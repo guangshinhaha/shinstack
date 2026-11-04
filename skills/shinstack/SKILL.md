@@ -6,7 +6,7 @@ description: A working style for code tasks: restate the goal, take the smallest
 # shinstack
 
 A guidance layer. Hooks and CI enforce; this advises. The user's own rules and any project instructions always win.
-Paths are relative to this file: `../../principles/general/` (how to work on anything, always applies), `../../principles/engineering/` (code), `../../principles/product/` (scoping, what to build), each with a `situational/` subfolder for rules that only fit some contexts; `../../playbooks/` (bug-fix, feature, babysit, autonomous-run, orchestrate, autopilot, shipping, pause-safely, opening-a-pr, refactoring, investigation, prototype, multi-phase-plan, worktree-cleanup). Read a principle in full before applying it.
+Paths are relative to this file: `../../principles/general/` (how to work on anything, always applies), `../../principles/engineering/` (code), `../../principles/product/` (scoping, what to build), each with a `situational/` subfolder for rules that only fit some contexts; `../../playbooks/` (bug-fix, feature, babysit, autonomous-run, orchestrate, autopilot, shipping, pause-safely, opening-a-pr, refactoring, investigation, prototype, multi-phase-plan, worktree-cleanup, perf-issue, hillclimb, eval, visual-parity). Read a principle in full before applying it.
 
 ## Local overlay
 If `~/.claude/skills/shinstack-local/SKILL.md` exists, read it first. It defines which actions need approval (project class), tool routes and personal constraints. If it does not exist, treat the project as gated: stop before merge, deploy and anything shared, and ask.
@@ -29,6 +29,9 @@ State in your own words: the goal, the problem, and the smallest change you expe
 - A design fork you can settle by building a throwaway -> `../../playbooks/prototype.md`
 - A change big enough to plan before building -> `../../playbooks/multi-phase-plan.md`
 - Worktrees piling up -> `../../playbooks/worktree-cleanup.md`
+- A one-off slowdown -> `../../playbooks/perf-issue.md`; sustained improvement of a number -> `../../playbooks/hillclimb.md`
+- Comparing two versions of an agent setup (a skill, a principle, a prompt) -> `../../playbooks/eval.md`
+- A UI migration that must look identical -> `../../playbooks/visual-parity.md`
 - Any code -> name the data shape first (model-the-domain)
 - Tempted to add a layer, abstraction or flag -> laziness-protocol
 - Debugging -> fix-root-causes; two fixes failed the same way -> attack-the-premise

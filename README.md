@@ -78,7 +78,10 @@ Each ends with a "When not to use" line. Engineering: [`outcome-oriented-executi
 **Single tasks**
 - [`bug-fix`](playbooks/bug-fix.md): reproduce, find the cause by elimination, smallest fix, failing test before the fix.
 - [`feature`](playbooks/feature.md): build from an issue or spec, one slice per acceptance criterion.
-- [`babysit`](playbooks/babysit.md): keep one PR moving until it is merge-ready.
+- [`babysit`](playbooks/babysit.md): keep one PR moving until it is merge-ready: modes, merge-frontier discipline, a fixed order (conflicts, threads, CI), and a rule for classifying CI failures.
+- [`perf-issue`](playbooks/perf-issue.md): tie every fix to a measurement; seven "mantras" tried cheapest first.
+- [`hillclimb`](playbooks/hillclimb.md): improve one number against a target: frozen harness, one change per iteration, keep or revert, decision log.
+- [`visual-parity`](playbooks/visual-parity.md): pixel-exact UI migration against a baseline you never touch.
 - [`refactoring`](playbooks/refactoring.md): change structure, not behavior: pin first, subtract first, prove unchanged.
 - [`investigation`](playbooks/investigation.md): a read-only question answered with cited evidence.
 - [`prototype`](playbooks/prototype.md): a throwaway built to settle one design decision.
@@ -90,6 +93,7 @@ Each ends with a "When not to use" line. Engineering: [`outcome-oriented-executi
 - [`autopilot`](playbooks/autopilot.md): one owner per PR, an independent verifier, verdict files tied to a head SHA. Stack mode stops at verified; full mode continues to merge.
 - [`shipping`](playbooks/shipping.md): land only the verified run, one PR at a time, then leave it alone.
 - [`multi-phase-plan`](playbooks/multi-phase-plan.md): the plan is the deliverable: a checklist with evidence per box, checked by `scripts/check-plan.sh`.
+- [`eval`](playbooks/eval.md): a blinded experiment to test whether a skill, principle or prompt actually helps.
 - [`pause-safely`](playbooks/pause-safely.md): a clean stop with a resume note a cold-start agent can use.
 - [`worktree-cleanup`](playbooks/worktree-cleanup.md): a safe sweep of leftover worktrees, using the read-only `scripts/worktree-audit.sh`.
 
