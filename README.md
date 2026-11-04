@@ -26,7 +26,7 @@ shinstack is a small router plus a library of short principles, playbooks and sk
 
 ```
 .claude-plugin/    plugin and marketplace manifests
-skills/            the router (shinstack/) and 21 other skills
+skills/            the router (shinstack/) and 22 other skills
 principles/
   general/         how to work on anything (always applies)
   engineering/     code-specific
