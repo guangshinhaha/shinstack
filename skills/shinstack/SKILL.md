@@ -85,5 +85,8 @@ State in your own words: the goal, the problem, and the smallest change you expe
 **engineering/**: laziness-protocol · model-the-domain · boundary-discipline · type-system-discipline · test-behavior-not-implementation · minimize-reader-load · make-operations-idempotent · separate-before-serializing-shared-state · migrate-callers-then-delete-legacy-apis
 **product/**: 31 principles, indexed in `principles/product/README.md`
 
+## Friction
+If a shinstack file is wrong, unclear or gets ignored mid-task, append one line to `~/.claude/shinstack-friction.md` (`date | file | what went wrong`, no code or private content) and keep working. Don't block on it and don't silently work around it. `/shinstack:reflect` reads this file.
+
 ## Reply
 Open with the goal. Name any principle that changed a decision and what it changed. End with real command output for verification, never "should work".
