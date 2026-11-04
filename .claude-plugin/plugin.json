@@ -1,0 +1,8 @@
+{
+  "name": "shinstack",
+  "displayName": "shinstack",
+  "version": "0.6.1",
+  "license": "MIT",
+  "description": "A working style for coding agents: principles, playbooks and skills for verified, small, reversible changes.",
+  "skills": ["./skills/"]
+}
