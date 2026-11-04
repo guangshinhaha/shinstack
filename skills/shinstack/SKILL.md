@@ -1,6 +1,6 @@
 ---
 name: shinstack
-description: A working style for code tasks: restate the goal, take the smallest change, verify against the real thing, work in small verifiable steps. Routes to principles and playbooks. Use for /shinstack or when asked to work in this style.
+description: A working style for code tasks: restate the goal, take the smallest change, verify against the real thing, work in small verifiable steps. Routes to principles and playbooks. Use at the start of any non-trivial coding task (bug, feature, review, refactor), or for /shinstack.
 ---
 
 # shinstack
