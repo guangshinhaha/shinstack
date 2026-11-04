@@ -79,6 +79,7 @@ State in your own words: the goal, the problem, and the smallest change you expe
 - `reflect`: mine this conversation for lessons and propose skill edits (applies nothing without approval)
 - `automate-me`: build or refresh a personal "-mode" skill from the user's transcripts
 - `create-verification-skill`: generate a project-local skill that drives the real app and captures proof
+- `maintain-verification-skill`: keep that skill honest as the app changes: read every feature from source, drive each one live, ship at most one PR of proven corrections
 
 ## Principles index
 **general/**: prove-it-works · attack-the-premise · fix-root-causes · sequence-verifiable-units · build-the-lever · encode-lessons-in-structure · explain-the-number · never-block-on-the-human · guard-the-context-window · session-state · count-the-scope · own-view-first

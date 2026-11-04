@@ -141,6 +141,7 @@ Invoke as `/shinstack:<name>`.
 | `reflect` | Mine a conversation for lessons and propose skill edits; applies nothing without approval |
 | `automate-me` | Build or refresh a personal "-mode" skill from your transcripts |
 | `create-verification-skill` | Generate a project-local skill that drives the real app and captures proof |
+| `maintain-verification-skill` | Keep that skill honest as the app changes: every feature read from source and driven live, at most one PR of proven corrections |
 
 ## Install
 
