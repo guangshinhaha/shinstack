@@ -1,13 +1,12 @@
 ---
 name: shinstack
 description: A working style for code tasks: restate the goal, take the smallest change, verify against the real thing, work in small verifiable steps. Routes to principles and playbooks. Use for /shinstack or when asked to work in this style.
-disable-model-invocation: true
 ---
 
 # shinstack
 
 A guidance layer. Hooks and CI enforce; this advises. The user's own rules and any project instructions always win.
-Paths are relative to this file: `../../principles/general/` (how to work on anything, always applies), `../../principles/engineering/` (code), `../../principles/product/` (scoping, what to build), each with a `situational/` subfolder for rules that only fit some contexts; `../../playbooks/` (step-by-step recipes). Read a principle in full before applying it.
+Paths are relative to this file: `../../principles/general/` (how to work on anything, always applies), `../../principles/engineering/` (code), `../../principles/product/` (scoping, what to build), each with a `situational/` subfolder for rules that only fit some contexts; `../../playbooks/` (bug-fix, feature, babysit). Read a principle in full before applying it.
 
 ## Local overlay
 If `~/.claude/skills/shinstack-local/SKILL.md` exists, read it first. It defines which actions need approval (project class), tool routes and personal constraints. If it does not exist, treat the project as gated: stop before merge, deploy and anything shared, and ask.
@@ -17,6 +16,8 @@ State in your own words: the goal, the problem, and the smallest change you expe
 
 ## Triggers
 - Bug -> `../../playbooks/bug-fix.md`
+- Build an existing issue or spec -> `../../playbooks/feature.md`
+- An open PR with CI or review feedback -> `../../playbooks/babysit.md`
 - Any code -> name the data shape first (model-the-domain)
 - Tempted to add a layer, abstraction or flag -> laziness-protocol
 - Debugging -> fix-root-causes; two fixes failed the same way -> attack-the-premise
