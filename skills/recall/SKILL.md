@@ -38,3 +38,11 @@ Lead with the capsule, then the thread status, then the problems, then the next 
 An adjacent feature or ticket stays out unless it blocks this one. When the capsule and thread lines outgrow a screen, cut detail before you cut threads. Write the brief through the `/shinstack:unslop`, cite chat findings by UUID and shared-record findings by their source (PR #, ticket ID, chat permalink, error-tracker issue), and sanitize private context before any public output.
 
 **Reply:** the brief, to the contract above.
+
+## Resuming one specific prior chat or run (session pickup)
+When the user points at one prior trail (a transcript, a branch, a run log, a resume note), read it instead of mining everything.
+1. Locate the trail in this workspace only: the chat transcript, the pushed branch, `decisions.tsv` or a `.audit/*-resume.md` note. Read the overview and the last messages first, then scan back for decision points. Parse a long transcript in a subagent and keep the reduced timeline in the main thread.
+2. Reconstruct state: the branch and worktree, what landed (`git log`, `git diff` against the base), open todos, decisions made. The prior trail is authoritative input. Resist re-deriving it.
+3. Diff done against pending. Name the resume point. Do not re-run the prior repro or redo completed work: "let me verify from scratch" means you are treating the trail as untrustworthy.
+4. Route the remaining work to the matching playbook: continue the execution, ship a finished recommendation, ratify or override a prior conclusion, or write up a failed run.
+5. Verify the inherited claims against the original goal on the real artifact (prove-it-works). A passing prior self-report is not the proof.

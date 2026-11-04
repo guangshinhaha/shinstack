@@ -79,12 +79,19 @@ Each ends with a "When not to use" line. Engineering: [`outcome-oriented-executi
 - [`bug-fix`](playbooks/bug-fix.md): reproduce, find the cause by elimination, smallest fix, failing test before the fix.
 - [`feature`](playbooks/feature.md): build from an issue or spec, one slice per acceptance criterion.
 - [`babysit`](playbooks/babysit.md): keep one PR moving until it is merge-ready.
+- [`refactoring`](playbooks/refactoring.md): change structure, not behavior: pin first, subtract first, prove unchanged.
+- [`investigation`](playbooks/investigation.md): a read-only question answered with cited evidence.
+- [`prototype`](playbooks/prototype.md): a throwaway built to settle one design decision.
+- [`opening-a-pr`](playbooks/opening-a-pr.md): ordered commits, a one-minute PR body, ready not draft.
 
 **Unattended and factory work**
 - [`autonomous-run`](playbooks/autonomous-run.md): drive one task to a checkable finish condition without stopping.
 - [`orchestrate`](playbooks/orchestrate.md): a coordinator that runs many tasks through owners, workers and verifiers, and never writes code.
 - [`autopilot`](playbooks/autopilot.md): one owner per PR, an independent verifier, verdict files tied to a head SHA. Stack mode stops at verified; full mode continues to merge.
 - [`shipping`](playbooks/shipping.md): land only the verified run, one PR at a time, then leave it alone.
+- [`multi-phase-plan`](playbooks/multi-phase-plan.md): the plan is the deliverable: a checklist with evidence per box, checked by `scripts/check-plan.sh`.
+- [`pause-safely`](playbooks/pause-safely.md): a clean stop with a resume note a cold-start agent can use.
+- [`worktree-cleanup`](playbooks/worktree-cleanup.md): a safe sweep of leftover worktrees, using the read-only `scripts/worktree-audit.sh`.
 
 Each of these ends with a "make it enforceable" note: the part to turn into a validator or check when a system runs the playbook, because prose alone is only a suggestion.
 
