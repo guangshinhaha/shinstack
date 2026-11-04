@@ -1,0 +1,34 @@
+# Product principles
+Read for scoping, "should we build this", and ticket-writing, not routine coding. Each file is one principle: read it in full before applying it. Treat as strong defaults, not law; they were inferred from past decisions and not all are validated.
+
+- **explicit-out-of-scope**: explicit out of scope.
+- **split-integration-from-evaluation**: split integration from evaluation.
+- **design-wider-than-build**: design wider than build.
+- **middle-option-for-tiny-populations**: middle option for tiny populations.
+- **publish-the-delta**: publish the delta.
+- **close-and-refile**: close and refile.
+- **name-it-or-close-it**: name it or close it.
+- **crude-interim-when-date-is-fixed**: crude interim when the date is fixed.
+- **workflow-fix-before-reimagining**: workflow fix before reimagining.
+- **engineers-during-design**: engineers during design.
+- **coverage-over-polish**: coverage over polish.
+- **readiness-gates**: readiness gates.
+- **demo-first**: demo first.
+- **lower-fidelity-for-leadership**: lower fidelity for leadership.
+- **defer-rather-than-ship-degraded**: defer rather than ship degraded.
+- **revert-whole-feature-when-blocked**: revert whole feature when blocked.
+- **reject-ai-needing-data-users-dont-produce**: reject ai that needs data users don't produce.
+- **aggregate-not-individual-analytics**: aggregate, not individual, analytics.
+- **resolve-privilege-downward**: resolve privilege downward.
+- **unknown-is-never-free**: unknown is never free.
+- **external-llm-out-of-sensitive-codebases**: external llm out of sensitive codebases.
+- **security-triage-by-reachability**: security triage by reachability.
+- **optimise-for-the-next-maintainer**: optimise for the next maintainer.
+- **platform-the-easy-half**: platform the easy half.
+- **no-route-for-indirection**: no route for indirection.
+- **own-repo-and-database**: own repo and database from day zero.
+- **default-framework-only-if-you-own-the-shell**: default framework only if you own the shell.
+- **capture-the-live-system-as-the-spec**: capture the live system as the spec.
+- **no-criterion-satisfiable-by-a-sentence**: no criterion satisfiable by a sentence.
+- **do-not-invent-evidence**: do not invent evidence.
+- **honesty-must-not-cost-the-users-work**: honesty must not cost the user's work.

@@ -1,0 +1,7 @@
+{
+  "name": "shinstack",
+  "owner": { "name": "guangshinhaha" },
+  "plugins": [
+    { "name": "shinstack", "source": "./", "description": "Principles, playbooks and skills for verified, small, reversible agent work." }
+  ]
+}
