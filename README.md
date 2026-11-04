@@ -75,9 +75,18 @@ Each ends with a "When not to use" line. Engineering: [`outcome-oriented-executi
 31 principles for scoping tickets, delivery decisions, trust and privacy, architecture, and honesty about what is tested. Index: [`principles/product/README.md`](principles/product/README.md).
 
 ## Playbooks
+**Single tasks**
 - [`bug-fix`](playbooks/bug-fix.md): reproduce, find the cause by elimination, smallest fix, failing test before the fix.
 - [`feature`](playbooks/feature.md): build from an issue or spec, one slice per acceptance criterion.
 - [`babysit`](playbooks/babysit.md): keep one PR moving until it is merge-ready.
+
+**Unattended and factory work**
+- [`autonomous-run`](playbooks/autonomous-run.md): drive one task to a checkable finish condition without stopping.
+- [`orchestrate`](playbooks/orchestrate.md): a coordinator that runs many tasks through owners, workers and verifiers, and never writes code.
+- [`autopilot`](playbooks/autopilot.md): one owner per PR, an independent verifier, verdict files tied to a head SHA. Stack mode stops at verified; full mode continues to merge.
+- [`shipping`](playbooks/shipping.md): land only the verified run, one PR at a time, then leave it alone.
+
+Each of these ends with a "make it enforceable" note: the part to turn into a validator or check when a system runs the playbook, because prose alone is only a suggestion.
 
 ## Skills
 Invoke as `/shinstack:<name>`.
