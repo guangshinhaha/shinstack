@@ -15,7 +15,7 @@ shinstack is a small router plus a library of short principles, playbooks and sk
 ## How it works
 
 1. **A coding task starts.** The router's one-line description is always visible to the agent. When a non-trivial coding task begins (or you type `/shinstack:craft`), the router's ~60 lines load.
-2. **Local overlay.** If `~/.claude/skills/shinstack-local/SKILL.md` exists, the router reads it first. That is where you put your own approval rules and tool routes. Without it, the router stops before merge, deploy and anything shared.
+2. **Local overlay.** If `~/.claude/shinstack-local/overlay.md` exists, the router reads it first. That is where you put your own approval rules and tool routes. Without it, the router stops before merge, deploy and anything shared.
 3. **First message.** The agent states the goal, the problem, and the smallest change it expects to meet it, without waiting for confirmation.
 4. **Triggers.** The router holds a table of "when X, read Y". "Bug" opens the bug-fix playbook, "debugging" opens `fix-root-causes`, "about to say done" opens `prove-it-works`, and so on. Everything else stays unloaded, so context stays small even with dozens of files.
 5. **Reply.** The agent opens with the goal, names any principle that changed a decision, and ends with real command output instead of "should work".
@@ -162,7 +162,7 @@ Restart Claude Code, then try `/shinstack:bro` or `/shinstack:craft`.
 
 ## Make it yours: the local overlay
 
-The public router is generic on purpose. Put your own rules in `~/.claude/skills/shinstack-local/SKILL.md`, which the router reads first:
+The public router is generic on purpose. Put your own rules in `~/.claude/shinstack-local/overlay.md`, which the router reads first:
 
 - **Project classes:** which repos the agent may run end to end (branch, PR, review, merge, deploy) and which need your OK at each step.
 - **Tool routes:** which skills from other plugins to use for issues, PRs and reviews.
