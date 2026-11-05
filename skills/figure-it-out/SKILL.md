@@ -10,7 +10,7 @@ When the task matches no playbook, design one. The deliverable before any code i
 
 ## Start
 
-Open a todolist whose first item is to read the principle index in the shinstack router. Then add the phases below as todos.
+Open a todolist whose first item is to read the principle index in the shinstack router (`craft`). Then add the phases below as todos.
 
 ## Phase A: Frame
 

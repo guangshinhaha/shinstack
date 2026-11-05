@@ -5,7 +5,7 @@
 shinstack is a small router plus a library of short principles, playbooks and skills. It nudges an agent to restate the goal, take the smallest change, verify against the real thing, and work in small steps that can each be checked. Nothing in it is a program: every piece is a markdown file the agent reads when it applies.
 
 ```
-/shinstack:shinstack      the router (loads on non-trivial coding tasks)
+/shinstack:craft          the router (loads on non-trivial coding tasks)
         │
         ├─ principles/    short rules, read only when their trigger matches
         ├─ playbooks/     step-by-step recipes for one kind of task
@@ -14,7 +14,7 @@ shinstack is a small router plus a library of short principles, playbooks and sk
 
 ## How it works
 
-1. **A coding task starts.** The router's one-line description is always visible to the agent. When a non-trivial coding task begins (or you type `/shinstack:shinstack`), the router's ~60 lines load.
+1. **A coding task starts.** The router's one-line description is always visible to the agent. When a non-trivial coding task begins (or you type `/shinstack:craft`), the router's ~60 lines load.
 2. **Local overlay.** If `~/.claude/skills/shinstack-local/SKILL.md` exists, the router reads it first. That is where you put your own approval rules and tool routes. Without it, the router stops before merge, deploy and anything shared.
 3. **First message.** The agent states the goal, the problem, and the smallest change it expects to meet it, without waiting for confirmation.
 4. **Triggers.** The router holds a table of "when X, read Y". "Bug" opens the bug-fix playbook, "debugging" opens `fix-root-causes`, "about to say done" opens `prove-it-works`, and so on. Everything else stays unloaded, so context stays small even with dozens of files.
@@ -26,7 +26,7 @@ shinstack is a small router plus a library of short principles, playbooks and sk
 
 ```
 .claude-plugin/    plugin and marketplace manifests
-skills/            the router (shinstack/) and 26 other skills
+skills/            the router (craft/) and 26 other skills
 principles/
   general/         how to work on anything (always applies)
   engineering/     code-specific
@@ -158,7 +158,7 @@ claude plugin marketplace add guangshinhaha/shinstack
 claude plugin install shinstack@shinstack
 ```
 
-Restart Claude Code, then try `/shinstack:bro` or `/shinstack:shinstack`.
+Restart Claude Code, then try `/shinstack:bro` or `/shinstack:craft`.
 
 ## Make it yours: the local overlay
 
