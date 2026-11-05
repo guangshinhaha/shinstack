@@ -26,7 +26,7 @@ shinstack is a small router plus a library of short principles, playbooks and sk
 
 ```
 .claude-plugin/    plugin and marketplace manifests
-skills/            the router (shinstack/) and 22 other skills
+skills/            the router (shinstack/) and 26 other skills
 principles/
   general/         how to work on anything (always applies)
   engineering/     code-specific
@@ -116,6 +116,14 @@ Invoke as `/shinstack:<name>`.
 | `technical-writing` | Docs and PR-body standard |
 | `typescript-best-practices` | TypeScript rule table with examples |
 
+**UI craft** (from [poteto/noodle](https://github.com/poteto/noodle))
+
+| Skill | What it does |
+|---|---|
+| `frontend-design` | Pick a design direction before code; UI that avoids generic AI aesthetics |
+| `interaction-design` | Microinteractions, motion, loading and feedback states, reduced motion |
+| `make-interfaces-feel-better` | Polish details: radius, optical alignment, shadows, interruptible animation, tabular numbers |
+
 **Context and trail**
 
 | Skill | What it does |
@@ -168,4 +176,4 @@ Early (v0.3). The principles and playbooks are the settled part. The multi-agent
 
 ## License
 
-MIT. See [`LICENSE`](LICENSE).
+MIT. See [`LICENSE`](LICENSE). `skills/frontend-design` is Anthropic's, under Apache 2.0 (its own `LICENSE.txt`).

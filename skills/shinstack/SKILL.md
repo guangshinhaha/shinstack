@@ -35,6 +35,7 @@ State in your own words: the goal, the problem, and the smallest change you expe
 - A one-off slowdown -> `../../playbooks/perf-issue.md`; sustained improvement of a number -> `../../playbooks/hillclimb.md`
 - Comparing two versions of an agent setup (a skill, a principle, a prompt) -> `../../playbooks/eval.md`
 - A UI migration that must look identical -> `../../playbooks/visual-parity.md`
+- Building UI (a page, component, dashboard) -> `/shinstack:frontend-design`; adding motion, loading, hover or feedback states -> `/shinstack:interaction-design`; UI that "feels off" or needs polish -> `/shinstack:make-interfaces-feel-better`
 - Any code -> name the data shape first (model-the-domain)
 - Tempted to add a layer, abstraction or flag -> laziness-protocol
 - Debugging -> fix-root-causes; two fixes failed the same way -> attack-the-premise
@@ -68,6 +69,10 @@ State in your own words: the goal, the problem, and the smallest change you expe
 - `unslop`: cut AI tells from writing
 - `technical-writing`: docs and PR-body standard
 - `typescript-best-practices`: TS rule table and examples
+**UI craft**
+- `frontend-design`: pick a design direction before code; UI that avoids generic AI aesthetics
+- `interaction-design`: microinteractions, motion, loading and feedback states, timing scale, reduced motion
+- `make-interfaces-feel-better`: polish details (radius, optical alignment, shadows, interruptible animation, tabular numbers)
 **Context and trail**
 - `ketchup`: catch the user up on a long chat, with every decision waiting on them
 - `recall`: rebuild recent working context from this repo's chats, git and PRs
