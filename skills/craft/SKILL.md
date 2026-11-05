@@ -1,9 +1,9 @@
 ---
-name: shinstack
-description: A working style for code tasks: restate the goal, take the smallest change, verify against the real thing, work in small verifiable steps. Routes to principles and playbooks. Use at the start of any non-trivial coding task (bug, feature, review, refactor), or for /shinstack.
+name: craft
+description: A working style for code tasks: restate the goal, take the smallest change, verify against the real thing, work in small verifiable steps. Routes to principles and playbooks. Use at the start of any non-trivial coding task (bug, feature, review, refactor), or for /shinstack:craft.
 ---
 
-# shinstack
+# shinstack craft (router)
 
 A guidance layer. Hooks and CI enforce; this advises. The user's own rules and any project instructions always win.
 Paths are relative to this file: `../../principles/general/` (how to work on anything, always applies), `../../principles/engineering/` (code), `../../principles/product/` (scoping, what to build), each with a `situational/` subfolder for rules that only fit some contexts; `../../playbooks/` (bug-fix, feature, babysit, autonomous-run, orchestrate, autopilot, shipping, pause-safely, opening-a-pr, refactoring, investigation, prototype, multi-phase-plan, worktree-cleanup, perf-issue, hillclimb, eval, visual-parity). Read a principle in full before applying it.
