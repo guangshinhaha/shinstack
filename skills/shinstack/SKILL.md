@@ -11,6 +11,9 @@ Paths are relative to this file: `../../principles/general/` (how to work on any
 ## Local overlay
 If `~/.claude/skills/shinstack-local/SKILL.md` exists, read it first. It defines which actions need approval (project class), tool routes and personal constraints. If it does not exist, treat the project as gated: stop before merge, deploy and anything shared, and ask.
 
+## Inside shinfactory
+If the `NOODLE_WORKTREE` environment variable is set, you are one stage of a shinfactory order. Do only that stage's job in this worktree, commit, and stop. The loop owns merging, modes, PRs and scheduling: don't push, don't open a PR, and don't load `autopilot`, `shipping`, `babysit`, `orchestrate` or `opening-a-pr`. Every other trigger and principle applies as normal.
+
 ## First message on any task
 State in your own words: the goal, the problem, and the smallest change you expect to meet it. Don't wait for confirmation. If evidence rules out the requested change, show it and stop.
 
