@@ -1,6 +1,6 @@
 # Opening a PR
 
-Run at the end of every other playbook. Whether you may push and open the PR without asking comes from the project's approval rules.
+Run at the end of every other playbook. Whether you may push and open the PR without asking comes from the repo's `approval-modes`.
 
 **Worktree.** Work from a git worktree off trunk. Subagents each get their own worktree.
 

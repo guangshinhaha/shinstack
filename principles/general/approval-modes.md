@@ -17,7 +17,7 @@ shinstack-mode.deploy: ask
 
 \* Merge only when CI is green and review has no unresolved blocking findings; otherwise stop and say why.
 
-- **Per-kind override:** `shinstack-mode.<kind>: auto|ask`, where kind is `push`, `merge`, `deploy` or `shared`. The override beats the repo mode for that kind only.
+- **Per-action override:** `shinstack-mode.<action>: auto|ask`, where action is `push`, `merge`, `deploy` or `shared`. The override beats the repo mode for that action only.
 - **Ask** means explicit OK for that one action. One "yes" covers one action.
 - **No declaration:** `supervised`. No remote, or a non-GitHub remote where colleagues see everything: `manual`.
 - **Inside shinfactory:** the loop's own `mode` governs merging and PRs; don't apply this.
