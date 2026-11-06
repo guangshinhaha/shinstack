@@ -117,6 +117,8 @@ Invoke as `/shinstack:<name>`.
 | `unslop` | Cut AI tells from writing |
 | `technical-writing` | Docs and PR-body standard |
 | `typescript-best-practices` | TypeScript rule table with examples |
+| `go-best-practices` | Go patterns for lifecycle, concurrency, config, testing and CI |
+| `react-best-practices` | React performance rules, including when not to use effects |
 
 **UI craft** (from [poteto/noodle](https://github.com/poteto/noodle))
 
