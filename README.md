@@ -171,6 +171,19 @@ The public router is generic on purpose. Put your own rules in `~/.claude/shinst
 
 Anything private stays in that file, outside this repo.
 
+## shinstack and shinfactory
+
+shinstack says how to work. [shinfactory](https://github.com/guangshinhaha/shinfactory) is an optional loop that decides when work runs and who runs it. shinstack works without it.
+
+| Concern | Owner |
+|---|---|
+| Principles, playbooks, craft skills, review standards | shinstack |
+| Stage order, scheduling, retries, and which provider or model runs a stage | shinfactory |
+| Merge and PRs inside a factory order | shinfactory |
+| Push, PR, merge and deploy outside the factory | shinstack |
+
+To place a new rule, ask: would it still apply to one person running one agent session with no loop? If yes, it goes here. If it needs a schedule, a stage or an event, it goes in shinfactory. Full reasoning: [the decision record](docs/decisions/shinstack-vs-shinfactory.md).
+
 ## Status
 
 Early (v0.3). The principles and playbooks are the settled part. The multi-agent skills have had little real use, so expect rough edges. Run `reflect` after real sessions to turn what went wrong into edits, and cut principles that never get used.
