@@ -22,6 +22,9 @@ shinstack is a small router plus a library of short principles, playbooks and sk
 
 **This is guidance, not enforcement.** The agent follows the table by judgment. Pair it with hooks and CI for anything that must never be skipped; the principle `encode-lessons-in-structure` says the same.
 
+
+shinstack says how to work. [shinfactory](https://github.com/guangshinhaha/shinfactory) is an optional loop that decides when work runs and who runs it. See [the boundary](docs/decisions/shinstack-vs-shinfactory.md).
+
 ## Layout
 
 ```
