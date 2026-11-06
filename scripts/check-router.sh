@@ -14,6 +14,11 @@ grep -rn -E "\bowned\b/|class: (owned|gated)|project-class|approval rules" princ
 for f in skills/*/SKILL.md; do
   awk '/^---$/{c++;next} c==1' "$f" | grep -q '^disable-model-invocation' && { echo "skill hidden from auto-invocation: $f"; fail=1; }
 done
+for f in playbooks/*.md; do
+  n=$(basename "$f" .md)
+  [ -f "skills/$n/SKILL.md" ] || { echo "playbook has no skill (no command): $n"; fail=1; continue; }
+  grep -q "playbooks/$n.md" "skills/$n/SKILL.md" || { echo "skill $n does not point at its playbook"; fail=1; }
+done
 python3 -c "import json;json.load(open('hooks/hooks.json'))" || { echo "hooks/hooks.json invalid"; fail=1; }
 [ -x hooks/inject-router.sh ] || { echo "hooks/inject-router.sh not executable"; fail=1; }
 sh hooks/inject-router.sh | grep -q "shinstack craft" || { echo "hook does not emit the router"; fail=1; }
