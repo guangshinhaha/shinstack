@@ -11,5 +11,18 @@ for p in $(grep -o '\.\./\.\./playbooks/[a-z-]*\.md' skills/craft/SKILL.md | sor
   [ -f "skills/craft/$p" ] || { echo "router points at missing file: $p"; fail=1; }
 done
 grep -rn -E "\bowned\b/|class: (owned|gated)|project-class|approval rules" principles playbooks skills/craft README.md && fail=1
+for f in skills/*/SKILL.md; do
+  awk '/^---$/{c++;next} c==1' "$f" | grep -q '^disable-model-invocation' && { echo "skill hidden from auto-invocation: $f"; fail=1; }
+done
+python3 -c "import json;json.load(open('hooks/hooks.json'))" || { echo "hooks/hooks.json invalid"; fail=1; }
+[ -x hooks/inject-router.sh ] || { echo "hooks/inject-router.sh not executable"; fail=1; }
+sh hooks/inject-router.sh | grep -q "shinstack craft" || { echo "hook does not emit the router"; fail=1; }
+# plugin content changed against main without a version bump -> installed copies never update
+if git rev-parse -q --verify origin/main >/dev/null && [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+  if git diff --name-only origin/main | grep -qE '^(skills|principles|playbooks|hooks)/' && \
+     [ "$(git show origin/main:.claude-plugin/plugin.json | grep '"version"')" = "$(grep '"version"' .claude-plugin/plugin.json)" ]; then
+    echo "plugin content changed but .claude-plugin/plugin.json version was not bumped"; fail=1
+  fi
+fi
 [ $fail -eq 0 ] && echo "router ok"
 exit $fail
