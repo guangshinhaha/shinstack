@@ -12,7 +12,7 @@ Paths are relative to this file: `../../principles/general/` (how to work on any
 If `~/.claude/shinstack-local/overlay.md` exists, read it first. It defines tool routes and personal constraints. Which actions need approval comes from the repo's `shinstack-mode` (`../../principles/general/approval-modes.md`); with none declared, that principle's defaults apply.
 
 ## Inside shinfactory
-If the `NOODLE_WORKTREE` environment variable is set, you are one stage of a shinfactory order. Do only that stage's job in this worktree, commit, and stop. The loop owns merging, modes, PRs and scheduling: don't push, don't open a PR, and don't load `autopilot`, `shipping`, `babysit`, `orchestrate` or `opening-a-pr`. Every other trigger and principle applies as normal.
+If the `NOODLE_WORKTREE` environment variable is set, you are one stage of a shinfactory order. Do only that stage's job in this worktree, commit, and stop. The loop owns merging, modes, PRs, review and scheduling: don't push, don't open a PR, and don't load `autopilot`, `shipping`, `babysit`, `orchestrate` or `opening-a-pr`. Every other trigger and principle applies as normal.
 
 ## First message on any task
 State in your own words: the goal, the problem, and the smallest change you expect to meet it. Don't wait for confirmation. If evidence rules out the requested change, show it and stop.
@@ -27,6 +27,7 @@ State in your own words: the goal, the problem, and the smallest change you expe
 - Landing verified PRs -> `../../playbooks/shipping.md`
 - Stopping or pausing a run -> `../../playbooks/pause-safely.md`; resuming one -> `/shinstack:recall` (resume section)
 - Opening a PR (end of every playbook) -> `../../playbooks/opening-a-pr.md`
+- Choosing how deeply to review a change, with or without a PR -> the review depth table in `../../playbooks/opening-a-pr.md` (inside shinfactory, the stage's own review instead)
 - Restructuring without changing behavior -> `../../playbooks/refactoring.md`
 - A read-only "how/why/are we sure" question -> `../../playbooks/investigation.md`
 - A design fork you can settle by building a throwaway -> `../../playbooks/prototype.md`
