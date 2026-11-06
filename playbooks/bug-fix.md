@@ -7,6 +7,6 @@ Every shipped line traces to runtime evidence. A "might help" change is a hypoth
 3. **Plan the smallest fix** (laziness-protocol; model-the-domain if the bug is state or branch sprawl). If it crosses a function boundary, sketch it first (`/shinstack:architect`).
 4. **Verify on the same surface:** the original repro now passes. "Inconclusive" or the wrong surface is not a pass; flag it. Unit tests show branch behavior, not that the bug is gone.
 5. **Commit the failing repro or test before the fix** (`/shinstack:tdd`, sequence-verifiable-units). Skip a test only when it would be expensive or unclear, and say what you used instead.
-6. **Run the repo's lint, typecheck and tests,** then open the PR (`opening-a-pr.md`) under the repo's `approval-modes`.
+6. **Run the repo's lint, typecheck and tests,** then open the PR (`opening-a-pr.md`) under the repo's `approval-modes`. If the bug shipped past a review that should have caught it, add a line to `~/.claude/shinstack-friction.md` (`date | opening-a-pr.md | the review tier and what it missed`, no code or private content).
 
 **Reply:** what was broken, the root cause, the fix, how you verified. Paste the failing-then-passing output verbatim.
