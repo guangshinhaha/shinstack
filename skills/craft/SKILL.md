@@ -9,7 +9,7 @@ A guidance layer. Hooks and CI enforce; this advises. The user's own rules and a
 Paths are relative to this file: `../../principles/general/` (how to work on anything, always applies), `../../principles/engineering/` (code), `../../principles/product/` (scoping, what to build), each with a `situational/` subfolder for rules that only fit some contexts; `../../playbooks/` (bug-fix, feature, babysit, autonomous-run, orchestrate, autopilot, shipping, pause-safely, opening-a-pr, refactoring, investigation, prototype, multi-phase-plan, worktree-cleanup, perf-issue, hillclimb, eval, visual-parity). Read a principle in full before applying it.
 
 ## Local overlay
-If `~/.claude/shinstack-local/overlay.md` exists, read it first. It defines which actions need approval (project class), tool routes and personal constraints. If it does not exist, treat the project as gated: stop before merge, deploy and anything shared, and ask.
+If `~/.claude/shinstack-local/overlay.md` exists, read it first. It defines tool routes and personal constraints. Which actions need approval comes from the repo's `shinstack-mode` (`../../principles/general/approval-modes.md`); with none declared, that principle's defaults apply.
 
 ## Inside shinfactory
 If the `NOODLE_WORKTREE` environment variable is set, you are one stage of a shinfactory order. Do only that stage's job in this worktree, commit, and stop. The loop owns merging, modes, PRs and scheduling: don't push, don't open a PR, and don't load `autopilot`, `shipping`, `babysit`, `orchestrate` or `opening-a-pr`. Every other trigger and principle applies as normal.
@@ -54,6 +54,7 @@ State in your own words: the goal, the problem, and the smallest change you expe
 - Resuming or pausing work -> session-state
 - Told "all of these / all related" -> count-the-scope
 - Design or "which approach" call -> own-view-first (a fact you can observe: run it instead of asking)
+- Push, PR, merge, deploy or shared-env write -> approval-modes
 - Tempted to ask "should I do X?" -> never-block-on-the-human
 - Scoping, "should we build this", ticket scope -> read `../../principles/product/README.md` and the matching file
 - Situational (`situational/` subfolders): outcome-oriented-execution, redesign-from-first-principles, experience-first, exhaust-the-design-space. Read the "When not to use" line first.
@@ -90,7 +91,7 @@ State in your own words: the goal, the problem, and the smallest change you expe
 - `maintain-verification-skill`: keep that skill honest as the app changes: read every feature from source, drive each one live, ship at most one PR of proven corrections
 
 ## Principles index
-**general/**: prove-it-works · attack-the-premise · fix-root-causes · sequence-verifiable-units · build-the-lever · encode-lessons-in-structure · explain-the-number · never-block-on-the-human · guard-the-context-window · session-state · count-the-scope · own-view-first
+**general/**: prove-it-works · attack-the-premise · fix-root-causes · sequence-verifiable-units · build-the-lever · encode-lessons-in-structure · explain-the-number · never-block-on-the-human · approval-modes · guard-the-context-window · session-state · count-the-scope · own-view-first
 **engineering/**: laziness-protocol · model-the-domain · boundary-discipline · type-system-discipline · test-behavior-not-implementation · minimize-reader-load · make-operations-idempotent · separate-before-serializing-shared-state · migrate-callers-then-delete-legacy-apis
 **product/**: 31 principles, indexed in `principles/product/README.md`
 
