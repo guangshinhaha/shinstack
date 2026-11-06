@@ -79,6 +79,7 @@ State in your own words: the goal, the problem, and the smallest change you expe
 - `ketchup`: catch the user up on a long chat, with every decision waiting on them
 - `recall`: rebuild recent working context from this repo's chats, git and PRs
 - `show-me-your-work`: append-only decision log for long or unattended runs
+- `autopilot`: drive open PRs to merge-ready with independent verifier verdicts (runs `playbooks/autopilot.md`)
 **Understand and design (multi-agent; heavier)**
 - `how`: how a subsystem works; `why`: why it is shaped that way; `teach`: both, as one plain explanation
 - `architect`: sketch types and module boundaries before code (checkpoint on by default); uses `arena`
