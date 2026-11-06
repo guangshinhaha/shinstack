@@ -6,6 +6,21 @@ Run at the end of every other playbook. Whether you may push and open the PR wit
 
 **Commits.** Commit often, then rebase into small ordered commits before opening. Each commit is a future PR: landable on its own and ordered to tell the story (subtraction, then reshape, then follow-on cleanup; failing test, then fix). Bodies don't restate the subject.
 
+**Review depth.** Once the commits are in final shape, pick the tier from what the change touches and run its review. If the PR opened early, do this at the code-ready head. An explicit request for a specific review overrides the table.
+
+| Change touches | Review |
+|---|---|
+| Docs, copy or config that no agent or program acts on | Run the repo's checks, no review |
+| Ordinary code with none of the risks below | `/code-review medium`, or your agent's equivalent |
+| Auth or permissions, sensitive data, migrations, shared state, deploy or infra, public APIs, deleting data or a capability others depend on | `/shinstack:blast-radius`, then `/shinstack:interrogate` |
+
+- If the tier is unclear, take the higher one. A repo's CLAUDE.md can add stricter rules.
+- Fix proven blockers and re-check before opening. List the rest in the PR body.
+- Don't repeat a review: re-run only for new behavior or a large new diff. A rebase or minor fix gets a single check at the new head.
+- On a sensitive-data change, reviewers use synthetic data and runners from the same provider.
+- If the review can't run (no subagents, or an unattended run blocked on a question), report it as not run. Never imply it ran.
+- Say the tier and why in your reply. This is the author's review: `autopilot.md` verification still runs separately.
+
 **Text.** Run the title, body and commit messages through `/shinstack:unslop`, and write to the standard in `/shinstack:technical-writing`.
 
 **Title.** Conventional Commits `type(scope): subject`, no trailing period, imperative, naming a real symbol when one carries the change.

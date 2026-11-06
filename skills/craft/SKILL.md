@@ -27,6 +27,7 @@ State in your own words: the goal, the problem, and the smallest change you expe
 - Landing verified PRs -> `../../playbooks/shipping.md`
 - Stopping or pausing a run -> `../../playbooks/pause-safely.md`; resuming one -> `/shinstack:recall` (resume section)
 - Opening a PR (end of every playbook) -> `../../playbooks/opening-a-pr.md`
+- Choosing how deeply to review a change, with or without a PR -> the review depth table in `../../playbooks/opening-a-pr.md` (inside shinfactory, the stage's own review instead)
 - Restructuring without changing behavior -> `../../playbooks/refactoring.md`
 - A read-only "how/why/are we sure" question -> `../../playbooks/investigation.md`
 - A design fork you can settle by building a throwaway -> `../../playbooks/prototype.md`
