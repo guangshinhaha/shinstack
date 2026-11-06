@@ -1,6 +1,6 @@
 # Autopilot (owner, verifier, merge-ready)
 
-**You own the verdicts, never the PRs. One owner carries each PR; nothing is merge-ready until a verifier who didn't write it has proven the code at its current head.** Two modes, set by the project's approval rules:
+**You own the verdicts, never the PRs. One owner carries each PR; nothing is merge-ready until a verifier who didn't write it has proven the code at its current head.** Two modes, set by the repo's `approval-modes` (`auto` allows full, otherwise stack):
 - **stack:** stop at *verified and green* and hand the PRs to the user. Nobody pushes after the handoff without a go. Use this where merging needs the user's OK.
 - **full:** continue through merge (`shipping.md`). Use this only where the project allows it.
 

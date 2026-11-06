@@ -55,6 +55,7 @@ State in your own words: the goal, the problem, and the smallest change you expe
 - Told "all of these / all related" -> count-the-scope
 - Design or "which approach" call -> own-view-first (a fact you can observe: run it instead of asking)
 - Push, PR, merge, deploy or shared-env write -> approval-modes
+- Editing shinstack itself (router, principle, playbook, skill) -> blast-radius on the change, `technical-writing` and `unslop` on the text; then opening-a-pr (and shipping if merging)
 - Tempted to ask "should I do X?" -> never-block-on-the-human
 - Scoping, "should we build this", ticket scope -> read `../../principles/product/README.md` and the matching file
 - Situational (`situational/` subfolders): outcome-oriented-execution, redesign-from-first-principles, experience-first, exhaust-the-design-space. Read the "When not to use" line first.

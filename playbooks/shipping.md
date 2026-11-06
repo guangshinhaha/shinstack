@@ -1,6 +1,6 @@
 # Shipping
 
-**You own what lands. Land only the verified run, one PR at a time, then keep your hands off.** Only for projects whose approval rules allow merging. Otherwise stop at `autopilot.md` stack mode.
+**You own what lands. Land only the verified run, one PR at a time, then keep your hands off.** Only where `approval-modes` lets you merge (mode `auto`, or `shinstack-mode.merge: auto`). Otherwise stop at `autopilot.md` stack mode.
 
 1. **Verify each PR independently before it lands** (`autopilot.md`): a verdict file per PR, written by a verifier who isn't the author, at the PR's current head.
 2. **Land only the contiguous verified run rooted at the bottom.** For stacked PRs, walk up from the lowest unmerged PR and stop at the first without `PASS` or `PASS+NOTES`. A verified PR above an unverified one waits. A PR whose branch neither holds nor needs the lower code may move onto trunk and land on its own.
