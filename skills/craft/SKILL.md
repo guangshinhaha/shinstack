@@ -73,6 +73,8 @@ State in your own words: the goal, the problem, and the smallest change you expe
 - `unslop`: cut AI tells from writing
 - `technical-writing`: docs and PR-body standard
 - `typescript-best-practices`: TS rule table and examples
+- `go-best-practices`: Go patterns for lifecycle, concurrency, config, testing and CI
+- `react-best-practices`: React performance rules, including when not to use effects
 **UI craft**
 - `frontend-design`: pick a design direction before code; UI that avoids generic AI aesthetics
 - `interaction-design`: microinteractions, motion, loading and feedback states, timing scale, reduced motion
