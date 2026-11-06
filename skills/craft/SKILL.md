@@ -65,6 +65,7 @@ State in your own words: the goal, the problem, and the smallest change you expe
 - `bro`: restate the last message in plain language
 - `sharpen`: make a task deeper, not bigger, then rewrite the prompt
 - `tdd`: failing test first, then the smallest fix
+- `init`: set up shinstack in a repo (mode and check commands in CLAUDE.md)
 - `correct`: find repeated agent mistakes in a repo and make each impossible (architecture, then types, lint, test, docs last)
 - `blast-radius`: before shipping a risky change, find what it could break beyond the diff and prove the one safety fact by running code
 - `benchmark-checklist`: vet a performance number before reporting it

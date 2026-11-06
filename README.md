@@ -110,6 +110,7 @@ Invoke as `/shinstack:<name>`.
 | `bro` | Restate the last message in plain language |
 | `sharpen` | Make a task deeper, not bigger, then rewrite the prompt |
 | `tdd` | Failing test first, then the smallest fix |
+| `init` | Set up shinstack in a repo: mode and check commands in CLAUDE.md |
 | `correct` | Find mistakes agents keep repeating in a repo and make each impossible: architecture first, then types, lint, test, docs last |
 | `blast-radius` | Before shipping a risky change, find what it could break beyond the diff and prove the one safety fact by running code |
 | `benchmark-checklist` | Vet a performance number before you report it |
