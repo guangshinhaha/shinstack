@@ -3,7 +3,7 @@
 Date: 2026-11-05. Status: accepted.
 
 ## Decision
-Approval for push, PR, merge, deploy and shared-env writes follows a per-repo `shinstack-mode` (`auto | supervised | manual`), with overrides per action and per kind of work. See `principles/general/approval-modes.md`.
+Approval for push, PR, merge, deploy and shared-env writes follows a per-repo `shinstack-mode` (`auto | supervised | manual`), with an optional override per action. There is no per-kind-of-work override; to review a kind of work first, switch the repo to `supervised` by hand. See `principles/general/approval-modes.md`.
 
 ## Why
 - The private overlay's `owned` class let the agent merge and deploy unasked. The user's global rule says one explicit OK per action. The two contradicted each other.
