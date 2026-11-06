@@ -22,9 +22,6 @@ shinstack is a small router plus a library of short principles, playbooks and sk
 
 **This is guidance, not enforcement.** The agent follows the table by judgment. Pair it with hooks and CI for anything that must never be skipped; the principle `encode-lessons-in-structure` says the same.
 
-
-shinstack says how to work. [shinfactory](https://github.com/guangshinhaha/shinfactory) is an optional loop that decides when work runs and who runs it. See [the boundary](docs/decisions/shinstack-vs-shinfactory.md).
-
 ## Layout
 
 ```
@@ -173,6 +170,19 @@ The public router is generic on purpose. Put your own rules in `~/.claude/shinst
 - **Personal constraints** on the situational principles.
 
 Anything private stays in that file, outside this repo.
+
+## shinstack and shinfactory
+
+shinstack says how to work. [shinfactory](https://github.com/guangshinhaha/shinfactory) is an optional loop that decides when work runs and who runs it. shinstack works without it.
+
+| Concern | Owner |
+|---|---|
+| Principles, playbooks, craft skills, review standards | shinstack |
+| Stage order, scheduling, retries, and which provider or model runs a stage | shinfactory |
+| Merge and PRs inside a factory order | shinfactory |
+| Push, PR, merge and deploy outside the factory | shinstack |
+
+To place a new rule, ask: would it still apply to one person running one agent session with no loop? If yes, it goes here. If it needs a schedule, a stage or an event, it goes in shinfactory. Full reasoning: [the decision record](docs/decisions/shinstack-vs-shinfactory.md).
 
 ## Status
 
