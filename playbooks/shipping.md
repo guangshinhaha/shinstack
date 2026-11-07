@@ -1,6 +1,11 @@
 # Shipping
 
-**You own what lands. Land only the verified run, one PR at a time, then keep your hands off.** Only where `approval-modes` lets you merge (mode `auto`, or `shinstack-mode.merge: auto`). Otherwise stop at `autopilot.md` stack mode.
+**You own what lands. Land only the verified run, one PR at a time, then keep your hands off.** The numbered steps are for merging without a yes on each PR, so they apply only where `approval-modes` allows that (mode `auto`, or `shinstack-mode.merge: auto`). Otherwise stop at `autopilot.md` stack mode.
+
+**A merge the user approved.** In any mode, a user's explicit yes on one PR replaces the numbered steps, so a hand-built PR needs no verdict file. A PR that ran under `autopilot.md` still needs `PASS` or `PASS+NOTES` at its current head.
+- Before merging, check for anything the user may not know: a commit pushed after their approval, red CI (if the repo has CI), an open blocking review finding, or a missing or failed verdict. Run step 4's trunk check too. If you find any of these, stop and say what you found. A rebase changes the head, so it needs a new yes.
+- Merge that one PR, pinned to the head you checked (`gh pr merge <pr> --squash --match-head-commit <sha>`, or the forge's equivalent). Another PR needs another yes.
+- Read back the PR's state, merged time and base, and name the merged SHA in your reply. If the base isn't trunk, say the change hasn't reached trunk. If the PR closes an issue that is still open, say so.
 
 1. **Verify each PR independently before it lands** (`autopilot.md`): a verdict file per PR, written by a verifier who isn't the author, at the PR's current head.
 2. **Land only the contiguous verified run rooted at the bottom.** For stacked PRs, walk up from the lowest unmerged PR and stop at the first without `PASS` or `PASS+NOTES`. A verified PR above an unverified one waits. A PR whose branch neither holds nor needs the lower code may move onto trunk and land on its own.

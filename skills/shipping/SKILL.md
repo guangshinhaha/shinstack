@@ -1,6 +1,6 @@
 ---
 name: shipping
-description: "Land verified PRs one at a time and confirm each landed. Use when asked to merge or ship verified PRs and approval-modes allows merging."
+description: "Land verified PRs one at a time and confirm each merge, or merge one PR the user approved. Use for 'ship these', 'land the stack', 'yes merge', or merging where approval-modes allows it."
 ---
 
 # shipping

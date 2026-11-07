@@ -36,6 +36,8 @@ Run at the end of every other playbook. Whether you may push and open the PR wit
 - `## Blast Radius`: who or what it touches, and why that is safe or risky.
 - `## Verification`: 1-3 bullets, each a real run and its outcome. Perf: one number with its unit, `before -> after`.
 
+If the PR finishes an issue, put `Closes #N` in the body. If it does only part of one, use `Refs #N`.
+
 SHAs, lane recitals and file-by-file lists go in a linked artifact, not the body. Attach screenshots or video when they prove a claim.
 
 **Ready, not draft.** Open every PR ready for review unless the project says otherwise.

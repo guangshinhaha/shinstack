@@ -5,7 +5,7 @@
 shinstack is a small router plus a library of short principles, playbooks and skills. It nudges an agent to restate the goal, take the smallest change, verify against the real thing, and work in small steps that can each be checked. Nothing in it is a program: every piece is a markdown file the agent reads when it applies.
 
 ```
-/shinstack:craft          the router (loads on non-trivial coding tasks)
+/shinstack:craft          the router (loads at the start of every session)
         │
         ├─ principles/    short rules, read only when their trigger matches
         ├─ playbooks/     step-by-step recipes for one kind of task
@@ -14,7 +14,7 @@ shinstack is a small router plus a library of short principles, playbooks and sk
 
 ## How it works
 
-1. **A coding task starts.** The router's one-line description is always visible to the agent. When a non-trivial coding task begins (or you type `/shinstack:craft`), the router's ~60 lines load.
+1. **A session starts.** A SessionStart hook (`hooks/inject-router.sh`) puts the router in the agent's context, so nothing depends on someone invoking it first.
 2. **Local overlay.** If `~/.claude/shinstack-local/overlay.md` exists, the router reads it first. That is where you put your own tool routes and constraints. Approval comes from each repo's `shinstack-mode` (default `supervised`: stops before merge, deploy and anything shared).
 3. **First message.** The agent states the goal, the problem, and the smallest change it expects to meet it, without waiting for confirmation.
 4. **Triggers.** The router holds a table of "when X, read Y". "Bug" opens the bug-fix playbook, "debugging" opens `fix-root-causes`, "about to say done" opens `prove-it-works`, and so on. Everything else stays unloaded, so context stays small even with dozens of files.
@@ -26,13 +26,13 @@ shinstack is a small router plus a library of short principles, playbooks and sk
 
 ```
 .claude-plugin/    plugin and marketplace manifests
-skills/            the router (craft/) and 26 other skills
+skills/            the router (craft/) and every other skill, including one command per playbook
 principles/
   general/         how to work on anything (always applies)
   engineering/     code-specific
   product/         scoping and what to build
   */situational/   rules that only fit some contexts
-playbooks/         bug-fix, feature, babysit
+playbooks/         one recipe per kind of task, listed below
 ```
 
 Every principle is one short file: a title, an **Apply** trigger line, the rule, and a **Why**.
@@ -92,7 +92,7 @@ Each ends with a "When not to use" line. Engineering: [`outcome-oriented-executi
 - [`autonomous-run`](playbooks/autonomous-run.md): drive one task to a checkable finish condition without stopping.
 - [`orchestrate`](playbooks/orchestrate.md): a coordinator that runs many tasks through owners, workers and verifiers, and never writes code.
 - [`autopilot`](playbooks/autopilot.md): one owner per PR, an independent verifier, verdict files tied to a head SHA. Stack mode stops at verified; full mode continues to merge.
-- [`shipping`](playbooks/shipping.md): land only the verified run, one PR at a time, then leave it alone.
+- [`shipping`](playbooks/shipping.md): land only the verified run, one PR at a time, then leave it alone. Also covers a single merge the user approved.
 - [`multi-phase-plan`](playbooks/multi-phase-plan.md): the plan is the deliverable: a checklist with evidence per box, checked by `scripts/check-plan.sh`.
 - [`eval`](playbooks/eval.md): a blinded experiment to test whether a skill, principle or prompt actually helps.
 - [`pause-safely`](playbooks/pause-safely.md): a clean stop with a resume note a cold-start agent can use.
@@ -189,7 +189,7 @@ To place a new rule, ask: would it still apply to one person running one agent s
 
 ## Status
 
-Early (v0.3). The principles and playbooks are the settled part. The multi-agent skills have had little real use, so expect rough edges. Run `reflect` after real sessions to turn what went wrong into edits, and cut principles that never get used.
+Early. The principles and playbooks are the settled part. The multi-agent skills have had little real use, so expect rough edges. Run `reflect` after real sessions to turn what went wrong into edits, and cut principles that never get used.
 
 ## License
 
