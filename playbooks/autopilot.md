@@ -1,6 +1,6 @@
 # Autopilot (owner, verifier, merge-ready)
 
-**You own the verdicts, never the PRs. One owner carries each PR; nothing is merge-ready until a verifier who didn't write it has proven the code at its current head.** Two modes, set by the repo's `approval-modes` (`auto` allows full, otherwise stack):
+**You own the verdicts, never the PRs. One owner carries each PR; nothing is merge-ready until a verifier who didn't write it has proven the code at its current head.** Use it when a High-risk PR will merge unattended, or when the user asks. Any other PR outside it needs only the gate in `shipping.md`. Two modes, set by the repo's `approval-modes` (`auto` allows full, otherwise stack):
 - **stack:** stop at *verified and green* and hand the PRs to the user. Nobody pushes after the handoff without a go. Use this where merging needs the user's OK.
 - **full:** continue through merge (`shipping.md`). Use this only where the project allows it.
 
@@ -9,7 +9,7 @@
 3. **Assume the session dies.** The owner commits and pushes each finished unit before starting the next and keeps a decision trail (`/shinstack:show-me-your-work`), so a replacement can resume.
 4. **Verify once, independently, at the code-ready head.** A fresh-context subagent that never saw the author's reasoning reruns the repo's gates (lint, typecheck, tests, mutation survivors), proves the load-bearing behavior against the running thing, and tries to break it for risky changes (`/shinstack:blast-radius`, `/shinstack:interrogate`). Re-verify only for new behavior or a large new diff; a rebase or minor fix gets a single check at the new head; a wording-only change gets none.
 5. **Block only on what you can show:** a failing run at the head, a bug a user would hit, a failed gate, or a doc line the PR made wrong. A problem the base already has doesn't block unless the PR copies or newly reaches it. Everything else becomes a follow-up.
-6. **Verdicts are files, not sentences.** Write `{pr, head_sha, verdict: PASS|PASS+NOTES|FAIL, evidence: [commands and outputs]}`. A verdict covers one head SHA, so a new push needs a new verdict. Green CI alone is never a verdict.
+6. **Verdicts are files, not sentences.** Write `{pr, head_sha, verdict: PASS|PASS+NOTES|FAIL, evidence: [commands and outputs]}` and post it as a comment on the PR, so any session can find it. A verdict covers one head SHA, so a new push needs a new verdict. Green CI alone is never a verdict.
 7. **Loosening a gate needs proof and your countersign.** A raised budget or an allowlist entry needs the verifier's proof first, because the owner is the one who wants green. A disabled or soft-failed check always comes out.
 8. **Audit on a heartbeat** while delegated work remains. Each tick re-reads this playbook, probes every agent by its side effects (pushes, trail rows), and treats an agent as stuck if it errors or shows nothing new past its expected runtime. A hold from the user reaches every owner as a zero-writes order.
 

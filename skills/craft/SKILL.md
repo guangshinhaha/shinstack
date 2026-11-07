@@ -25,7 +25,7 @@ State in your own words: the goal, the problem, and the smallest change you expe
 - One task to drive unattended to a checkable finish -> `../../playbooks/autonomous-run.md`
 - A program of many tasks or PRs -> `../../playbooks/orchestrate.md`
 - PRs that need independent verification before they count as ready -> `../../playbooks/autopilot.md` (stack mode stops at verified; full mode continues to shipping)
-- Landing verified PRs, or merging a PR the user approved -> `../../playbooks/shipping.md`
+- Merging a PR, unattended or with the user's yes -> `../../playbooks/shipping.md`
 - Stopping or pausing a run -> `../../playbooks/pause-safely.md`; resuming one -> `/shinstack:recall` (resume section)
 - Opening a PR (end of every playbook) -> `../../playbooks/opening-a-pr.md`
 - Choosing how deeply to review a change, with or without a PR -> the review depth table in `../../playbooks/opening-a-pr.md` (inside shinfactory, the stage's own review instead)
