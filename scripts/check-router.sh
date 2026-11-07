@@ -31,3 +31,4 @@ if git rev-parse -q --verify origin/main >/dev/null && [ "$(git rev-parse HEAD)"
 fi
 [ $fail -eq 0 ] && echo "router ok"
 exit $fail
+# gantry#45 proof: clean change.
