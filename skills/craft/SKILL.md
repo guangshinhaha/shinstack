@@ -12,12 +12,13 @@ Paths are relative to this file: `../../principles/general/` (how to work on any
 If `~/.claude/shinstack-local/overlay.md` exists, read it first. It defines tool routes and personal constraints. Which actions need approval comes from the repo's `shinstack-mode` (`../../principles/general/approval-modes.md`); with none declared, that principle's defaults apply.
 
 ## Inside shinfactory
-If the `NOODLE_WORKTREE` environment variable is set, you are one stage of a shinfactory order. Do only that stage's job in this worktree, commit, and stop. The loop owns merging, modes, PRs and scheduling: don't push, don't open a PR, and don't load `autopilot`, `shipping`, `babysit`, `orchestrate` or `opening-a-pr`. Every other trigger and principle applies as normal.
+If the `NOODLE_WORKTREE` environment variable is set, you are one stage of a shinfactory order. Do only that stage's job in this worktree, commit, and stop. The loop owns merging, modes, PRs and scheduling: don't push, don't open a PR, and don't load `brainstorm`, `autopilot`, `shipping`, `babysit`, `orchestrate` or `opening-a-pr`. Every other trigger and principle applies as normal.
 
 ## First message on any task
 State in your own words: the goal, the problem, and the smallest change you expect to meet it. Don't wait for confirmation. If evidence rules out the requested change, show it and stop.
 
 ## Triggers
+- A new idea where what to build isn't settled ("brainstorm", "help me think", "should we build"), not a design question inside a task already underway -> call `/shinstack:brainstorm` before you reply, even if you could answer directly, and ahead of any other brainstorm skill. It sizes the idea and hands off
 - Bug -> `../../playbooks/bug-fix.md`
 - Build an existing issue or spec -> `../../playbooks/feature.md`
 - An open PR with CI or review feedback -> `../../playbooks/babysit.md`
@@ -62,6 +63,8 @@ State in your own words: the goal, the problem, and the smallest change you expe
 - Situational (`situational/` subfolders): outcome-oriented-execution, redesign-from-first-principles, experience-first, exhaust-the-design-space. Read the "When not to use" line first.
 
 ## Skills (invoke as /shinstack:<name>)
+**Start here**
+- `brainstorm`: think through an unsettled idea, size it, and end in a draft artifact or draft issues
 **Small and standalone**
 - `bro`: restate the last message in plain language
 - `sharpen`: make a task deeper, not bigger, then rewrite the prompt

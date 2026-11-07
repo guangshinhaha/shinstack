@@ -1,6 +1,6 @@
 # Orchestrate
 
-**You run the program, never the code. Decide which agent does each piece, then check what each one produces.** For a standing project of many tasks and PRs. One task driven to a check is `autonomous-run.md`.
+**You run the program, never the code. Decide which agent does each piece, then check what each one produces.** For a standing project of many tasks and PRs. One task driven to a check is `autonomous-run.md`. Given a parent issue, its open child issues are the units, in the listed order. Skip closed or checked children, and turn each child's done condition into the proof of done in its kickoff.
 
 **Topology**
 - **One owner per PR.** The owner is the only writer of its branch and carries the PR from build to merge-ready. You never author or edit code; conflicts, rebases and fixes go back to owners.

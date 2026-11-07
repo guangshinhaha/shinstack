@@ -107,6 +107,7 @@ Invoke as `/shinstack:<name>`.
 
 | Skill | What it does |
 |---|---|
+| `brainstorm` | Start here for an unsettled idea: size it, give a position, end in a draft artifact or draft issues |
 | `bro` | Restate the last message in plain language |
 | `sharpen` | Make a task deeper, not bigger, then rewrite the prompt |
 | `tdd` | Failing test first, then the smallest fix |
