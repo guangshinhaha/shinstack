@@ -22,6 +22,7 @@ Run at the end of every other playbook. Whether you may push and open the PR wit
 - Don't repeat a review: re-run only for new behavior or a large new diff. A rebase or minor fix gets a single check at the new head.
 - On a sensitive-data change, reviewers use synthetic data and runners from the same provider.
 - If the review can't run (no subagents, or an unattended run blocked on a question), report it as not run. Never imply it ran.
+- A review that returns nothing counts as not run, and it can't clear the gate in `shipping.md`. Rerun it or report it. A review that finds no problems must say what it checked.
 - Say the tier, the review level and why in your reply, and name the tier and review in `## Verification`, so a later session can see them. This is the author's review. `autopilot.md` verification runs separately where `shipping.md` asks for it.
 
 **Text.** Run the title, body and commit messages through `/shinstack:unslop`, and write to the standard in `/shinstack:technical-writing`.
