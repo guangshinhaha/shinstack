@@ -10,11 +10,11 @@
 - **Start with one unit.** Take it through kickoff, owner, review and merge-ready before fanning out, so a flawed kickoff costs one agent.
 
 **Supervision**
-- **Every kickoff names the proof of done** (a command and its expected output, or an artifact), the goal, the build playbook to follow (`/shinstack:feature` for an issue or spec, `/shinstack:bug-fix` for a bug, `/shinstack:refactoring` for a reshape), the paths the worker may and may not write, and the actions it must not take. If you can't name the proof, the unit isn't scoped.
+- **Every kickoff names the proof of done** (a command and its expected output, or an artifact), the goal, the build playbook to follow (`/shinstack:feature` for an issue or spec, `/shinstack:bug-fix` for a bug, `/shinstack:refactoring` for a reshape), the paths the worker may and may not write, the actions it must not take, the tier you expect, its required review, and that subagents are allowed (a worker that defaults to none leaves the review unrun). If you can't name the proof, the unit isn't scoped.
 - **Read the diff, not the summary.** Green CI is an input to your judgment, not the judgment. Send back work that drifts from scope; park the rest as follow-ups.
 - **Check live state before reporting** (`git log`, the forge CLI's PR view and checks), not the worker's last message. Account for every worker as done, replaced or absorbed.
 - **Replace workers that stall.** Judge by pushes and PR activity, not status text. Retry by cause: smaller scope after a context limit, same kickoff after a dropped connection, a different approach after a tool error. After two retries drop the unit and replan around it.
-- **Ask the user only for a real decision or blocker:** an irreversible action, a product call no experiment settles, a dead end that survived a replan. Retries, CI flakes and review triage never reach the user.
+- **Ask the user only for a real decision or blocker:** an irreversible action, a product call no experiment settles, a dead end that survived a replan. Retries, CI flakes and review triage never reach the user, but a review that came back empty twice does.
 
 **Make it enforceable (factory):** the program state lives in a file (`run.json`-style) a validator can read, not in your context. Kickoffs are generated from a template with required fields. A worker that returns without the named proof is rejected by the runner.
 

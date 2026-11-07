@@ -11,7 +11,7 @@ Date: 2026-11-06, recording a split made on 2026-11-05. Gantry added on 2026-11-
 | Who runs a stage: provider, model, runtime | shinfactory |
 | Merging, PRs and worktrees inside a factory order | shinfactory (its `mode`) |
 | Push, PR, merge and deploy outside the factory | shinstack (`approval-modes`) |
-| Checks that need no judgment, shared across repos: secret scan, lint, tests, `ac-check`, the `needs-human` label | gantry |
+| Checks that need no judgment, shared across repos: secret scan, lint, tests, the `needs-human` label, and `ac-check` in repos that opt in (`gantry-init --ac-check`) | gantry |
 | Whether a failed check blocks a merge: the required `gantry / ci-ok` check | gantry (`gantry-protect`) |
 | Checks that only one repo needs, such as `check-router.sh` | That repo's own workflow or `lefthook.yml` |
 | Knowledge about one project | That project's `CLAUDE.md` and `docs/` (for the factory itself, `brain/`) |
