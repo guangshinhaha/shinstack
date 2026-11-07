@@ -78,7 +78,7 @@ Each ends with a "When not to use" line. Engineering: [`outcome-oriented-executi
 ## Playbooks
 **Single tasks**
 - [`bug-fix`](playbooks/bug-fix.md): reproduce, find the cause by elimination, smallest fix, failing test before the fix.
-- [`feature`](playbooks/feature.md): build from an issue or spec, one slice per acceptance criterion.
+- [`feature`](playbooks/feature.md): build from an issue or spec, one slice per item in its Done when.
 - [`babysit`](playbooks/babysit.md): keep one PR moving until it is merge-ready: modes, merge-frontier discipline, a fixed order (conflicts, threads, CI), and a rule for classifying CI failures.
 - [`perf-issue`](playbooks/perf-issue.md): tie every fix to a measurement; seven "mantras" tried cheapest first.
 - [`hillclimb`](playbooks/hillclimb.md): improve one number against a target: frozen harness, one change per iteration, keep or revert, decision log.
