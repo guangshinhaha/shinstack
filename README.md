@@ -90,7 +90,7 @@ Each ends with a "When not to use" line. Engineering: [`outcome-oriented-executi
 
 **Unattended and factory work**
 - [`autonomous-run`](playbooks/autonomous-run.md): drive one task to a checkable finish condition without stopping.
-- [`orchestrate`](playbooks/orchestrate.md): a coordinator that runs many tasks through owners, workers and verifiers, and never writes code.
+- [`orchestrate`](playbooks/orchestrate.md): a coordinator that runs many tasks through owners and workers, adds verifiers for High-risk PRs, and never writes code.
 - [`autopilot`](playbooks/autopilot.md): one owner per PR, an independent verifier, verdict files tied to a head SHA. Stack mode stops at verified; full mode continues to merge.
 - [`shipping`](playbooks/shipping.md): land one PR at a time once it clears the gate for its risk, then leave it alone. Also covers a single merge the user approved.
 - [`multi-phase-plan`](playbooks/multi-phase-plan.md): the plan is the deliverable: a checklist with evidence per box, checked by `scripts/check-plan.sh`.

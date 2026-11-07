@@ -27,7 +27,7 @@ One box is one unit of work. Every box names its evidence. Check a box only when
 ### Every PR
 - [ ] Opened ready, per `opening-a-pr.md`. Evidence: PR link.
 - [ ] Lint, typecheck and tests pass at the code-ready head. Evidence: command output.
-- [ ] Independent verdict file at that head. Evidence: `{pr, head_sha, verdict}`.
+- [ ] The review for its risk tier at that head, plus an independent verdict file if High. Evidence: review output, and `{pr, head_sha, verdict}` if High.
 ### Verdict and merge
 - [ ] <The merge or handoff rule, with the patch-id rule from `shipping.md`.>
 
