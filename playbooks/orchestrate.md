@@ -6,7 +6,7 @@
 - **One owner per PR.** The owner is the only writer of its branch and carries the PR from build to merge-ready. You never author or edit code; conflicts, rebases and fixes go back to owners.
 - **A fresh worker per independent task**, each in its own worktree, started as a subagent. Workers can't see siblings, so each kickoff carries everything it needs, with upstream reports pasted in full.
 - **Two levels (coordinator, workers)** until one area needs many parallel workers; only then add a sub-coordinator that sends you one rollup. Keep a handful of workers in flight, not dozens.
-- **Each High-risk PR gets a verifier who isn't its author** (`autopilot.md`), with the tier from the table in `opening-a-pr.md`. Use a second model family for it if you have one; otherwise a fresh-context subagent. A Low or Moderate PR gets its tier's review and no verifier, unless the user asked for `/shinstack:autopilot`.
+- **Each High-risk PR gets a verifier who isn't its author** (`autopilot.md`), with the tier from the table in `opening-a-pr.md`. Use a second model family for it if you have one; otherwise a fresh-context subagent. Any other PR gets its tier's review and no verifier, unless the user asked for `/shinstack:autopilot`.
 - **Start with one unit.** Take it through kickoff, owner, review and merge-ready before fanning out, so a flawed kickoff costs one agent.
 
 **Supervision**

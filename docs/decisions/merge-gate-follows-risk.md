@@ -8,12 +8,13 @@ An unattended merge (mode `auto`, with no yes on that PR) needs what the PR's ri
 
 | Risk | What the merge needs |
 |---|---|
-| Low or Moderate | Green CI, the review for that tier, and no open blocking finding |
+| None, Low or Moderate | Green CI, the review for that tier, and no open blocking finding |
 | High | All of that, plus an independent verifier and a verdict file |
 
-- A verdict that exists must be `PASS` or `PASS+NOTES` at the current head, whatever the tier.
+- The latest verdict on a PR must be `PASS` or `PASS+NOTES`, whatever the tier. Verdicts go on the PR as comments, so a new session can find them.
 - Outside High risk, a verifier runs only when the user asks for `/shinstack:autopilot`. `orchestrate.md` follows the same rule.
-- A yes on one PR still takes the lighter path in `shipping.md`.
+- `shipping.md` holds the gate. `approval-modes.md` points to it, so the two can't disagree.
+- A yes on one PR skips the gate, but the agent first flags a High-risk PR with no verdict.
 
 ## Why
 
@@ -28,4 +29,5 @@ An unattended merge (mode `auto`, with no yes on that PR) needs what the PR's ri
 ## Consequences
 
 - A Low or Moderate change can merge with only its author's review. In a repo on `auto`, no person or second agent looks at it.
-- Agents rate their own tier, so under-rating can skip the verifier. An unclear tier goes up, and a miss becomes a friction line (`review-depth.md`).
+- If an autopilot verifier dies before writing a verdict, a new session sees a Low PR with no verdict and can merge it under the normal gate. That is the same bar as any Low PR.
+- Agents rate their own tier, so under-rating can skip the verifier, and nothing outside the author checks the rating. An unclear tier goes up, and a miss becomes a friction line (`review-depth.md`). A path-based check for the High areas would close this, but we'd build it only if friction lines show under-rating.
