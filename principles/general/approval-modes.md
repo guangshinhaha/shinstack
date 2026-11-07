@@ -15,7 +15,7 @@ shinstack-mode.deploy: ask
 | `supervised` (default) | do | ask | ask | ask |
 | `manual` | ask | ask | ask | ask |
 
-\* Merge only when CI is green and review has no unresolved blocking findings; otherwise stop and say why.
+\* Merge only when CI is green and review has no unresolved blocking findings; otherwise stop and say why. High-risk changes also need an independent verifier (`shipping.md`).
 
 - **Per-action override:** `shinstack-mode.<action>: auto|ask`, where action is `push`, `merge`, `deploy` or `shared`. The override beats the repo mode for that action only.
 - **Ask** means explicit OK for that one action. One "yes" covers one action.
