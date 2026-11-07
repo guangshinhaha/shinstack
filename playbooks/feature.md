@@ -2,7 +2,10 @@
 
 Build what the acceptance criteria say, one verifiable slice at a time. Stop and ask if the issue isn't specific enough to build.
 
-1. **Read the contract:** the issue body, its acceptance criteria, its out-of-scope list, and the comments (a later comment overrides the body). If nothing is observable to check, say what is missing and stop instead of guessing.
+1. **Read the contract:** the issue body, its acceptance criteria, its out-of-scope list, and the comments (a later comment overrides the body). If nothing is observable to check, say what is missing and stop instead of guessing. If the issue lists Decided, Assumed or Open items:
+   - *Decided:* build to it and don't reopen it. If evidence rules it out, show the evidence and stop.
+   - *Assumed:* build on it. If the code contradicts it, take the smallest change that still meets the goal and say so in the PR.
+   - *Open:* if it doesn't block the build, take its default, or the most reversible option if it has none, and list it in the PR as your call. If it blocks, settle it by reading or running what you can. If only a person can settle it, say what is missing and stop.
 2. **Restate** the goal and the smallest change that meets it.
 3. **Explore before coding:** the nearest existing code that does something similar, the data model you will extend, the repo's conventions (`/shinstack:how`). Name the data shape first (model-the-domain).
 4. **Write the throughput checkpoint** as four lines, keeping any that don't apply as `n/a: <reason>`:
