@@ -3,7 +3,7 @@
 **You own what lands. Land one PR at a time, each only after it clears the gate for its risk, then keep your hands off.** The gate and the numbered steps are for merging without a yes on each PR, so they apply only where `approval-modes` allows that (mode `auto`, or `shinstack-mode.merge: auto`). Otherwise stop when the PR is ready, or at `autopilot.md` stack mode if it ran under autopilot.
 
 **The gate.** Take the PR's tier from the review table in `opening-a-pr.md`. An unclear tier goes up.
-- *None, Low or Moderate:* at the current head, green CI (with no CI, run the repo's checks and paste the output), the review its tier names, and no open blocking finding. It needs no verifier.
+- *None, Low or Moderate:* at the current head, green CI (with no CI, run the repo's checks and paste the output), the review its tier names (an empty one counts as not run, see `opening-a-pr.md`), and no open blocking finding. It needs no verifier.
 - *High:* all of that, plus a verdict from an independent verifier (`autopilot.md`).
 - *Any tier:* check the PR for a verdict. The latest one must be `PASS` or `PASS+NOTES` and must still describe the code (step 3). A `FAIL` stops the merge until a newer verdict replaces it, whatever was pushed since.
 
