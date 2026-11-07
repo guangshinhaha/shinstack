@@ -201,3 +201,5 @@ Early. The principles and playbooks are the settled part. The multi-agent skills
 ## License
 
 MIT. See [`LICENSE`](LICENSE). `skills/frontend-design` is Anthropic's, under Apache 2.0 (its own `LICENSE.txt`).
+
+<!-- issue 45 verify, do not merge -->
