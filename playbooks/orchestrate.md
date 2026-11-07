@@ -10,7 +10,7 @@
 - **Start with one unit.** Take it through kickoff, owner, verifier and merge-ready before fanning out, so a flawed kickoff costs one agent.
 
 **Supervision**
-- **Every kickoff names the proof of done** (a command and its expected output, or an artifact), the goal, the paths the worker may and may not write, and the actions it must not take. If you can't name the proof, the unit isn't scoped.
+- **Every kickoff names the proof of done** (a command and its expected output, or an artifact), the goal, the build playbook to follow (`/shinstack:feature` for an issue or spec, `/shinstack:bug-fix` for a bug, `/shinstack:refactoring` for a reshape), the paths the worker may and may not write, and the actions it must not take. If you can't name the proof, the unit isn't scoped.
 - **Read the diff, not the summary.** Green CI is an input to a verdict, not a verdict. Send back work that drifts from scope; park the rest as follow-ups.
 - **Check live state before reporting** (`git log`, the forge CLI's PR view and checks), not the worker's last message. Account for every worker as done, replaced or absorbed.
 - **Replace workers that stall.** Judge by pushes and PR activity, not status text. Retry by cause: smaller scope after a context limit, same kickoff after a dropped connection, a different approach after a tool error. After two retries drop the unit and replan around it.
