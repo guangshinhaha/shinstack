@@ -22,7 +22,11 @@ Date: 2026-11-06, recording a split made on 2026-11-05. Gantry added on 2026-11-
 2. Does it need a schedule, a stage or an event? It goes in shinfactory.
 3. Would it still apply to one person running one agent session with no loop? It goes in shinstack.
 
-**Dependency direction:** shinfactory depends on shinstack, never the reverse. shinstack must work with no factory installed. It mentions the factory only to step aside: the router's "Inside shinfactory" section and the matching line in `approval-modes`. Gantry depends on neither: its checks run on a repo whoever wrote the code, person or agent. shinstack and shinfactory must both work in a repo with no gantry.
+**Each tool works alone and stays compatible with the others.** Any one of the three must work in a repo with neither of the other two installed. A tool may use another when it is present, and it must not fail or give wrong instructions when that tool is absent.
+
+- gantry's checks run on a repo whoever wrote the code, person or agent. Its files don't assume an agent plugin is installed.
+- shinstack mentions the factory only to step aside when it detects a factory run: the router's "Inside shinfactory" section and the matching line in `approval-modes`.
+- shinfactory stages use shinstack for craft when it is installed. Without it, a stage still runs on its own instructions and the project's `CLAUDE.md`.
 
 **A merge needs both a green check and an approval.** Gantry decides whether the checks pass. `approval-modes` or the factory's `mode` decides whether the merge may happen. Neither one overrides the other.
 
@@ -40,8 +44,10 @@ Two rulebooks diverged and made cooks behave inconsistently. One source of truth
 
 ## Rejected
 - Merge them into one repo: shinstack would stop being usable on its own, and upstream noodle updates would be harder to take.
+- shinfactory requires shinstack, the rule until 2026-11-07: the factory couldn't run for anyone without the plugin.
 
 ## Consequences
 - Craft changes land in shinstack even when a factory run exposed the problem.
 - Exceptions that exist today are tracked as issues in the repo that owns the fix.
+- A new feature in one tool can't require another tool. It can only use that tool when it is present.
 - A factory order merges to local main, so gantry first sees that work at push. The factory passes through gantry's merge gate only once its final stage opens a PR (shinfactory#6).
