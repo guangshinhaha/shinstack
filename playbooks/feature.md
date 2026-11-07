@@ -1,6 +1,6 @@
 # Feature from an issue or spec
 
-Build what the issue's Done when says, one verifiable slice at a time. Stop and ask if the issue isn't specific enough to build.
+Build what the issue or spec's Done when says, one verifiable slice at a time. Stop and ask if the issue isn't specific enough to build.
 
 1. **Read the contract:** the issue body, its Done when (acceptance criteria or any other observable statement of done counts, whatever the heading), its out-of-scope list, and the comments (a later comment overrides the body). If nothing is observable to check, say what is missing and stop instead of guessing. If the issue lists Decided, Assumed or Open items:
    - *Decided:* build to it and don't reopen it. If evidence rules it out, show the evidence and stop.
