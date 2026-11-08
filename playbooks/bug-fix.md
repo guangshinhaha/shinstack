@@ -4,9 +4,10 @@ Every shipped line traces to runtime evidence. A "might help" change is a hypoth
 
 1. **Reproduce it yourself,** on the surface where it happens. Ask the human only with a specific reason you can't. If it won't reproduce, synthesize the trigger, tighten the conditions, or instrument until it fires.
 2. **Find the cause by elimination.** List the candidate hypotheses, then rule them out until one survives. Each pass, take the split that cuts the most remaining problem space, get runtime evidence, and eliminate. When state is unclear, add logging and read it as the code runs. Don't guess. `/shinstack:how` gives the map and `/shinstack:why` the regression history. Two failed fixes mean attack-the-premise. **Confirm the surviving mechanism with evidence before planning the fix.**
-3. **Plan the smallest fix** (laziness-protocol; model-the-domain if the bug is state or branch sprawl). If it crosses a function boundary, sketch it first (`/shinstack:architect`).
+3. **Plan the smallest fix** (laziness-protocol; model-the-domain if the bug is state or branch sprawl). Call `/shinstack:architect` only at a real design fork: the fix changes a data shape or a public interface. Crossing a function boundary is not a fork.
 4. **Verify on the same surface:** the original repro now passes. "Inconclusive" or the wrong surface is not a pass; flag it. Unit tests show branch behavior, not that the bug is gone.
-5. **Commit the failing repro or test before the fix** (`/shinstack:tdd`, sequence-verifiable-units). Skip a test only when it would be expensive or unclear, and say what you used instead.
+5. **Call `/shinstack:tdd`: commit the failing repro or test before the fix** (sequence-verifiable-units). Skip a test only when it would be expensive or unclear, and say what you used instead. Push each commit (per `approval-modes`), so a killed session resumes from the branch (`/shinstack:recall`).
 6. **Run the repo's lint, typecheck and tests,** then open the PR (`opening-a-pr.md`) under the repo's `approval-modes`. If the bug shipped past a review that should have caught it, add a line to `~/.claude/shinstack-friction.md` (`date | opening-a-pr.md | the review tier and what it missed`, no code or private content).
+7. **Hand off.** Outside shinfactory, if the PR has red CI or review comments, continue in `babysit.md`. Otherwise stop at the PR URL.
 
 **Reply:** what was broken, the root cause, the fix, how you verified. Paste the failing-then-passing output verbatim.
