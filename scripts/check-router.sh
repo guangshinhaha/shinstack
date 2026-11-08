@@ -24,7 +24,7 @@ for f in playbooks/*.md; do
   grep -q "playbooks/$n.md" "skills/$n/SKILL.md" || { echo "skill $n does not point at its playbook"; fail=1; }
 done
 awk '/^## Reply/{r=1;next} /^## /{r=0} r' skills/craft/SKILL.md | grep -q 'what it achieves' || { echo "router Reply: Done must ask what the work achieves"; fail=1; }
-awk '/^## Local overlay/{r=1;next} /^## /{r=0} r' skills/craft/SKILL.md | grep -q 'trigger -> skill' || { echo "router Local overlay must say it holds trigger -> skill lines"; fail=1; }
+awk '/^## Local overlay/{r=1;next} /^## /{r=0} r' skills/craft/SKILL.md | grep 'trigger -> skill' | grep -q 'approval modes still apply' || { echo "router Local overlay must say trigger -> skill lines only route"; fail=1; }
 python3 -c "import json;json.load(open('hooks/hooks.json'))" || { echo "hooks/hooks.json invalid"; fail=1; }
 [ -x hooks/inject-router.sh ] || { echo "hooks/inject-router.sh not executable"; fail=1; }
 sh hooks/inject-router.sh | grep -q "shinstack craft" || { echo "hook does not emit the router"; fail=1; }
