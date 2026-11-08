@@ -7,7 +7,7 @@ description: "Use for \"how does X work\", code walkthroughs before changing som
 
 Explore the codebase to answer "how does X work?" questions. Produce architectural explanations at the level of a senior engineer onboarding onto a subsystem, enough to build a working mental model, not so much that it reads like annotated source code.
 
-Every spawn is an `Agent` call with `subagent_type: general-purpose`, read-only in intent (explorers and the explainer never edit files). Use the parent model unless the user says otherwise.
+Every spawn is an `Agent` call with `subagent_type: general-purpose`, read-only in intent (explorers, light weight, and the explainer, standard weight, never edit files). Use the parent model unless the user says otherwise.
 
 ## 1. Assess complexity
 

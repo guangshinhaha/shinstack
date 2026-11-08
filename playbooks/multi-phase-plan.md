@@ -23,7 +23,7 @@ One box is one unit of work. Every box names its evidence. Check a box only when
 - [ ] State the plan to the user, then stop. Start only on an explicit go. Evidence: the user's go.
 - [ ] Re-read the execution playbook from trunk at program start and at every audit tick. Evidence: the tick log.
 ### Spawn owners
-- [ ] One owner per PR. Dependency order: <PR ids>. File boundaries: <PR id> touches only <glob>. Evidence: owner list.
+- [ ] One owner per PR (a builder, standard weight). Dependency order: <PR ids>. File boundaries: <PR id> touches only <glob>. Evidence: owner list.
 ### Every PR
 - [ ] Opened ready, per `opening-a-pr.md`. Evidence: PR link.
 - [ ] Lint, typecheck and tests pass at the code-ready head. Evidence: command output.

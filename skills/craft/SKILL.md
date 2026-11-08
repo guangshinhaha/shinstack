@@ -18,7 +18,7 @@ If the `NOODLE_WORKTREE` environment variable is set, you are one stage of a shi
 Outside shinfactory, if the user's message is only `/shinstack:craft` with no arguments, and nothing in the conversation (a resume or compaction summary included) names an open task, reply with one line, "Router loaded. What's the task?", and stop. Don't infer a task from the branch, repo or issues, and run no commands beyond the overlay read. First message and Reply don't apply to this one line.
 
 ## Resuming
-Outside shinfactory, with a task (not a bare `/shinstack:craft`), before the first message: if the branch has commits the default branch lacks (`git log <default>..HEAD`) or an open PR exists for it (`gh pr list --head <branch>`), call `/shinstack:recall` first. Skip the check where there is no git repo, no `gh` or no remote.
+Outside shinfactory, with a task (not a bare `/shinstack:craft`), before the first message: if the branch has commits the remote default branch lacks (`git log origin/<default>..HEAD`; a local default can be stale) or an open PR exists for it (`gh pr list --head <branch>`), call `/shinstack:recall` first. Skip the check where there is no git repo, no `gh`, no remote or no `origin/<default>` ref.
 
 ## First message on any task
 State in your own words: the goal, the problem, and the smallest change you expect to meet it. Don't wait for confirmation. If evidence rules out the requested change, show it and stop.

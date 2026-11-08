@@ -6,7 +6,7 @@ Run at the end of every other playbook. Whether you may push and open the PR wit
 
 **Commits.** Commit often, then rebase into small ordered commits before opening. Each commit is a future PR: landable on its own and ordered to tell the story (subtraction, then reshape, then follow-on cleanup; failing test, then fix). Bodies don't restate the subject.
 
-**Review depth.** Once the commits are in final shape, ask three questions. How bad is it if the change is wrong? Can you reverse its effects after deploy, not only revert the commit? Would tests catch it? Pick the tier from the answers and run its review. If the PR opened early, do this at the code-ready head. An explicit request for a specific review overrides the table.
+**Review depth.** Once the commits are in final shape, ask three questions. How bad is it if the change is wrong? Can you reverse its effects after deploy, not only revert the commit? Would tests catch it? Pick the tier from the answers and run its review; reviewers and adversaries are standard weight. If the PR opened early, do this at the code-ready head. An explicit request for a specific review overrides the table.
 
 | Risk if the change is wrong | Typical change | Review |
 |---|---|---|
