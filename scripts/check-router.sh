@@ -23,6 +23,9 @@ awk '/^## Reply/{r=1;next} /^## /{r=0} r' skills/craft/SKILL.md | grep -q 'what 
 python3 -c "import json;json.load(open('hooks/hooks.json'))" || { echo "hooks/hooks.json invalid"; fail=1; }
 [ -x hooks/inject-router.sh ] || { echo "hooks/inject-router.sh not executable"; fail=1; }
 sh hooks/inject-router.sh | grep -q "shinstack craft" || { echo "hook does not emit the router"; fail=1; }
+# Claude Code shows the model only a 2KB preview of SessionStart output over ~10KB, so keep the router well under it
+size=$(sh hooks/inject-router.sh | wc -c | tr -d ' ')
+[ "$size" -le 9000 ] || { echo "hook output is $size bytes, over the 9000-byte limit: move reference detail out of skills/craft/SKILL.md"; fail=1; }
 # plugin content changed against main without a version bump -> installed copies never update
 if git rev-parse -q --verify origin/main >/dev/null && [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
   if git diff --name-only origin/main | grep -qE '^(skills|principles|playbooks|hooks)/' && \
