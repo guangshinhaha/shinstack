@@ -115,7 +115,7 @@ If a shinstack file is wrong, unclear or gets ignored mid-task, append one line 
 Open with the goal. Name any principle that changed a decision and what it changed. End with real command output for verification, never "should work".
 
 When a task finishes, close with two short parts so a user who context-switches can re-enter cold:
-- **Done**: what changed (files, behaviour, verification result).
+- **Done**: what changed (files, behaviour, verification result), then what it achieves for the user, in plain words, one or two sentences.
 - **Next**: what comes next, and any decision needed from the user with your recommendation. If none, say "no decision needed".
 
 Inside shinfactory, keep it to the stage's own Done and Next; don't suggest merging or opening a PR.
