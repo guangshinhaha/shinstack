@@ -13,7 +13,7 @@ Every candidate gets the same prompt, so the prompt is the contract.
 
 1. State the artifact each candidate is producing.
 2. Derive the rubric, 3-6 concrete gradeable criteria for what success looks like on *this* task. It is the picker's tool in Phase D. Candidates only see the task.
-3. Pick the runners. Default: two runners with different framings on the parent model, or on different model families if the harness offers more than one (for example through a separate Codex worker). Use the same model N times when the work is generation-bound rather than judgment-sensitive. Spawn more runners when the arena covers multiple design directions. Say which seat ran on which model.
+3. Pick the runners (builders, standard weight). Default: two runners with different framings on the parent model, or on different model families if the harness offers more than one. Use the same model N times when the work is generation-bound rather than judgment-sensitive. Spawn more runners when the arena covers multiple design directions. Say which seat ran on which model.
 4. Give each candidate its own output location (a git worktree where possible, otherwise `/tmp/arena-<slug>/candidate-<n>/`), per the separate-before-serializing-shared-state principle.
 
 ## Phase B: Fan out
@@ -24,7 +24,7 @@ If a candidate produces no output, proceed with N-1 and note the dropout.
 
 ## Phase C: Cross-judge
 
-After all Phase B candidates complete, spawn one read-only judge subagent, on a different model family from the runners if one is available, otherwise a fresh subagent that scores the candidates before it reads their rationales. The judge sees the rubric and the candidates by path label, scores each criterion, and recommends a base with rationale. It runs in parallel with your reading in Phase D. Don't spawn it while candidates are still writing.
+After all Phase B candidates complete, spawn one read-only judge subagent (strong weight), on a different model family from the runners if one is available, otherwise a fresh subagent that scores the candidates before it reads their rationales. The judge sees the rubric and the candidates by path label, scores each criterion, and recommends a base with rationale. It runs in parallel with your reading in Phase D. Don't spawn it while candidates are still writing.
 
 ## Phase D: Pick a base
 

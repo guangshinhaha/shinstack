@@ -49,5 +49,6 @@ Two rulebooks diverged and made cooks behave inconsistently. One source of truth
 ## Consequences
 - Craft changes land in shinstack even when a factory run exposed the problem.
 - Exceptions that exist today are tracked as issues in the repo that owns the fix.
+- Shinstack names a delegate's role and weight (`guard-the-context-window`), never a model or provider. The host or shinfactory maps weights to models (decided 2026-11-08, #47).
 - A new feature in one tool can't require another tool. It can only use that tool when it is present.
 - A factory order merges to local main, so gantry first sees that work at push. The factory passes through gantry's merge gate only once its final stage opens a PR (shinfactory#6).

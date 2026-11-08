@@ -4,7 +4,7 @@
 
 1. **Skip the plan** when the change is one or two files with an obvious approach. Say so and stop.
 2. **Settle open questions by prototype** (`prototype.md`) before writing. Ask the user only about a product or preference call that no run can settle, and give options.
-3. **Explore in subagents** (read-only), each returning file pointers, conventions, test commands and entry points. Keep the reduced findings in the main thread (guard-the-context-window).
+3. **Explore in subagents** (explorers, light weight, read-only), each returning file pointers, conventions, test commands and entry points. Keep the reduced findings in the main thread (guard-the-context-window).
 4. **Fill the skeleton below.** One section per PR, and one PR is one change with its own evidence (sequence-verifiable-units).
 5. **Write it plainly** (`/shinstack:technical-writing`, then `/shinstack:unslop`).
 6. **Run `check-plan.sh` on the plan's absolute path** and fix every line it prints. The script ships with shinstack, not with the repo you're working in. It's at `../scripts/check-plan.sh` from this playbook's directory, so build its absolute path from there.

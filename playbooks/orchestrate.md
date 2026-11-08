@@ -4,13 +4,14 @@
 
 **Topology**
 - **One owner per PR.** The owner is the only writer of its branch and carries the PR from build to merge-ready. You never author or edit code; conflicts, rebases and fixes go back to owners.
-- **A fresh worker per independent task**, each in its own worktree, started as a subagent. Workers can't see siblings, so each kickoff carries everything it needs, with upstream reports pasted in full.
+- **A fresh worker per independent task**, each a builder (standard weight) in its own worktree, started as a subagent. Workers can't see siblings, so each kickoff carries everything it needs, with upstream reports pasted in full.
 - **Two levels (coordinator, workers)** until one area needs many parallel workers; only then add a sub-coordinator that sends you one rollup. Keep a handful of workers in flight, not dozens.
-- **Each High-risk PR gets a verifier who isn't its author** (`autopilot.md`), with the tier from the table in `opening-a-pr.md`. Use a second model family for it if you have one; otherwise a fresh-context subagent. Any other PR gets its tier's review and no verifier, unless the user asked for `/shinstack:autopilot`.
+- **Each High-risk PR gets a verifier who isn't its author** (`autopilot.md`), with the tier from the table in `opening-a-pr.md`. The verifier is strong weight and independent of the author: a different model family if the host has one, otherwise a fresh-context subagent. Any other PR gets its tier's review and no verifier, unless the user asked for `/shinstack:autopilot`.
 - **Start with one unit.** Take it through kickoff, owner, review and merge-ready before fanning out, so a flawed kickoff costs one agent.
 
 **Supervision**
-- **Every kickoff names the proof of done** (a command and its expected output, or an artifact), the goal, the build playbook to follow (`/shinstack:feature` for an issue or spec, `/shinstack:bug-fix` for a bug, `/shinstack:refactoring` for a reshape), the paths the worker may and may not write, the actions it must not take, the tier you expect, its required review, and that subagents are allowed (a worker that defaults to none leaves the review unrun). If you can't name the proof, the unit isn't scoped.
+- **A kickoff is a brief: the playbook to follow plus task facts. It never restates the playbook's steps.** The playbook is `/shinstack:feature` for an issue or spec, `/shinstack:bug-fix` for a bug, `/shinstack:refactoring` for a reshape; the worker loads it and its own steps govern. The task facts are the issue, the decisions already made, the tier you expect and its required review, the paths the worker may and may not write, the actions it must not take, and that subagents are allowed (a worker that defaults to none leaves the review unrun).
+- **Every kickoff names the proof of done:** a command and its expected output, or an artifact. If you can't name the proof, the unit isn't scoped.
 - **Read the diff, not the summary.** Green CI is an input to your judgment, not the judgment. Send back work that drifts from scope; park the rest as follow-ups.
 - **Check live state before reporting** (`git log`, the forge CLI's PR view and checks), not the worker's last message. Account for every worker as done, replaced or absorbed.
 - **Replace workers that stall.** Judge by pushes and PR activity, not status text. Retry by cause: smaller scope after a context limit, same kickoff after a dropped connection, a different approach after a tool error. After two retries drop the unit and replan around it.
