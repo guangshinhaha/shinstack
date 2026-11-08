@@ -27,7 +27,7 @@ Skip Phase A only when the work is genuinely greenfield with no surrounding syst
 
 Run the `/shinstack:arena` with the design-sketch task and the Phase A grounding artifacts. Pass `references/runner-prompt.md` as each runner's prompt.
 
-Use the arena defaults: at least two structurally different candidates, on different model families if available.
+Use the arena defaults: at least two structurally different candidates (builders, standard weight), on different model families if available.
 
 Design it twice. Require at least two structurally distinct candidates before synthesis, even when the first looks sufficient. This is the exhaust-the-design-space principle made concrete. Whole-shape alternatives, not point fixes inside one shape.
 

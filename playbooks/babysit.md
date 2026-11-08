@@ -1,6 +1,6 @@
 # Babysit a PR
 
-**You own the merge frontier. Declare a mode, clear one PR at a time, and stop where the human's call begins.** Babysitting starts when the user asks (normally once a phase or a whole stack is built), or when you are an `autopilot.md` owner. Opening a PR never starts one. Landing is `shipping.md`.
+**You own the merge frontier. Declare a mode, clear one PR at a time, and stop where the human's call begins.** Babysitting starts when the PR you built has red CI or review comments (outside shinfactory), when the user asks (normally once a phase or a whole stack is built), or when you are an `autopilot.md` owner. Opening a PR alone never starts one. Landing is `shipping.md`.
 
 1. **Declare the mode before polling.**
    - `drive`: run to merge-ready ("get it green", "merge-ready").

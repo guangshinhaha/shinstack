@@ -13,8 +13,8 @@
 1. **Frame:** the variant under test, and what counts as success. Write a 3-6 criterion rubric for the judge only.
 2. **Set up sanitized environments:** one working directory per candidate with the variant in place, plus any context an organic task would have (a project skeleton, the rules it would naturally read).
 3. **Author one organic prompt,** what a user would type, with no leak of what is measured.
-4. **Run N candidates in parallel** as subagents, each in its own sanitized directory, same prompt. Use different models where you have them.
-5. **Run one blinded judge,** a fresh-context subagent (a different model family if available) that sees the rubric and the outputs by label only.
+4. **Run N candidates in parallel** as subagents (builders, standard weight), each in its own sanitized directory, same prompt. Use different models where you have them.
+5. **Run one blinded judge** (strong weight), a fresh-context subagent (a different model family if available) that sees the rubric and the outputs by label only.
 6. **Verify from transcripts, not self-report.** Read each candidate's transcript for this workspace only (`~/.claude/projects/<slug>/`) and see which files it really opened. Never glob across other projects.
 7. **Read every output yourself** and compare it with the judge's verdict. Disagreement means a bias or an ambiguous rubric.
 

@@ -17,6 +17,8 @@ In Claude Code, transcripts are at `~/.claude/projects/<slug>/<session-id>.jsonl
 
 ## 2. Spawn three reviewers in parallel
 
+Reviewers and the synthesizer are standard weight.
+
 One message, three `Agent` calls (`subagent_type: general-purpose`). Reviewers need MCP access to look up the tickets, chat threads, and observability traces the transcript references, so run them with the session's full tools. They must not edit anything.
 
 **Other harnesses.** If your harness has no subagent tool, run each lens yourself, one after another.

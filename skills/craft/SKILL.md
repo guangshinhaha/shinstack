@@ -17,6 +17,9 @@ If the `NOODLE_WORKTREE` environment variable is set, you are one stage of a shi
 ## Invoked with no task
 Outside shinfactory, if the user's message is only `/shinstack:craft` with no arguments, and nothing in the conversation (a resume or compaction summary included) names an open task, reply with one line, "Router loaded. What's the task?", and stop. Don't infer a task from the branch, repo or issues, and run no commands beyond the overlay read. First message and Reply don't apply to this one line.
 
+## Resuming
+Outside shinfactory, with a task (not a bare `/shinstack:craft`), before the first message: if the branch has commits the remote default branch lacks (`git log origin/<default>..HEAD`; a local default can be stale) or an open PR exists for it (`gh pr list --head <branch>`), call `/shinstack:recall` first. Skip it with no git repo, remote or `origin/<default>` ref; skip the PR lookup with no `gh`.
+
 ## First message on any task
 State in your own words: the goal, the problem, and the smallest change you expect to meet it. Don't wait for confirmation. If evidence rules out the requested change, show it and stop.
 
@@ -46,7 +49,7 @@ State in your own words: the goal, the problem, and the smallest change you expe
 - Debugging -> fix-root-causes; two fixes failed the same way -> attack-the-premise
 - Writing or changing a test -> test-behavior-not-implementation
 - Validation, errors, framework wiring -> boundary-discipline; types or signatures -> type-system-discipline
-- Same instruction or correction a second time -> encode-lessons-in-structure
+- Same instruction or correction a second time -> `/shinstack:correct` (encode-lessons-in-structure is its principle)
 - Non-trivial or repetitive work -> build-the-lever (a script that does or proves it)
 - Code hard to trace, or reviewing -> minimize-reader-load
 - Trusting or reporting a measured number -> explain-the-number
