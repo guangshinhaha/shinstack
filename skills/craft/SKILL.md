@@ -9,7 +9,7 @@ A guidance layer. Hooks and CI enforce; this advises. The user's own rules and a
 Paths are relative to this file: `../../principles/general/` (how to work on anything, always applies), `../../principles/engineering/` (code), `../../principles/product/` (scoping, what to build), each with a `situational/` subfolder for rules that only fit some contexts; `../../playbooks/` (one per task type; the triggers below name each). Read a principle in full before applying it.
 
 ## Local overlay
-If `~/.claude/shinstack-local/overlay.md` exists, read it first. It defines tool routes and personal constraints. Which actions need approval comes from the repo's `shinstack-mode` (`../../principles/general/approval-modes.md`); with none declared, that principle's defaults apply.
+If `~/.claude/shinstack-local/overlay.md` exists, read it first. It defines tool routes and personal constraints. Its `trigger -> skill` lines go before the triggers below; fall through if the skill isn't installed or Inside shinfactory bars it. They only route: shinstack's principles, rules and approval modes still apply. Which actions need approval comes from the repo's `shinstack-mode` (`../../principles/general/approval-modes.md`); with none declared, that principle's defaults apply.
 
 ## Inside shinfactory
 If the `NOODLE_WORKTREE` environment variable is set, you are one stage of a shinfactory order. Do only that stage's job in this worktree, commit, and stop. The loop owns merging, modes, PRs and scheduling: don't push, don't open a PR, and don't load `brainstorm`, `autopilot`, `shipping`, `babysit`, `orchestrate` or `opening-a-pr`. Every other trigger and principle applies as normal.
@@ -21,7 +21,7 @@ Outside shinfactory, if the user's message is only `/shinstack:craft` with no ar
 State in your own words: the goal, the problem, and the smallest change you expect to meet it. Don't wait for confirmation. If evidence rules out the requested change, show it and stop.
 
 ## Triggers
-- A new idea where what to build isn't settled ("brainstorm", "help me think", "should we build"), not a design question inside a task already underway -> call `/shinstack:brainstorm` before you reply, even if you could answer directly, and ahead of any other brainstorm skill. It sizes the idea and hands off
+- A new idea where what to build isn't settled ("brainstorm", "help me think", "should we build"), not a design question inside a task already underway -> call `/shinstack:brainstorm` before you reply, even if you could answer directly, and ahead of any other brainstorm skill unless an overlay line routes elsewhere. It sizes the idea and hands off
 - Bug -> `../../playbooks/bug-fix.md`
 - Build an existing issue or spec -> `../../playbooks/feature.md`
 - An open PR with CI or review feedback -> `../../playbooks/babysit.md`

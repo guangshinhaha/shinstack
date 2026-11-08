@@ -15,7 +15,7 @@ shinstack is a small router plus a library of short principles, playbooks and sk
 ## How it works
 
 1. **A session starts.** A SessionStart hook (`hooks/inject-router.sh`) puts the router in the agent's context, so nothing depends on someone invoking it first.
-2. **Local overlay.** If `~/.claude/shinstack-local/overlay.md` exists, the router reads it first. That is where you put your own tool routes and constraints. Approval comes from each repo's `shinstack-mode` (default `supervised`: stops before merge, deploy and anything shared).
+2. **Local overlay.** If `~/.claude/shinstack-local/overlay.md` exists, the router reads it first. That is where you put your own tool routes, `trigger -> skill` lines for personal skills, and constraints. Approval comes from each repo's `shinstack-mode` (default `supervised`: stops before merge, deploy and anything shared).
 3. **First message.** The agent states the goal, the problem, and the smallest change it expects to meet it, without waiting for confirmation. A bare `/shinstack:craft` with no task gets one line asking for the task.
 4. **Triggers.** The router holds a table of "when X, read Y". "Bug" opens the bug-fix playbook, "debugging" opens `fix-root-causes`, "about to say done" opens `prove-it-works`, and so on. Everything else stays unloaded, so context stays small even with dozens of files.
 5. **Reply.** The agent opens with the goal, names any principle that changed a decision, and ends with real command output instead of "should work".
@@ -171,6 +171,7 @@ The public router is generic on purpose. Put your own rules in `~/.claude/shinst
 
 - **Tool routes:** which skills from other plugins to use for issues, PRs and reviews.
 - **Personal constraints** on the situational principles.
+- **Personal skill routes:** lines like `flaky test -> my-flake-skill` send a matching task to that skill before the router's own triggers. If the skill isn't installed, or a shinfactory stage bars it, the router's own triggers apply. They only route: shinstack's principles, rules and approval modes still apply.
 
 Anything private stays in that file, outside this repo.
 
