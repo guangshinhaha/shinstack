@@ -6,7 +6,6 @@ for f in principles/general/*.md principles/engineering/*.md; do
   n=$(basename "$f" .md)
   grep -q "$n" skills/craft/SKILL.md || { echo "not in router index: $n"; fail=1; }
   grep -q "$n" README.md || { echo "not in README: $n"; fail=1; }
-  grep -q "$n" skills/craft/index.md || { echo "not in skills/craft/index.md: $n"; fail=1; }
 done
 for d in skills/*/; do
   n=$(basename "$d"); [ "$n" = craft ] && continue

@@ -60,13 +60,18 @@ State in your own words: the goal, the problem, and the smallest change you expe
 - Told "all of these / all related" -> count-the-scope
 - Design or "which approach" call -> own-view-first (a fact you can observe: run it instead of asking)
 - Push, PR, merge, deploy or shared-env write -> approval-modes
-- Editing shinstack itself (router, principle, playbook, skill) -> blast-radius on the change, `technical-writing` and `unslop` on the text; then opening-a-pr (and shipping if merging)
+- Editing shinstack itself (router, principle, playbook, skill) -> `/shinstack:blast-radius` on the change, `technical-writing` and `unslop` on the text; then opening-a-pr (and shipping if merging)
 - Tempted to ask "should I do X?" -> never-block-on-the-human
 - Scoping, "should we build this", ticket scope -> read `../../principles/product/README.md` and the matching file
 - Situational (`situational/` subfolders): outcome-oriented-execution, redesign-from-first-principles, experience-first, exhaust-the-design-space. Read the "When not to use" line first.
 
-## Skills and principles
-Every shinstack skill (invoke as /shinstack:<name>) and every principle, one line each, with folders: `index.md` next to this file. Read it when no trigger above names what you need.
+## Skills
+Every shinstack skill (invoke as /shinstack:<name>), one line each: `index.md` next to this file. Read it to find a skill no trigger names, or to learn what a named skill does.
+
+## Principles index
+**general/**: prove-it-works · attack-the-premise · fix-root-causes · sequence-verifiable-units · build-the-lever · encode-lessons-in-structure · explain-the-number · never-block-on-the-human · approval-modes · guard-the-context-window · session-state · count-the-scope · own-view-first
+**engineering/**: laziness-protocol · model-the-domain · boundary-discipline · type-system-discipline · test-behavior-not-implementation · minimize-reader-load · make-operations-idempotent · separate-before-serializing-shared-state · migrate-callers-then-delete-legacy-apis
+**product/**: 31 principles, indexed in `principles/product/README.md`
 
 ## Friction
 If a shinstack file is wrong, unclear or gets ignored mid-task, append one line to `~/.claude/shinstack-friction.md` (`date | file | what went wrong`, no code or private content) and keep working. Don't block on it and don't silently work around it. `/shinstack:reflect` reads this file.

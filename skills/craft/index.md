@@ -1,6 +1,6 @@
 # shinstack index
 
-The catalog behind the router (`SKILL.md`, next to this file): every skill and principle, one line each. It lives here so the router injected each session stays under Claude Code's hook output limit.
+The catalog behind the router (`SKILL.md`, next to this file): every skill, one line each. It lives here so the router injected each session stays under Claude Code's hook output limit.
 
 ## Skills (invoke as /shinstack:<name>)
 **Start here**
@@ -39,8 +39,3 @@ The catalog behind the router (`SKILL.md`, next to this file): every skill and p
 - `automate-me`: build or refresh a personal "-mode" skill from the user's transcripts
 - `create-verification-skill`: generate a project-local skill that drives the real app and captures proof
 - `maintain-verification-skill`: keep that skill honest as the app changes: read every feature from source, drive each one live, ship at most one PR of proven corrections
-
-## Principles index
-**general/**: prove-it-works · attack-the-premise · fix-root-causes · sequence-verifiable-units · build-the-lever · encode-lessons-in-structure · explain-the-number · never-block-on-the-human · approval-modes · guard-the-context-window · session-state · count-the-scope · own-view-first
-**engineering/**: laziness-protocol · model-the-domain · boundary-discipline · type-system-discipline · test-behavior-not-implementation · minimize-reader-load · make-operations-idempotent · separate-before-serializing-shared-state · migrate-callers-then-delete-legacy-apis
-**product/**: 31 principles, indexed in `principles/product/README.md`
