@@ -14,6 +14,9 @@ If `~/.claude/shinstack-local/overlay.md` exists, read it first. It defines tool
 ## Inside shinfactory
 If the `NOODLE_WORKTREE` environment variable is set, you are one stage of a shinfactory order. Do only that stage's job in this worktree, commit, and stop. The loop owns merging, modes, PRs and scheduling: don't push, don't open a PR, and don't load `brainstorm`, `autopilot`, `shipping`, `babysit`, `orchestrate` or `opening-a-pr`. Every other trigger and principle applies as normal.
 
+## Invoked with no task
+If the user's message is only `/shinstack:craft`, with no arguments, and the conversation holds no task, reply with one line, "Router loaded. What's the task?", and stop. Don't infer a task from the branch, repo or issues, don't read files or run tools, and skip the Reply section's Done and Next.
+
 ## First message on any task
 State in your own words: the goal, the problem, and the smallest change you expect to meet it. Don't wait for confirmation. If evidence rules out the requested change, show it and stop.
 
