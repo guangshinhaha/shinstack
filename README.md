@@ -171,6 +171,7 @@ The public router is generic on purpose. Put your own rules in `~/.claude/shinst
 
 - **Tool routes:** which skills from other plugins to use for issues, PRs and reviews.
 - **Personal constraints** on the situational principles.
+- **Personal skill routes:** lines like `flaky test -> my-flake-skill` send a matching task to that skill before the router's own triggers. They only route; they can't override shinstack's rules or approval modes.
 
 Anything private stays in that file, outside this repo.
 
