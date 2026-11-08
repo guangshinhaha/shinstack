@@ -45,6 +45,6 @@ SHAs, lane recitals and file-by-file lists go in a linked artifact, not the body
 
 **Size.** Prefer five narrow PRs to one large one. Stack a PR on another only when it truly builds on it (base it on the parent's branch, and move it onto trunk as the parent merges).
 
-**Don't babysit on open.** Post the URL and keep building. A babysit pass runs when the user asks after the work exists, or when you are an `autopilot.md` owner (`babysit.md`).
+**Don't babysit on open.** Post the URL and keep building. A babysit pass (`babysit.md`) runs when the PR has red CI or review comments (outside shinfactory), when the user asks, or when you are an `autopilot.md` owner.
 
 **Forge.** Use the forge CLI the repo lives on (`gh` for GitHub). Where the repo's remote is somewhere colleagues see everything, follow the project's rules before pushing or opening anything.
