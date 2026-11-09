@@ -22,7 +22,7 @@ Run at the end of every other playbook. Whether you may push and open the PR wit
 - Don't repeat a review: re-run only for new behavior or a large new diff. A rebase or minor fix gets a single check at the new head.
 - On a sensitive-data change, reviewers use synthetic data and runners from the same provider.
 - If the review can't run (no subagents, or an unattended run blocked on a question), report it as not run. Never imply it ran.
-- A review that comes back empty counts as not run and can't clear the gate in `shipping.md`, because nobody can tell it from a review that didn't look. Zero findings count only if the reviewer's result says what it covered, and `## Verification` repeats that. The author can't write that statement, so if the tool returns a bare empty list, run your agent's equivalent with a prompt that asks for it. Rerun an empty review once, the one exception to the rule on repeats. If it's empty again, report it as not run and stop at ready for a person.
+- A review that comes back empty counts as not run and can't clear the gate in `shipping.md`, because nobody can tell it from a review that didn't look. Zero findings count only if the reviewer's own result states what it covered: the diff or files it read, the level, and the kinds of problem it checked. The author can't write that statement. Once the PR exists, paste the reviewer's statement as a PR comment and summarize it in `## Verification`. On a bare empty list, rerun once (the one exception to the rule on repeats). If that is empty too, run your agent's equivalent review once, with a prompt that asks for the coverage statement. If that returns none, report the review as not run and stop at ready for a person. A clean `blast-radius` or `interrogate` counts the same way: it must list the paths or attacks it tried.
 - Say the tier, the review level and why in your reply, and name the tier and review in `## Verification`, so a later session can see them. This is the author's review. `autopilot.md` verification runs separately where `shipping.md` asks for it.
 
 **Text.** Run the title, body and commit messages through `/shinstack:unslop`, and write to the standard in `/shinstack:technical-writing`.
@@ -32,10 +32,10 @@ Run at the end of every other playbook. Whether you may push and open the PR wit
 **Body.** A one-minute briefing for a reviewer who has the diff, using `##` headings in this order:
 - `## Why`: the problem and approach, 1-3 short sentences.
 - `## What changed`: 1-3 short bullets. Name both sides of a rename.
-- `## Scope`: always. What it covers and what it deliberately leaves out.
+- `## Scope`: always. What it covers and what it deliberately leaves out. With `Refs #N`, list the Done when items it claims, which is what the verifier tests.
 - `## Tradeoffs`: only rejected alternatives a reviewer would otherwise ask about.
 - `## Blast Radius`: who or what it touches, and why that is safe or risky.
-- `## Verification`: 1-3 bullets, each a real run and its outcome. Perf: one number with its unit, `before -> after`.
+- `## Verification`: 1-5 bullets, each a real run and its outcome. The tier, review and coverage statement take one. Perf: one number with its unit, `before -> after`.
 
 If the PR finishes an issue, put `Closes #N` in the body. If it does only part of one, use `Refs #N`.
 
