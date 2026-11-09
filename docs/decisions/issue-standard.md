@@ -58,7 +58,7 @@ Three gantry PRs showed the gap in enforcement. gantry#33 and gantry#35 were Hig
 
 ## Amended 2026-11-08 (#35)
 
-- A later comment overrides Done when only if it comes from outside the run (the user, or the issue's author if a person). Factory stages don't edit or comment on issues (a router rule since #51), and the verifier tests Done when as written plus those comments.
+- A later comment overrides Done when only if it comes from outside the run (the user, or the issue's author if a person). Factory stages don't edit or comment on issues (a router rule), and the verifier tests Done when as written plus those comments.
 - A coverage statement names what the reviewer read, the level and the kinds of problem checked. It goes in a PR comment and is summarized in `## Verification`. An empty review reruns once, then an equivalent review runs once, then it counts as not run.
 - A user's yes given after the flag on an empty review is final for that head.
 - `Refs #N` PRs list the claimed items in `## Scope`, and the verdict carries `done_when`.
