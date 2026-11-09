@@ -1,0 +1,3 @@
+# High-risk paths for shinstack, on top of the gantry defaults. A PR changing one gets risk:high.
+skills/craft/SKILL.md
+playbooks/**
