@@ -8,7 +8,7 @@
 - *Any tier:* check the PR for a verdict. The latest one must be `PASS` or `PASS+NOTES` and must still describe the code (step 3). A `FAIL` stops the merge until a newer verdict replaces it, whatever was pushed since.
 
 **A merge the user approved.** In any mode, a user's explicit yes on one PR replaces the numbered steps, so a hand-built PR needs no verdict file. A PR that ran under `autopilot.md` still needs `PASS` or `PASS+NOTES` at its current head.
-- Before merging, check for anything the user may not know: a commit pushed after their approval, red CI (if the repo has CI), an open blocking review finding, a required review that was empty or not run, a missing or failed verdict, or a High-risk PR with no verdict. Run step 4's trunk check too. If you find any of these, stop and say what you found. A rebase changes the head, so it needs a new yes.
+- Before merging, check for anything the user may not know: a commit pushed after their approval, red CI (if the repo has CI), an open blocking review finding, a required review that was empty or not run, a missing or failed verdict, or a High-risk PR with no verdict. Run step 4's trunk check too. If you find any of these, stop and say what you found. A yes given after you flagged an empty or not-run review is final for that head; one given before you flagged it isn't. A rebase changes the head, so it needs a new yes.
 - Merge that one PR, pinned to the head you checked (`gh pr merge <pr> --squash --match-head-commit <sha>`, or the forge's equivalent). Another PR needs another yes.
 - Read back the PR's state, merged time and base, and name the merged SHA in your reply. If the base isn't trunk, say the change hasn't reached trunk. If the PR closes an issue that is still open, say so.
 
