@@ -12,6 +12,7 @@ An unattended merge (mode `auto`, with no yes on that PR) needs what the PR's ri
 | High | All of that, plus an independent verifier and a verdict file |
 
 - The latest verdict on a PR must be `PASS` or `PASS+NOTES`, whatever the tier. Verdicts go on the PR as comments, so a new session can find them.
+- The verifier posts its own verdict. The author never writes or transcribes one, because all agents share one GitHub account and no check can tell who wrote it (shinstack#59).
 - Outside High risk, a verifier runs only when the user asks for `/shinstack:autopilot`. `orchestrate.md` follows the same rule.
 - `shipping.md` holds the gate. `approval-modes.md` points to it, so the two can't disagree.
 - A yes on one PR skips the gate, but the agent first flags a High-risk PR with no verdict.
