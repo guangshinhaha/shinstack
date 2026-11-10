@@ -1,3 +1,9 @@
 # High-risk paths for shinstack, on top of the gantry defaults. A PR changing one gets risk:high.
 skills/craft/SKILL.md
 playbooks/**
+# The factory's own loop config: it sets what runs unattended, so an agent editing it steers itself.
+.noodle.toml
+# Skills the factory loads for every stage: a change here changes how unattended work behaves.
+.agents/skills/**
+# The backlog adapter: it decides which issues the factory picks up and how their state moves.
+adapters/**
