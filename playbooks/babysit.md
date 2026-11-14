@@ -19,4 +19,7 @@
 8. **Review comments, bots included, are triaged skeptically:** fix, dismiss with a concrete reason, or ask. Verify each claim against the code. Fix real findings with a failing-test-first proof in the PR that owns the code. Reply on the thread with what changed.
 9. **Stop at the human's line.** Babysitting never authorizes a merge; only an explicit request to merge or ship does, and that routes to `shipping.md`. Owner approval is a wait, not a blocker to fix. Surface it and keep working the rest.
 
+10. **Arm the poll yourself.** While CI or a long worker runs, start a recurring check (`/loop` or a schedule) instead of waiting to be asked. Each poll reads CI state, new review threads and pushes since the last check.
+11. **A status answer ("running, stuck, fine?") is never read from a snapshot or an open port.** Check the process is alive, the age of the last event, failures since the last check, and each running worker's liveness against the order state. A reply ending "no decision needed" says what was verified and when. A known false-alarm pattern lowers the effort; you still read the worker's output.
+
 **Reply:** PR state, what changed since the last check, what is blocking, and the single next action.
