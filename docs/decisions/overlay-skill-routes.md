@@ -3,7 +3,7 @@
 Date: 2026-11-08. Status: accepted.
 
 ## Decision
-A `trigger -> skill` line in `~/.claude/shinstack-local/overlay.md` sends a matching task to that skill before the router's own triggers. If the skill isn't installed, or the router's Inside shinfactory section bars it, the router's triggers apply. The lines only route: shinstack's principles, rules and approval modes still apply.
+A `trigger -> skill` line in `~/.claude/shinstack-local/overlay.md` sends a matching task to that skill before the router's own triggers. If the skill isn't installed, or the router's Inside a factory station section bars it, the router's triggers apply. The lines only route: shinstack's principles, rules and approval modes still apply.
 
 ## Why
 - Personal skills in `~/.claude/skills` were reachable only through their own description, which loses to a shinstack trigger that matches the same task.

@@ -19,6 +19,6 @@
 5. **Leave the stack alone while it lands.** Moving the next PR to trunk is the only change to a branch or base. Watch the run with a background watcher until it reaches the ceiling.
 6. **Stop at the ceiling.** Extending the run means the next PR has to clear its gate first.
 
-**Make it enforceable (factory):** the merge step is a wrapper that reads any verdict, checks `head_sha` and `patch-id`, and refuses on a `FAIL`, or where the tier needs a verdict and none exists. `release: manual` in policy keeps it off until a project is switched to auto.
+**Make it enforceable (factory):** the merge step is the factory's `sf-ship` gate. It reruns gantry's `sf-gate-evidence` and `sf-verdict-check`, so it refuses on a `FAIL`, on a verdict whose `head_sha` is not the branch head, or where the tier needs a verdict and none exists. It merges only where the repo's `shinstack-mode` is `auto`; otherwise it parks the PR.
 
 **Reply:** the cleared run and its ceiling, each PR's tier and gate result, any verdict and who produced it, what landed and how you confirmed it, and what the next gap needs.

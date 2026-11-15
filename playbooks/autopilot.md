@@ -13,6 +13,6 @@
 7. **Loosening a gate needs proof and your countersign.** A raised budget or an allowlist entry needs the verifier's proof first, because the owner is the one who wants green. A disabled or soft-failed check always comes out.
 8. **Audit on a heartbeat** while delegated work remains. Each tick re-reads this playbook, probes every agent by its side effects (pushes, trail rows), and treats an agent as stuck if it errors or shows nothing new past its expected runtime. A hold from the user reaches every owner as a zero-writes order.
 
-**Make it enforceable (factory):** the verdict file is schema-validated, and a wrapper refuses to mark a PR merge-ready unless its `head_sha` equals the PR's current head.
+**Make it enforceable (factory):** gantry's `sf-verdict-check` gate schema-validates the verdict and won't mark a PR merge-ready unless its `head_sha` equals the PR's current head.
 
 **Reply (`/shinstack:ketchup` style):** each PR's state and verdict with links, what is ready, countersigns and why, gates waiting on the user, parked follow-ups.
