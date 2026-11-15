@@ -2,14 +2,14 @@
 
 **A working style for coding agents, packaged as a Claude Code plugin.**
 
-shinstack is a small router plus a library of short principles, playbooks and skills. It nudges an agent to restate the goal, take the smallest change, verify against the real thing, and work in small steps that can each be checked. Nothing in it is a program: every piece is a markdown file the agent reads when it applies.
+shinstack is how one person runs one agent: a short router that always loads, a few playbooks for the work that person does, and a few skills. It nudges an agent to restate the goal, take the smallest change, verify against the real thing, and work in small steps that can each be checked. Nothing in it is a program: every piece is a markdown file the agent reads when it applies. The rebuild plan and the reason each piece stays are in issue #68.
 
 ```
-/shinstack:craft          the router (loads at the start of every session)
+/shinstack:craft          the router (loads at the start of every session; rules 1-10 inline)
         │
-        ├─ principles/    short rules, read only when their trigger matches
         ├─ playbooks/     step-by-step recipes for one kind of task
-        └─ skills/        tools you or the agent invoke by name
+        ├─ skills/        tools you or the agent invoke by name
+        └─ taste/         product.md: scoping calls, loaded when scoping or writing an issue
 ```
 
 ## How it works
@@ -17,144 +17,47 @@ shinstack is a small router plus a library of short principles, playbooks and sk
 1. **A session starts.** A SessionStart hook (`hooks/inject-router.sh`) puts the router in the agent's context, so nothing depends on someone invoking it first.
 2. **Local overlay.** If `~/.claude/shinstack-local/overlay.md` exists, the router reads it first. That is where you put your own tool routes, `trigger -> skill` lines for personal skills, and constraints. Approval comes from each repo's `shinstack-mode` (default `supervised`: stops before merge, deploy and anything shared).
 3. **First message.** The agent states the goal, the problem, and the smallest change it expects to meet it, without waiting for confirmation. A bare `/shinstack:craft` with no task gets one line asking for the task.
-4. **Triggers.** The router holds a table of "when X, read Y". "Bug" opens the bug-fix playbook, "debugging" opens `fix-root-causes`, "about to say done" opens `prove-it-works`, and so on. Everything else stays unloaded, so context stays small even with dozens of files.
-5. **Reply.** The agent opens with the goal, names any principle that changed a decision, and ends with real command output instead of "should work".
+4. **Rules and triggers.** The router states ten rules inline (reply style, approval mode, deciding in a batch, evidence before claims, rigor by risk, minimalism, issues as state, fix at the source, token cost, skills firing on their own) and a short list of "when X, read Y". Everything else stays unloaded, so context stays small.
+5. **Reply.** The agent opens with the goal, names any rule that changed a decision, and ends with real command output instead of "should work".
 
-**This is guidance, not enforcement.** The agent follows the table by judgment. Pair it with hooks and CI for anything that must never be skipped; the principle `encode-lessons-in-structure` says the same.
+**This is guidance, not enforcement.** The agent follows the router by judgment. Pair it with hooks and CI for anything that must never be skipped.
 
 ## Layout
 
 ```
 .claude-plugin/    plugin and marketplace manifests
 skills/            the router (craft/) and every other skill, including one command per playbook
-principles/
-  general/         how to work on anything (always applies)
-  engineering/     code-specific
-  product/         scoping and what to build
-  */situational/   rules that only fit some contexts
 playbooks/         one recipe per kind of task, listed below
+taste/product.md   product calls for scoping and ticket-writing
 ```
 
-Every principle is one short file: a title, an **Apply** trigger line, the rule, and a **Why**.
-
-## Principles
-
-### General
-| Principle | Apply |
-|---|---|
-| [`attack-the-premise`](principles/general/attack-the-premise.md) | When two or more fixes that share one premise have failed the same gate |
-| [`build-the-lever`](principles/general/build-the-lever.md) | To any non-trivial work, not just bulk work: edits, migrations, analyses, checks |
-| [`count-the-scope`](principles/general/count-the-scope.md) | When told "all of these", "all related" or "until everything's fixed" |
-| [`encode-lessons-in-structure`](principles/general/encode-lessons-in-structure.md) | When you catch yourself writing the same instruction a second time, or notice a recurring correction |
-| [`explain-the-number`](principles/general/explain-the-number.md) | Before you measure, and before you trust, report, or act on a number you measured: a speedup, a regression, a throughput, a latency, or an eval result |
-| [`fix-root-causes`](principles/general/fix-root-causes.md) | When debugging |
-| [`guard-the-context-window`](principles/general/guard-the-context-window.md) | When context is filling up: large outputs, long files, repeated reads, fan-out planning |
-| [`approval-modes`](principles/general/approval-modes.md) | Before push, PR, merge, deploy or a shared-env write |
-| [`never-block-on-the-human`](principles/general/never-block-on-the-human.md) | When tempted to ask "should I do X?" |
-| [`own-view-first`](principles/general/own-view-first.md) | When making a design or "which approach" call |
-| [`prove-it-works`](principles/general/prove-it-works.md) | After completing a task, before declaring done |
-| [`sequence-verifiable-units`](principles/general/sequence-verifiable-units.md) | To multi-step work (sweeps, migrations, runs of similar edits) and to how you stack commits and PRs |
-| [`session-state`](principles/general/session-state.md) | When resuming, pausing or finishing work |
-
-### Engineering
-| Principle | Apply |
-|---|---|
-| [`boundary-discipline`](principles/engineering/boundary-discipline.md) | When wiring validation, error handling, or framework adapters |
-| [`laziness-protocol`](principles/engineering/laziness-protocol.md) | When refactoring, evaluating diff size, or tempted to add abstractions, layers, or signal threading |
-| [`make-operations-idempotent`](principles/engineering/make-operations-idempotent.md) | When designing commands, lifecycle steps, or processing loops that run amid crashes, restarts, and retries |
-| [`migrate-callers-then-delete-legacy-apis`](principles/engineering/migrate-callers-then-delete-legacy-apis.md) | When introducing a new internal API while old callers still exist |
-| [`minimize-reader-load`](principles/engineering/minimize-reader-load.md) | When reviewing or shaping code that's hard to trace |
-| [`model-the-domain`](principles/engineering/model-the-domain.md) | When writing stateful logic, or when code branches a lot or repeats a shape assumption across files |
-| [`separate-before-serializing-shared-state`](principles/engineering/separate-before-serializing-shared-state.md) | When concurrent actors might write to the same file, branch, key, or state object |
-| [`test-behavior-not-implementation`](principles/engineering/test-behavior-not-implementation.md) | When you write, change, or keep a test |
-| [`type-system-discipline`](principles/engineering/type-system-discipline.md) | When designing types, reviewing a function signature, or writing code in any statically-typed language |
-
-### Situational
-Each ends with a "When not to use" line. Engineering: [`outcome-oriented-execution`](principles/engineering/situational/outcome-oriented-execution.md), [`redesign-from-first-principles`](principles/engineering/situational/redesign-from-first-principles.md). Product: [`exhaust-the-design-space`](principles/product/situational/exhaust-the-design-space.md), [`experience-first`](principles/product/situational/experience-first.md).
-
-### Product
-31 principles for scoping tickets, delivery decisions, trust and privacy, architecture, and honesty about what is tested. Index: [`principles/product/README.md`](principles/product/README.md).
-
 ## Playbooks
-**Single tasks**
-- [`bug-fix`](playbooks/bug-fix.md): reproduce, find the cause by elimination, smallest fix, failing test before the fix.
+
+Each is also a command, `/shinstack:<name>`.
+
 - [`feature`](playbooks/feature.md): build from an issue or spec, one slice per item in its Done when.
-- [`babysit`](playbooks/babysit.md): keep one PR moving until it is merge-ready: modes, merge-frontier discipline, a fixed order (conflicts, threads, CI), and a rule for classifying CI failures.
-- [`perf-issue`](playbooks/perf-issue.md): tie every fix to a measurement; seven "mantras" tried cheapest first.
-- [`hillclimb`](playbooks/hillclimb.md): improve one number against a target: frozen harness, one change per iteration, keep or revert, decision log.
-- [`visual-parity`](playbooks/visual-parity.md): pixel-exact UI migration against a baseline you never touch.
+- [`bug-fix`](playbooks/bug-fix.md): reproduce, find the cause by elimination, smallest fix, failing test before the fix.
 - [`refactoring`](playbooks/refactoring.md): change structure, not behavior: pin first, subtract first, prove unchanged.
+- [`opening-a-pr`](playbooks/opening-a-pr.md): ordered commits, a one-minute PR body, ready not draft, and the review depth table by risk.
+- [`ship`](playbooks/ship.md): the merge gate by risk, plus an independent verifier and the verdict format for High-risk PRs.
+- [`coordinate`](playbooks/coordinate.md): run many tasks through owners and workers, or one task unattended; poll, verify liveness, never write code.
+- [`plan`](playbooks/plan.md): the plan is a GitHub issue, a checklist with evidence per box, checked by `scripts/check-plan.sh`.
 - [`investigation`](playbooks/investigation.md): a read-only question answered with cited evidence.
-- [`prototype`](playbooks/prototype.md): a throwaway built to settle one design decision.
-- [`opening-a-pr`](playbooks/opening-a-pr.md): ordered commits, a one-minute PR body, ready not draft.
 
-**Unattended and factory work**
-- [`autonomous-run`](playbooks/autonomous-run.md): drive one task to a checkable finish condition without stopping.
-- [`orchestrate`](playbooks/orchestrate.md): a coordinator that runs many tasks through owners and workers, adds verifiers for High-risk PRs, and never writes code.
-- [`autopilot`](playbooks/autopilot.md): one owner per PR, an independent verifier, verdict files tied to a head SHA. Stack mode stops at verified; full mode continues to merge.
-- [`shipping`](playbooks/shipping.md): land one PR at a time once it clears the gate for its risk, then leave it alone. Also covers a single merge the user approved.
-- [`multi-phase-plan`](playbooks/multi-phase-plan.md): the plan is the deliverable: a checklist with evidence per box, checked by `scripts/check-plan.sh`.
-- [`eval`](playbooks/eval.md): a blinded experiment to test whether a skill, principle or prompt actually helps.
-- [`pause-safely`](playbooks/pause-safely.md): a clean stop with a resume note a cold-start agent can use.
-- [`worktree-cleanup`](playbooks/worktree-cleanup.md): a safe sweep of leftover worktrees, using the read-only `scripts/worktree-audit.sh`.
-
-Each of these ends with a "make it enforceable" note: the part to turn into a validator or check when a system runs the playbook, because prose alone is only a suggestion.
+Watching a PR and pausing a run are router lines, not playbooks.
 
 ## Skills
-Invoke as `/shinstack:<name>`.
-
-**Small and standalone**
+Invoke as `/shinstack:<name>`. Every skill, one line each, is in [`skills/craft/index.md`](skills/craft/index.md).
 
 | Skill | What it does |
 |---|---|
 | `brainstorm` | Start here for an unsettled idea: size it, give a position, end in a draft artifact or draft issues |
-| `bro` | Restate the last message in plain language |
-| `sharpen` | Make a task deeper, not bigger, then rewrite the prompt |
-| `tdd` | Failing test first, then the smallest fix |
-| `init` | Set up shinstack in a repo: mode and check commands in CLAUDE.md |
-| `correct` | Find mistakes agents keep repeating in a repo and make each impossible: architecture first, then types, lint, test, docs last |
 | `blast-radius` | Before shipping a risky change, find what it could break beyond the diff and prove the one safety fact by running code |
-| `benchmark-checklist` | Vet a performance number before you report it |
-| `unslop` | Cut AI tells from writing |
-| `technical-writing` | Docs and PR-body standard |
-| `typescript-best-practices` | TypeScript rule table with examples |
-| `go-best-practices` | Go patterns for lifecycle, concurrency, config, testing and CI |
-| `react-best-practices` | React performance rules, including when not to use effects |
-
-**UI craft** (from [poteto/noodle](https://github.com/poteto/noodle))
-
-| Skill | What it does |
-|---|---|
-| `frontend-design` | Pick a design direction before code; UI that avoids generic AI aesthetics |
-| `interaction-design` | Microinteractions, motion, loading and feedback states, reduced motion |
-| `make-interfaces-feel-better` | Polish details: radius, optical alignment, shadows, interruptible animation, tabular numbers |
-
-**Context and trail**
-
-| Skill | What it does |
-|---|---|
-| `ketchup` | Catch you up on a long chat, with every decision waiting on you |
-| `recall` | Rebuild recent working context from this repo's chats, git and PRs |
-| `show-me-your-work` | Append-only decision log for long or unattended runs |
-
-**Understand and design** (multi-agent, heavier)
-
-| Skill | What it does |
-|---|---|
-| `how` / `why` / `teach` | How a subsystem works, why it is shaped that way, and both as one plain explanation |
-| `architect` | Sketch types and module boundaries before code; stops for your go by default |
-| `arena` | N parallel candidates, a cross-judge, pick a base, graft the best parts |
 | `interrogate` | Adversarial review where a finding survives only if a run proves it |
-| `figure-it-out` | Design a workflow when no playbook fits |
-
-**Improve the stack**
-
-| Skill | What it does |
-|---|---|
-| `reflect` | Mine a conversation for lessons and propose skill edits; applies nothing without approval |
-| `automate-me` | Build or refresh a personal "-mode" skill from your transcripts |
-| `create-verification-skill` | Generate a project-local skill that drives the real app and captures proof |
-| `maintain-verification-skill` | Keep that skill honest as the app changes: every feature read from source and driven live, at most one PR of proven corrections |
+| `unslop`, `technical-writing` | Cut AI tells; docs and PR-body standard |
+| `recall`, `ketchup`, `show-me-your-work` | Rebuild working context, catch you up on a long chat, keep a decision log |
+| `reflect`, `correct`, `init` | Mine a conversation for lessons; make a repeated mistake impossible; set up the repo's mode and checks |
+| `frontend-design`, `interaction-design`, `make-interfaces-feel-better` | UI craft (from [poteto/noodle](https://github.com/poteto/noodle)) |
 
 ## Install
 
@@ -163,19 +66,19 @@ claude plugin marketplace add guangshinhaha/shinstack
 claude plugin install shinstack@shinstack
 ```
 
-Restart Claude Code, then try `/shinstack:bro` or `/shinstack:craft`.
+Restart Claude Code, then try `/shinstack:craft`.
 
 ## Make it yours: the local overlay
 
 The public router is generic on purpose. Put your own rules in `~/.claude/shinstack-local/overlay.md`, which the router reads first:
 
 - **Tool routes:** which skills from other plugins to use for issues, PRs and reviews.
-- **Personal constraints** on the situational principles.
-- **Personal skill routes:** lines like `flaky test -> my-flake-skill` send a matching task to that skill before the router's own triggers. If the skill isn't installed, or a factory station bars it, the router's own triggers apply. They only route: shinstack's principles, rules and approval modes still apply.
+- **Personal constraints** on how the router's rules apply to you.
+- **Personal skill routes:** lines like `flaky test -> my-flake-skill` send a matching task to that skill before the router's own triggers. If the skill isn't installed, or a factory station bars it, the router's own triggers apply. They only route: shinstack's rules and approval modes still apply.
 
 Anything private stays in that file, outside this repo.
 
-## How signals, gantry, shinstack and shinfactory fit together
+## How signals, gantry, shinstack and factory fit together
 
 Each of the four works alone. When they are used together, they do not overlap.
 
@@ -183,8 +86,8 @@ Each of the four works alone. When they are used together, they do not overlap.
 |---|---|---|---|
 | [signals](https://github.com/guangshinhaha/signals) | What outside fact becomes a task, and did the fix hold? | Events from a live product, the cause that groups them, the task it opens, and the confirm after a release | An agent reads and writes an API |
 | [gantry](https://github.com/guangshinhaha/gantry) | Did it pass? | Local hooks, CI checks, the secret scan and the required `gantry / ci-ok` check | Runs checks with no judgment, and can block a merge |
-| [shinstack](https://github.com/guangshinhaha/shinstack) | How should the agent work, and may it act? | Principles, playbooks, review depth, PR format and approval modes | Advises the agent |
-| [factory](https://github.com/guangshinhaha/factory) (replacing [shinfactory](https://github.com/guangshinhaha/shinfactory)) | What runs next? | Station order, retries, each station's model, and merges inside a factory order (`sf-ship`) | Starts Orca workers once a task exists |
+| [shinstack](https://github.com/guangshinhaha/shinstack) | How should the agent work, and may it act? | Rules, playbooks, review depth, PR format and approval modes | Advises the agent |
+| [factory](https://github.com/guangshinhaha/factory) (shinfactory is retired) | What runs next? | Station order, retries, each station's model, and merges inside a factory order (`sf-ship`) | Starts Orca workers once a task exists |
 
 To place a new rule, ask these in order and stop at the first yes:
 
@@ -193,13 +96,13 @@ To place a new rule, ask these in order and stop at the first yes:
 3. Does it need a schedule, a station, or an event inside a factory order that already has a task? It goes in the factory.
 4. Would it still apply to one person running one agent session with no loop? It goes in shinstack.
 
-Signals opens the task and stops. The factory decides when that task runs and which model runs each station, and Orca runs the workers. gantry decides whether the checks pass. shinstack tells the agent how to work, and the repo's `shinstack-mode` decides whether a merge may happen, through `approval-modes` or the factory's `sf-ship`. A merge still needs both a green check and an approval.
+Signals opens the task and stops. The factory decides when that task runs and which model runs each station, and Orca runs the workers. gantry decides whether the checks pass. shinstack tells the agent how to work, and the repo's `shinstack-mode` decides whether a merge may happen, through router rule 2 or the factory's `sf-ship`. A merge still needs both a green check and an approval.
 
 Full reasoning: [the decision record](https://github.com/guangshinhaha/shinstack/blob/main/docs/decisions/shinstack-vs-shinfactory.md).
 
 ## Status
 
-Early. The principles and playbooks are the settled part. The multi-agent skills have had little real use, so expect rough edges. Run `reflect` after real sessions to turn what went wrong into edits, and cut principles that never get used.
+Rebuilding from Shin's own rules (issue #68). The router and playbooks are rewritten; the skills (`writing`, `recall`, `reflect`) follow in #71.
 
 ## License
 

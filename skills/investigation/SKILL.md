@@ -5,4 +5,4 @@ description: "Answer a read-only 'how', 'why' or 'are we sure' question with evi
 
 # investigation
 
-Read `../../playbooks/investigation.md` in full and follow it. Check the repo's `approval-modes` before any push, PR, merge or deploy. End with Done and Next.
+Read `../../playbooks/investigation.md` in full and follow it. Check the repo's mode (router rule 2) before any push, PR, merge or deploy. End with Done and Next.

@@ -19,7 +19,7 @@ Help the user think by giving them something to push against. A question the use
 | Unclear | You can't yet say what to build or who it is for | Continue below |
 | Big | Several pieces, or the order isn't clear | Continue below, and expect a parent issue |
 
-4. **Retrieve before you ask, and scale it to the size.** For a small idea, read only the code or issue it touches. For the rest, read the repo, the issues and past chats. Pull from connected sources such as Slack or meeting notes when the user points at them, and synthesize the material first. Write "I assumed X from Y" instead of asking for X. Treat student, staff and citizen data as sensitive: don't pull it in unasked, and don't send it to external services. For a scoping call, read `../../principles/product/README.md` and the matching file.
+4. **Retrieve before you ask, and scale it to the size.** For a small idea, read only the code or issue it touches. For the rest, read the repo, the issues and past chats. Pull from connected sources such as Slack or meeting notes when the user points at them, and synthesize the material first. Write "I assumed X from Y" instead of asking for X. Treat student, staff and citizen data as sensitive: don't pull it in unasked, and don't send it to external services. For a scoping call, read `../../taste/product.md` and apply the lines that match.
 5. **Open with a position.** Say what you would build first, who it is for, why, what you would leave out, and what would change your mind. Give a flat verdict, not conditionals. A wrong first pass is useful, because the user sharpens the idea by pointing at the gap.
 
 If the user says they want to understand first, walk through the items one by one and hold your recommendation until they have seen them all.
@@ -40,7 +40,7 @@ If the user asks directly whether to do it, or the evidence rules it out, say so
 - Ask each question once. If the user skips it, or says "not sure" or "you write first", take that as a handoff. Record an assumption or an open item, then keep going with your default.
 - If the user is lost, restate the idea as plain segments, each with a default to correct.
 - Take new material at any point, with or without a question. Say what it changed.
-- If building something small would settle a question faster than talking, offer `/shinstack:prototype`.
+- If building something small would settle a question faster than talking, offer a throwaway build.
 
 Keep a running record in the chat, and update it when something changes:
 
@@ -58,8 +58,8 @@ Never end on a question alone. End with a draft and one next step. Set the lengt
 |---|---|---|
 | Something to show or send to people | A one-pager, a message or a deck outline | The user sends it |
 | One or two buildable pieces | One issue for each | `/shinstack:feature #N` |
-| Three or more independent pieces, in a known order | A parent issue with a checklist of child issues | `/shinstack:orchestrate #N` |
-| Pieces that depend on each other, or an unclear order | A parent issue that lists the pieces and the open questions | `/shinstack:multi-phase-plan` |
+| Three or more independent pieces, in a known order | A parent issue with a checklist of child issues | `/shinstack:coordinate #N` |
+| Pieces that depend on each other, or an unclear order | A parent issue that lists the pieces and the open questions | `/shinstack:plan` |
 
 Each issue states its goal, what you can observe when it is done, what is out of scope, and the Decided, Assumed and Open items it depends on. The next agent can't see this chat. Each child issue must stand alone for the same reason.
 
