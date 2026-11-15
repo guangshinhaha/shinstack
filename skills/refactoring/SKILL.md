@@ -5,4 +5,4 @@ description: "Restructure code without changing behavior, with proof that behavi
 
 # refactoring
 
-Read `../../playbooks/refactoring.md` in full and follow it. Check the repo's `approval-modes` before any push, PR, merge or deploy. End with Done and Next.
+Read `../../playbooks/refactoring.md` in full and follow it. Check the repo's mode (router rule 2) before any push, PR, merge or deploy. End with Done and Next.

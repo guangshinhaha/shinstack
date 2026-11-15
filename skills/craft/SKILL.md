@@ -1,88 +1,78 @@
 ---
 name: craft
-description: A working style for code tasks: restate the goal, take the smallest change, verify against the real thing, work in small verifiable steps. Routes to principles and playbooks. Use at the start of any non-trivial coding task (bug, feature, review, refactor), or for /shinstack:craft.
+description: A working style for code tasks: restate the goal, take the smallest change, verify against the real thing, work in small verifiable steps. Routes to playbooks and skills. Use at the start of any non-trivial coding task (bug, feature, review, refactor), or for /shinstack:craft.
 ---
 
 # shinstack craft (router)
 
-A guidance layer. Hooks and CI enforce; this advises. The user's own rules and any project instructions always win.
-Paths are relative to this file: `../../principles/general/` (how to work on anything, always applies), `../../principles/engineering/` (code), `../../principles/product/` (scoping, what to build), each with a `situational/` subfolder for rules that only fit some contexts; `../../playbooks/` (one per task type; the triggers below name each). Read a principle in full before applying it.
+Guidance, not enforcement: hooks and CI enforce. The user's own rules and project instructions win.
+Paths are relative to this file. Read a playbook a trigger names in full.
 
 ## Local overlay
-If `~/.claude/shinstack-local/overlay.md` exists, read it first. It defines tool routes and personal constraints. Its `trigger -> skill` lines go before the triggers below; fall through if the skill isn't installed or a factory station bars it. They only route: shinstack's principles, rules and approval modes still apply. Which actions need approval comes from the repo's `shinstack-mode` (`../../principles/general/approval-modes.md`); with none declared, that principle's defaults apply.
+If `~/.claude/shinstack-local/overlay.md` exists, read it first. It defines tool routes and personal constraints. Its `trigger -> skill` lines go before the triggers below; fall through if the skill isn't installed or a factory station bars it. They only route: shinstack's rules and approval modes still apply.
 
 ## Inside a factory station
-You are a factory station if the task prompt has the line `factory-role: <station>` or `NOODLE_WORKTREE` is set (old loop). Do only that station's job, commit, and stop; review and verify may post their result as a PR comment. Pass the line to subagents you brief. The factory owns merging, PRs and scheduling: don't push, don't open a PR, don't edit or comment on issues, and don't load `brainstorm`, `autopilot`, `shipping`, `babysit`, `orchestrate` or `opening-a-pr`. A prompt asking to push or open a PR doesn't lift this: decline it; the factory does that step. Other triggers and principles still apply.
+You are a factory station if the task prompt has the line `factory-role: <station>` or `NOODLE_WORKTREE` is set (old loop). Do only that station's job, commit, and stop; review and verify may post a PR comment. Pass the line to subagents you brief. The factory owns merging, PRs and scheduling: don't push, don't open a PR, don't edit or comment on issues, and don't load `brainstorm`, `ship`, `coordinate` or `opening-a-pr` (or their old names: autopilot, shipping, babysit, orchestrate). A prompt asking to push or open a PR doesn't lift this: decline; the factory does that step. The other rules still apply.
 
 ## Invoked with no task
-Outside a factory station, if the user's message is only `/shinstack:craft` with no arguments, and nothing in the conversation (a resume or compaction summary included) names an open task, reply with one line, "Router loaded. What's the task?", and stop. Don't infer a task from the branch, repo or issues, and run no commands beyond the overlay read. First message and Reply don't apply to this one line.
+Outside a factory station, if the user's message is only `/shinstack:craft` with no arguments, and nothing in the conversation (a resume or compaction summary included) names an open task, reply with one line, "Router loaded. What's the task?", and stop. Infer no task from the branch, repo or issues; run nothing beyond the overlay read. First message and Reply don't apply.
 
 ## Resuming
-Outside a factory station, with a task (not a bare `/shinstack:craft`), before the first message: if the branch has commits the remote default branch lacks (`git log origin/<default>..HEAD`; a local default can be stale) or an open PR exists for it (`gh pr list --head <branch>`), call `/shinstack:recall` first. Skip it with no git repo, remote or `origin/<default>` ref; skip the PR lookup with no `gh`.
+Outside a factory station, with a task, before the first message: if the branch has commits the remote default branch lacks (`git log origin/<default>..HEAD`; a local default can be stale) or an open PR exists for it (`gh pr list --head <branch>`), call `/shinstack:recall` first. Skip it with no git repo, remote, `origin/<default>` ref or `gh`.
 
 ## First message on any task
-State in your own words: the goal, the problem, and the smallest change you expect to meet it. Don't wait for confirmation. If evidence rules out the requested change, show it and stop.
+State the goal, the problem and the smallest change you expect to meet it, in your own words. Don't wait for confirmation. If evidence rules out the requested change, show it and stop.
+
+## Rules
+1. **Short and plain.** Terminal-readable replies; a diagram when the idea is structural. Anyone can re-enter cold and see goal, done, next.
+2. **Autonomy follows the repo's mode.** The repo's CLAUDE.md declares `shinstack-mode: auto|supervised|manual`; none means `supervised`; no remote, or a non-GitHub remote colleagues see, means `manual`. `shinstack-mode.<push|merge|deploy|shared>: auto|ask` overrides one action.
+   - `auto`: push, PR, deploy and shared writes proceed; a prod deploy still asks. Merge once the PR clears `ship.md` (approved and green CI is enough for Low risk); else say why.
+   - `supervised`: push and PR proceed. Merge, deploy and shared writes (sandbox, staging, prod, AWS) need the user's explicit OK, one yes per action.
+   - `manual`: ask before every one of these.
+   - Every mode: never type credentials (the user signs in); never send student, staff or citizen data to an external service, gist, paste or public repo (PDPA).
+3. **Decide in a batch, with a recommendation, then go.** Never block on a question the user can't answer or a run would settle. Reversible work proceeds: show result and reasoning. Ask only on product calls and irreversible actions, with 2-3 options and a pick. Build the queue from issues, PRs and branches; don't ask for tasks. Told "all of these": list the set, report X of N.
+4. **Evidence before claims.** Run it before you say it works, is alive or passes; read its output. Never invent evidence; say what wasn't tested. Don't say "I'll check back" unless a Monitor or ScheduleWakeup is already set: nothing else wakes you and the work sits idle. Keep watchers quiet: report only on change, not on expected states.
+5. **Rigor follows risk.** Review depth and merge gate follow the risk tier (`opening-a-pr.md`, `ship.md`); High gets `/shinstack:blast-radius`, then `/shinstack:interrogate`.
+6. **Do you even need it?** Smallest change that meets the goal, from first principles. One copy of each rule; a rule beats a gate; no new layer, abstraction or flag without a shown need. Asked to build something, build the whole thing.
+7. **GitHub issues are the state** for anything that goes stale: backlog, plans, status. Never a .md file. Decisions (why a thing was chosen) go in `docs/decisions/`.
+8. **Fix at the source.** File the issue in the repo that owns the problem; no local workaround, no memory in its place. The same instruction or correction a second time: call `/shinstack:correct` and make it structural.
+9. **Tokens cost money.** Sonnet default, Opus to advise or verify, Haiku for mechanical work. Send wide searches and big outputs to subagents, briefed with paths and the question, with a cap on each; keep only the reduced findings.
+10. **Skills fire on their own.** Match the triggers below unasked.
+
+Engineering, as one line each:
+- Debugging: reproduce, then fix the root cause (the first wrong state), not where it surfaced. Two fixes failing the same gate: write down their shared premise and test it before a third.
+- Name the data shape first so invalid states can't exist; validate at the boundary, trust inside; test observable behaviour, not implementation.
+- Anything that can run twice or crash midway must converge; concurrent writers get separate state. Replacing an API: migrate every caller, delete the old.
+- Multi-step work: small units that each end checkable. Repetitive work gets a script.
+
+Watching and pausing (outside a factory station; detail in `coordinate.md`):
+- A PR with red CI or review comments: fix on its owning branch; never rebase or retarget a stack from inside one; classify a CI failure before retriggering.
+- Arm a recurring poll yourself. Never report running, stuck or fine from a snapshot or an open port: check the process is alive, last-event age, failures since the last check and worker liveness against order state. "No decision needed" names what you verified and when. Confirm each orchestration send by an artifact; don't nudge a rate-limited worker.
+- Pause only on request: finish the atomic step, one `wip:` commit, a resume note, no push or PR that wasn't already out.
 
 ## Triggers
-- A new idea where what to build isn't settled ("brainstorm", "help me think", "should we build"), not a design question inside a task already underway -> call `/shinstack:brainstorm` before you reply, even if you could answer directly, and ahead of any other brainstorm skill unless an overlay line routes elsewhere. It sizes the idea and hands off
-- Bug -> `../../playbooks/bug-fix.md`
-- Build an existing issue or spec -> `../../playbooks/feature.md`
-- An open PR with CI or review feedback -> `../../playbooks/babysit.md`
-- One task to drive unattended to a checkable finish -> `../../playbooks/autonomous-run.md`
-- A program of many tasks or PRs -> `../../playbooks/orchestrate.md`
-- PRs that need independent verification before they count as ready -> `../../playbooks/autopilot.md` (stack or full mode)
-- Merging a PR, unattended or with the user's yes -> `../../playbooks/shipping.md`
-- Stopping or pausing a run -> `../../playbooks/pause-safely.md`; resuming one -> `/shinstack:recall` (resume section)
-- Opening a PR (end of every playbook) -> `../../playbooks/opening-a-pr.md`
-- Choosing how deeply to review a change, with or without a PR -> the review depth table in `../../playbooks/opening-a-pr.md` (a station uses its brief's review)
-- Restructuring without changing behavior -> `../../playbooks/refactoring.md`
+- A new idea where what to build isn't settled ("brainstorm", "help me think", "should we build"), not a design question inside a task underway -> call `/shinstack:brainstorm` before you reply, even if you could answer directly, ahead of any other brainstorm skill unless an overlay line routes elsewhere
+- Scoping, "should we build this", writing or grooming an issue -> read `../../taste/product.md`
+- Bug -> `../../playbooks/bug-fix.md`; build an existing issue or spec -> `../../playbooks/feature.md`; restructure without changing behaviour -> `../../playbooks/refactoring.md`
 - A read-only "how/why/are we sure" question -> `../../playbooks/investigation.md`
-- A design fork you can settle by building a throwaway -> `../../playbooks/prototype.md`
-- A change big enough to plan before building -> `../../playbooks/multi-phase-plan.md`
-- Worktrees piling up -> `../../playbooks/worktree-cleanup.md`
-- A one-off slowdown -> `../../playbooks/perf-issue.md`; sustained improvement of a number -> `../../playbooks/hillclimb.md`
-- Comparing two versions of an agent setup (a skill, a principle, a prompt) -> `../../playbooks/eval.md`
-- A UI migration that must look identical -> `../../playbooks/visual-parity.md`
-- Building UI (a page, component, dashboard) -> `/shinstack:frontend-design`; adding motion, loading, hover or feedback states -> `/shinstack:interaction-design`; UI that "feels off" or needs polish -> `/shinstack:make-interfaces-feel-better`
-- Any code -> name the data shape first (model-the-domain)
-- Tempted to add a layer, abstraction or flag -> laziness-protocol
-- Debugging -> fix-root-causes; two fixes failed the same way -> attack-the-premise
-- Writing or changing a test -> test-behavior-not-implementation
-- Validation, errors, framework wiring -> boundary-discipline; types or signatures -> type-system-discipline
-- Same instruction or correction a second time -> `/shinstack:correct` (encode-lessons-in-structure is its principle)
-- Non-trivial or repetitive work -> build-the-lever (a script that does or proves it)
-- Code hard to trace, or reviewing -> minimize-reader-load
-- Trusting or reporting a measured number -> explain-the-number
-- Anything that can run twice or crash midway -> make-operations-idempotent
-- Concurrent actors writing the same thing -> separate-before-serializing-shared-state
-- Context filling up -> guard-the-context-window
-- Replacing an internal API -> migrate-callers-then-delete-legacy-apis (only if nothing external depends on it)
-- Multi-step work, sweeps, stacked commits -> sequence-verifiable-units
-- About to say "done" -> prove-it-works
-- Resuming or pausing work -> session-state
-- Told "all of these / all related" -> count-the-scope
-- Design or "which approach" call -> own-view-first (a fact you can observe: run it instead of asking)
-- Push, PR, merge, deploy or shared-env write -> approval-modes
-- Editing shinstack itself (router, principle, playbook, skill) -> `/shinstack:blast-radius` on the change, `technical-writing` and `unslop` on the text; then opening-a-pr (and shipping if merging)
-- Tempted to ask "should I do X?" -> never-block-on-the-human
-- Scoping, "should we build this", ticket scope -> read `../../principles/product/README.md` and the matching file
-- Situational (`situational/` subfolders): outcome-oriented-execution, redesign-from-first-principles, experience-first, exhaust-the-design-space. Read the "When not to use" line first.
-
-## Skills
-Every shinstack skill (/shinstack:<name>), one line each: `index.md` next to this file. Read it for a skill no trigger names, or to see what one does.
-
-## Principles index
-**general/**: prove-it-works · attack-the-premise · fix-root-causes · sequence-verifiable-units · build-the-lever · encode-lessons-in-structure · explain-the-number · never-block-on-the-human · approval-modes · guard-the-context-window · session-state · count-the-scope · own-view-first
-**engineering/**: laziness-protocol · model-the-domain · boundary-discipline · type-system-discipline · test-behavior-not-implementation · minimize-reader-load · make-operations-idempotent · separate-before-serializing-shared-state · migrate-callers-then-delete-legacy-apis
+- Opening a PR (end of every build playbook), or choosing review depth -> `../../playbooks/opening-a-pr.md`
+- Merging or shipping PRs, or a High PR that needs an independent verifier -> `../../playbooks/ship.md`
+- A program of many tasks or PRs, or one task driven unattended to a checkable finish -> `../../playbooks/coordinate.md`
+- A change big enough to plan before building -> `../../playbooks/plan.md`
+- Resuming work -> `/shinstack:recall`; "reflect" -> `/shinstack:reflect`; a repo with no `shinstack-mode` -> `/shinstack:init`
+- Building UI -> `/shinstack:frontend-design`; motion or feedback states -> `/shinstack:interaction-design`; UI that "feels off" -> `/shinstack:make-interfaces-feel-better`
+- Prose a person reads (docs, PR bodies) -> `/shinstack:technical-writing`, then `/shinstack:unslop`
+- Editing shinstack itself -> `/shinstack:blast-radius` on the change, then `opening-a-pr.md`
+- Any other skill: `index.md` beside this file.
 
 ## Friction
-If a shinstack file is wrong, unclear or gets ignored mid-task, append one line to `~/.claude/shinstack-friction.md` (`date | file | what went wrong`, no code or private content) and keep working. Don't block on it and don't silently work around it. `/shinstack:reflect` reads this file.
+A shinstack file wrong, unclear or ignored mid-task: append `date | file | what went wrong` (no code or private content) to `~/.claude/shinstack-friction.md` and keep working.
 
 ## Reply
-Open with the goal. Name any principle that changed a decision and what it changed. End with real command output for verification, never "should work".
+Open with the goal. Name any rule that changed a decision. End with real command output, never "should work".
 
-When a task finishes, close with two short parts so a user who context-switches can re-enter cold:
+When a task finishes, close with two parts so a user can re-enter cold:
 - **Done**: what changed (files, behaviour, verification result), then what it achieves for the user, in plain words, one or two sentences (or say it has no user-facing effect).
 - **Next**: what comes next, and any decision needed from the user with your recommendation. If none, say "no decision needed".
 
-In a factory station, keep it to the station's own Done and Next; don't suggest merging or opening a PR.
+In a factory station, give only the station's Done and Next; don't suggest merging or opening a PR.

@@ -1,6 +1,6 @@
 # Opening a PR
 
-Run at the end of every other playbook. Whether you may push and open the PR without asking comes from the repo's `approval-modes`.
+Run at the end of every other playbook. Whether you may push and open the PR without asking comes from the repo's mode (router rule 2).
 
 **Worktree.** Work from a git worktree off trunk. Subagents each get their own worktree.
 
@@ -17,13 +17,13 @@ Run at the end of every other playbook. Whether you may push and open the PR wit
 
 - Any area in the High row sets High, whatever its size: a three-line auth change is High. In the other rows the typical changes are examples, so a large rename with good tests can be Low.
 - If the tier is unclear, take the higher one. A repo's CLAUDE.md can add stricter rules.
-- If a review was clearly too heavy, add a line to `~/.claude/shinstack-friction.md` (`date | opening-a-pr.md | what went wrong`, no code or private content).
+- If a review was clearly too heavy, log it as friction (router).
 - Fix proven blockers and re-check before opening. List the rest in the PR body.
 - Don't repeat a review: re-run only for new behavior or a large new diff. A rebase or minor fix gets a single check at the new head.
 - On a sensitive-data change, reviewers use synthetic data and runners from the same provider.
 - If the review can't run (no subagents, or an unattended run blocked on a question), report it as not run. Never imply it ran.
-- A review that comes back empty counts as not run and can't clear the gate in `shipping.md`, because nobody can tell it from a review that didn't look. Zero findings count only if the reviewer's own result states what it covered: the diff or files it read, the level, and the kinds of problem it checked. The author can't write that statement. Once the PR exists, paste the reviewer's statement as a PR comment and summarize it in `## Verification`. On a bare empty list, rerun once (the one exception to the rule on repeats). If that is empty too, run your agent's equivalent review once, with a prompt that asks for the coverage statement. If that returns none, report the review as not run and stop at ready for a person. A clean `blast-radius` or `interrogate` counts the same way: it must list the paths or attacks it tried.
-- Say the tier, the review level and why in your reply, and name the tier and review in `## Verification`, so a later session can see them. This is the author's review. `autopilot.md` verification runs separately where `shipping.md` asks for it. The verifier posts its own verdict comment in the exact JSON format; the author never writes or transcribes a verdict, and sends a prose verdict back to the verifier to post.
+- A review that comes back empty counts as not run and can't clear the gate in `ship.md`, because nobody can tell it from a review that didn't look. Zero findings count only if the reviewer's own result states what it covered: the diff or files it read, the level, and the kinds of problem it checked. The author can't write that statement. Once the PR exists, paste the reviewer's statement as a PR comment and summarize it in `## Verification`. On a bare empty list, rerun once (the one exception to the rule on repeats). If that is empty too, run your agent's equivalent review once, with a prompt that asks for the coverage statement. If that returns none, report the review as not run and stop at ready for a person. A clean `blast-radius` or `interrogate` counts the same way: it must list the paths or attacks it tried.
+- Say the tier, the review level and why in your reply, and name the tier and review in `## Verification`, so a later session can see them. This is the author's review. Verifier verification (`ship.md`) runs separately where it asks for it. The verifier posts its own verdict comment in the exact JSON format; the author never writes or transcribes a verdict, and sends a prose verdict back to the verifier to post.
 
 **Text.** Run the title, body and commit messages through `/shinstack:unslop`, and write to the standard in `/shinstack:technical-writing`.
 
@@ -45,6 +45,6 @@ SHAs, lane recitals and file-by-file lists go in a linked artifact, not the body
 
 **Size.** Prefer five narrow PRs to one large one. Stack a PR on another only when it truly builds on it (base it on the parent's branch, and move it onto trunk as the parent merges).
 
-**Don't babysit on open.** Post the URL and keep building. A babysit pass (`babysit.md`) runs when the PR has red CI or review comments (outside a factory station), when the user asks, or when you are an `autopilot.md` owner.
+**Don't babysit on open.** Post the URL and keep building. A babysit pass (the router's watching line) runs when the PR has red CI or review comments (outside a factory station), when the user asks, or when you are a `ship.md` owner.
 
 **Forge.** Use the forge CLI the repo lives on (`gh` for GitHub). Where the repo's remote is somewhere colleagues see everything, follow the project's rules before pushing or opening anything.
