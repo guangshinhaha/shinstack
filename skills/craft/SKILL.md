@@ -59,9 +59,9 @@ Watching and pausing (outside a factory station; detail in `coordinate.md`):
 - Merging or shipping PRs, or a High PR that needs an independent verifier -> `../../playbooks/ship.md`
 - A program of many tasks or PRs, or one task driven unattended to a checkable finish -> `../../playbooks/coordinate.md`
 - A change big enough to plan before building -> `../../playbooks/plan.md`
-- Resuming work -> `/shinstack:recall`; "reflect" -> `/shinstack:reflect`; a repo with no `shinstack-mode` -> `/shinstack:init`
+- Resuming work, "lost the thread", "what's waiting on me" -> `/shinstack:recall`; "reflect" -> `/shinstack:reflect`; a repo with no `shinstack-mode` -> `/shinstack:init`
 - Building UI -> `/shinstack:frontend-design`; motion or feedback states -> `/shinstack:interaction-design`; UI that "feels off" -> `/shinstack:make-interfaces-feel-better`
-- Prose a person reads (docs, PR bodies) -> `/shinstack:technical-writing`, then `/shinstack:unslop`
+- Prose a person reads (docs, PR bodies) -> `/shinstack:writing`
 - Editing shinstack itself -> `/shinstack:blast-radius` on the change, then `opening-a-pr.md`
 - Any other skill: `index.md` beside this file.
 

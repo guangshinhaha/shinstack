@@ -5,12 +5,12 @@ description: "Use when the user asks to set up, init or onboard shinstack in a r
 
 # shinstack init
 
-Set up shinstack in the current repo: one managed block in `CLAUDE.md`. Re-running updates it in place.
+Rule 2: autonomy follows the repo's mode, so the repo must declare one. This writes one managed block in `CLAUDE.md`; re-running updates it in place.
 
-1. **Find the check commands** by reading the repo: `package.json` scripts, `Makefile`, `scripts/`, CI workflows, lefthook or husky config. Pick what a PR must pass (test, lint, typecheck). Write one command per line to a temp file. Don't invent any; an empty file writes "none found".
-2. **Run the lever:** `sh <this skill's dir>/init.sh <repo-root> <checks-file> [mode]`. Mode defaults to `supervised` for a GitHub remote and `manual` otherwise. Pass a mode only if the user named one.
-3. **Show `git diff CLAUDE.md`** and stop. Do not commit, push or open a PR.
+1. **Find the check commands** a PR must pass (test, lint, typecheck) in `package.json`, `Makefile`, `scripts/`, CI workflows, lefthook or husky. Write one per line to a temp file. Invent none; an empty file writes "none found".
+2. **Run the lever:** `sh <this skill's dir>/init.sh <repo-root> <checks-file> [mode]`. Mode defaults to `supervised` for a GitHub remote and `manual` otherwise; pass one only if the user named it.
+3. **Show `git diff CLAUDE.md`** and stop. No commit, push or PR.
 
-The script keeps everything outside `<!-- shinstack:begin/end -->` untouched, and skips its own mode line when `shinstack-mode:` is already declared outside the block.
+The script leaves everything outside `<!-- shinstack:begin/end -->` untouched and skips its own mode line when one is declared outside the block.
 
-**Reply:** the mode chosen and why, the commands found (or "none found"), the diff.
+**Reply:** the mode and why, the commands found (or "none found"), the diff.

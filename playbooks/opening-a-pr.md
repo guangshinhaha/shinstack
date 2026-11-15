@@ -25,7 +25,7 @@ Run at the end of every other playbook. Whether you may push and open the PR wit
 - A review that comes back empty counts as not run and can't clear the gate in `ship.md`, because nobody can tell it from a review that didn't look. Zero findings count only if the reviewer's own result states what it covered: the diff or files it read, the level, and the kinds of problem it checked. The author can't write that statement. Once the PR exists, paste the reviewer's statement as a PR comment and summarize it in `## Verification`. On a bare empty list, rerun once (the one exception to the rule on repeats). If that is empty too, run your agent's equivalent review once, with a prompt that asks for the coverage statement. If that returns none, report the review as not run and stop at ready for a person. A clean `blast-radius` or `interrogate` counts the same way: it must list the paths or attacks it tried.
 - Say the tier, the review level and why in your reply, and name the tier and review in `## Verification`, so a later session can see them. This is the author's review. Verifier verification (`ship.md`) runs separately where it asks for it. The verifier posts its own verdict comment in the exact JSON format; the author never writes or transcribes a verdict, and sends a prose verdict back to the verifier to post.
 
-**Text.** Run the title, body and commit messages through `/shinstack:unslop`, and write to the standard in `/shinstack:technical-writing`.
+**Text.** Write the title, body and commit messages to `/shinstack:writing`.
 
 **Title.** Conventional Commits `type(scope): subject`, no trailing period, imperative, naming a real symbol when one carries the change.
 

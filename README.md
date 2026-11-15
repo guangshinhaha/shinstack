@@ -54,9 +54,9 @@ Invoke as `/shinstack:<name>`. Every skill, one line each, is in [`skills/craft/
 | `brainstorm` | Start here for an unsettled idea: size it, give a position, end in a draft artifact or draft issues |
 | `blast-radius` | Before shipping a risky change, find what it could break beyond the diff and prove the one safety fact by running code |
 | `interrogate` | Adversarial review where a finding survives only if a run proves it |
-| `unslop`, `technical-writing` | Cut AI tells; docs and PR-body standard |
-| `recall`, `ketchup`, `show-me-your-work` | Rebuild working context, catch you up on a long chat, keep a decision log |
-| `reflect`, `correct`, `init` | Mine a conversation for lessons; make a repeated mistake impossible; set up the repo's mode and checks |
+| `writing` | Standard for prose a person reads, including cutting AI tells |
+| `recall` | Re-enter cold: rebuild context, catch you up on a long chat, keep the decision trail |
+| `reflect`, `correct`, `init` | File a conversation's lessons as issues; make a repeated mistake impossible; set up the repo's mode and checks |
 | `frontend-design`, `interaction-design`, `make-interfaces-feel-better` | UI craft (from [poteto/noodle](https://github.com/poteto/noodle)) |
 
 ## Install

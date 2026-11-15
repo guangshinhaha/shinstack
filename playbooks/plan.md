@@ -6,7 +6,7 @@
 2. **Settle open questions by running something.** Build a throwaway if that settles a design fork faster than talking. Ask the user only about a product or preference call no run can settle, and give options with a pick.
 3. **Explore in subagents** (explorers, light weight, read-only), each returning file pointers, conventions, test commands and entry points. Keep the reduced findings in the main thread.
 4. **Fill the skeleton below.** One section per PR, and one PR is one change with its own evidence.
-5. **Write it plainly** (`/shinstack:technical-writing`, then `/shinstack:unslop`), then open it as an issue with `gh issue create`, labelled as the repo's labels allow. Its edits are design changes: record the call under a `Decided` heading, not in a side file.
+5. **Write it plainly** (`/shinstack:writing`), then open it as an issue with `gh issue create`, labelled as the repo's labels allow. Its edits are design changes: record the call under a `Decided` heading, not in a side file.
 6. **Run `check-plan.sh` on the plan's body saved to a temp file** and fix every line it prints. The script ships with shinstack, at `../scripts/check-plan.sh` from this playbook's directory.
 7. **Hand back** the issue link and the checker's output, then stop.
 
