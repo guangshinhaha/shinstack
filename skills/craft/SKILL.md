@@ -61,7 +61,7 @@ Watching and pausing (not in a factory station; detail: `coordinate.md`):
 - Resuming work, "lost the thread", "what's waiting on me" -> `/shinstack:recall`; "reflect" -> `/shinstack:reflect`; a repo with no `shinstack-mode` -> `/shinstack:init`
 - Building UI -> `/shinstack:frontend-design`; motion or feedback states -> `/shinstack:interaction-design`; UI that "feels off" -> `/shinstack:make-interfaces-feel-better`
 - Prose a person reads (docs, PR bodies) -> `/shinstack:writing`
-- A product call blocks you and the user is away or unreachable -> `/shinstack:consult-shin`
+- A product call blocks you and the user is away (as consult-shin defines it) -> `/shinstack:consult-shin`
 - Editing shinstack itself -> `/shinstack:blast-radius` on the change, then `opening-a-pr.md`
 - Any other skill: `index.md` beside this file.
 

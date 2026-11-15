@@ -39,7 +39,7 @@ shinstack repo (taste/)  ──install──▶  plugin cache  ──read by─�
 each repo's docs/decisions/  ◀── product-only calls ──────────────────┘
 ```
 
-General taste is in `taste/`, changed only by a `taste` PR that waits for the owner's yes. Taste that applies to one product stays in that repo's `docs/decisions/`. When the owner is away, `consult-shin` reads both before it picks.
+General taste is in `taste/`, changed through `taste` PRs (see `ship.md`). Taste that applies to one product stays in that repo's `docs/decisions/`. When the owner is away, `consult-shin` reads both before it picks.
 
 ## Playbooks
 
