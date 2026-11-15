@@ -26,4 +26,11 @@ Then prove it: the new check must fail on the real past mistake. Run the same co
 - A check is not a gate until it is a required status check. Until then call it advisory (rule 4).
 - Get one independent review before merging your own change, and say which changes went unreviewed (rule 5).
 
+## Where does the rule belong
+
+For a taste or product-judgment correction, ask: this product only, or all products?
+
+- **This product only:** the reason goes in that repo's `docs/decisions/`.
+- **All products:** a PR to shinstack `taste/` with one generic line (when / do / because), labelled `taste`. It always waits for Shin's yes, whatever the repo's mode. No project, agency, user or government detail: the repo is public. A line that can't be made generic stays in the product's repo.
+
 **Reply:** each class with its two cases, the level you picked, and why a higher level didn't work.

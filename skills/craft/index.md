@@ -10,6 +10,7 @@ The catalog behind the router (`SKILL.md`, next to this file): every skill, one 
 - `correct`: make a repeated agent mistake impossible (architecture, then types, lint, test, docs last); CI-check lessons
 - `writing`: standard for prose a person reads (docs, PR bodies, replies), including cutting AI tells
 - `recall`: re-enter cold: rebuild context from chats, git and PRs; catch the user up on a long chat; keep the decision trail
+- `consult-shin`: Shin is away and a product call blocks you: take the pick (taste first, else Fable advises), log it in a fixed line, keep going; never an approval
 - `reflect`: file this conversation's lessons as issues in the repos that own them (`friction` label for shinstack)
 **UI craft**
 - `frontend-design`: pick a design direction before code; UI that avoids generic AI aesthetics
