@@ -31,6 +31,16 @@ playbooks/         one recipe per kind of task, listed below
 taste/product.md   product calls for scoping and ticket-writing
 ```
 
+## Where taste lives
+
+```
+shinstack repo (taste/)  ──install──▶  plugin cache  ──read by──▶  every repo's agent
+                                                                      │
+each repo's docs/decisions/  ◀── product-only calls ──────────────────┘
+```
+
+General taste is in `taste/`, changed only by a `taste` PR that waits for the owner's yes. Taste that applies to one product stays in that repo's `docs/decisions/`. When the owner is away, `consult-shin` reads both before it picks.
+
 ## Playbooks
 
 Each is also a command, `/shinstack:<name>`.
@@ -56,6 +66,7 @@ Invoke as `/shinstack:<name>`. Every skill, one line each, is in [`skills/craft/
 | `interrogate` | Adversarial review where a finding survives only if a run proves it |
 | `writing` | Standard for prose a person reads, including cutting AI tells |
 | `recall` | Re-enter cold: rebuild context, catch you up on a long chat, keep the decision trail |
+| `consult-shin` | Shin is away and a product call blocks the work: take the pick, log it in a fixed line, keep going. Never an approval |
 | `reflect`, `correct`, `init` | File a conversation's lessons as issues; make a repeated mistake impossible; set up the repo's mode and checks |
 | `frontend-design`, `interaction-design`, `make-interfaces-feel-better` | UI craft (from [poteto/noodle](https://github.com/poteto/noodle)) |
 

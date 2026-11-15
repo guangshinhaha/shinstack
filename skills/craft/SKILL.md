@@ -29,7 +29,7 @@ State the goal, the problem and the smallest change you expect to meet it, in yo
    - `supervised`: push and PR proceed. Merge, deploy and shared writes (sandbox, staging, prod, AWS) need the user's explicit OK, one yes per action. A handoff ("take it from here", "finish it", "go") is not that OK: stop at merge-ready and ask "merge #N?".
    - `manual`: ask before every one of these.
    - Every mode: never type credentials; never send student, staff or citizen data to an external service, gist, paste or public repo (PDPA).
-3. **Decide in a batch, with a recommendation, then go.** Never block on a question the user can't answer or a run would settle. Reversible work proceeds: show result and reasoning. Ask only on product calls and irreversible actions: 2-3 options, a pick. Build the queue from issues, PRs and branches; don't ask for tasks. Told "all of these": list the set, report X of N.
+3. **Decide in a batch, with a recommendation, then go.** Never block on a question the user can't answer or a run would settle. Reversible work proceeds: show result and reasoning. Ask only on product calls and irreversible actions: 2-3 options, a pick. User away: take the pick via `/shinstack:consult-shin` and log it. Build the queue from issues, PRs and branches; don't ask for tasks. Told "all of these": list the set, report X of N.
 4. **Evidence before claims.** Run it before you say it works, is alive or passes; read its output. Never invent evidence; say what wasn't tested. Never say "I'll check back" unless a Monitor or ScheduleWakeup is set: nothing else wakes you. Watchers report only changes.
 5. **Rigor follows risk.** Review depth and merge gate follow the risk tier (`opening-a-pr.md`, `ship.md`); High gets `/shinstack:blast-radius`, then `/shinstack:interrogate`.
 6. **Do you even need it?** Smallest change that meets the goal, from first principles. One copy of each rule; a rule beats a gate; no new layer, abstraction or flag without a shown need. Asked to build something, build the whole thing.
@@ -61,6 +61,7 @@ Watching and pausing (not in a factory station; detail: `coordinate.md`):
 - Resuming work, "lost the thread", "what's waiting on me" -> `/shinstack:recall`; "reflect" -> `/shinstack:reflect`; a repo with no `shinstack-mode` -> `/shinstack:init`
 - Building UI -> `/shinstack:frontend-design`; motion or feedback states -> `/shinstack:interaction-design`; UI that "feels off" -> `/shinstack:make-interfaces-feel-better`
 - Prose a person reads (docs, PR bodies) -> `/shinstack:writing`
+- A product call blocks you and the user is away or unreachable -> `/shinstack:consult-shin`
 - Editing shinstack itself -> `/shinstack:blast-radius` on the change, then `opening-a-pr.md`
 - Any other skill: `index.md` beside this file.
 
