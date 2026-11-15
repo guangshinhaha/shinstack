@@ -26,7 +26,7 @@
 6. **Loosening a gate needs proof and your countersign.** A raised budget or an allowlist entry needs the verifier's proof first, because the owner is the one who wants green. A disabled or soft-failed check always comes out.
 7. **Audit on a heartbeat** while delegated work remains: arm the recurring poll yourself, probe every agent by its side effects (pushes, commits), and treat an agent as stuck if it errors or shows nothing new past its expected runtime. A hold from the user reaches every owner as a zero-writes order.
 
-**Make it enforceable (factory):** gantry's `sf-verdict-check` gate schema-validates the verdict and won't mark a PR merge-ready unless its `head_sha` equals the PR's current head.
+**Make it enforceable (factory):** gantry's `gantry-verdict-check` gate schema-validates the verdict and won't mark a PR merge-ready unless its `head_sha` equals the PR's current head.
 
 ## Landing
 
@@ -37,6 +37,6 @@
 5. **Leave the stack alone while it lands.** Moving the next PR to trunk is the only change to a branch or base. Watch the run with a Monitor or ScheduleWakeup, not "I'll check back", until it reaches the ceiling.
 6. **Stop at the ceiling.** Extending the run means the next PR has to clear its gate first.
 
-**Make it enforceable (factory):** the merge step is the factory's `sf-ship` gate. It reruns gantry's `sf-gate-evidence` and `sf-verdict-check`, so it refuses on a `FAIL`, on a verdict whose `head_sha` is not the branch head, or where the tier needs a verdict and none exists. It merges only where the repo's `shinstack-mode` is `auto`; otherwise it parks the PR.
+**Make it enforceable (factory):** the merge step is the factory's `sf-ship` gate. It reruns gantry's `gantry-gate-evidence` and `gantry-verdict-check`, so it refuses on a `FAIL`, on a verdict whose `head_sha` is not the branch head, or where the tier needs a verdict and none exists. It merges only where the repo's `shinstack-mode` is `auto`; otherwise it parks the PR.
 
 **Reply:** the cleared run and its ceiling, each PR's tier and gate result, any verdict and who produced it, what landed and how you confirmed it, what is ready, gates waiting on the user, and what the next gap needs.
