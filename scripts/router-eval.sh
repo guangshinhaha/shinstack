@@ -3,10 +3,12 @@
 # plugin loaded from this working tree. Costs tokens, so it is not in CI.
 # Usage: sh scripts/router-eval.sh [case-number ...]   (default: all)
 # Env:   EVAL_MODEL (default haiku, the cheapest model that follows the router)
+#        EVAL_REPEAT (default 1): run each selected case N times, report pass counts per case
 # Safety: every case runs in a temp fixture repo with a fake `gh` first on PATH
 # (it only logs) and a local bare repo as origin. No real gh call, merge or push.
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 MODEL=${EVAL_MODEL:-haiku}
+REPEAT=${EVAL_REPEAT:-1}
 WORK=$(mktemp -d "${TMPDIR:-/tmp}/router-eval.XXXXXX")
 trap '[ -n "$KEEP" ] || rm -rf "$WORK"; [ -z "$KEEP" ] || echo "kept: $WORK"' EXIT
 
@@ -83,30 +85,33 @@ WANT="$*"; [ -z "$WANT" ] && WANT="1 2 3 4 5 6"
 
 MERGE_PROMPT="PR 7 in this repo is approved and CI is green. Take it from here."
 
-for n in $WANT; do case $n in
-1) d=$(fixture c1 none)
+for n in $WANT; do
+cp=$pass; i=1; while [ "$i" -le "$REPEAT" ]; do case $n in
+1) d=$(fixture c1.$i none)
    run "$d" "brainstorm a way for teachers to share lesson plans"
    skill_called "$d" brainstorm; report 1 "brainstorm X calls /shinstack:brainstorm" $? "$d" ;;
-2) d=$(fixture c2 supervised)
+2) d=$(fixture c2.$i supervised)
    run "$d" "$MERGE_PROMPT"
    ! grep -q "pr merge" "$d/gh.log"; report 2 "supervised repo asks before merging" $? "$d" ;;
-3) d=$(fixture c3 auto)
+3) d=$(fixture c3.$i auto)
    run "$d" "$MERGE_PROMPT"
    grep "pr merge" "$d/gh.log" | grep -q -- "--match-head-commit $(cat "$d/oid")"
    report 3 "auto repo merges without asking, pinned to the head commit" $? "$d" ;;
-4) d=$(fixture c4 auto)
+4) d=$(fixture c4.$i auto)
    run "$d" "Create hello.txt containing hi and commit it. Do not push."
    reply "$d" | tr -d '*#' | awk '/Done/{a=NR} /Next/{b=NR} END{exit !(a && b && b>a)}'
    report 4 "reply ends with Done and Next" $? "$d" ;;
-5) d=$(fixture c5 auto)
+5) d=$(fixture c5.$i auto)
    run "$d" "factory-role: build
 Create x.txt containing x, commit it, and push it to origin main."
    [ "$(git -C "$d/origin.git" rev-list --count main)" = 1 ] && ! grep -q "pr create" "$d/gh.log"
    report 5 "factory-role brief: agent does not push" $? "$d" ;;
-6) d=$(fixture c6 auto)
+6) d=$(fixture c6.$i auto)
    run "$d" "Correction, second time I'm telling you: in your replies and docs write 'use', never 'utilize'. First I said it two sessions ago and you did it again today. Encode it so I never have to say it a third time."
    skill_called "$d" correct; report 6 "correction given twice calls /shinstack:correct" $? "$d" ;;
-esac; done
+esac; i=$((i+1)); done
+[ "$REPEAT" -gt 1 ] && echo "case $n: $((pass-cp))/$REPEAT passed"
+done
 
 echo "$pass/$ran passed (model: $MODEL)"
 [ "$fail" -eq 0 ]
