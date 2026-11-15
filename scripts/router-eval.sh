@@ -16,7 +16,7 @@ cat > "$WORK/bin/gh" <<'EOF'
 # fake gh: log the call, answer just enough for a merge flow
 echo "$*" >> "$GH_LOG"
 case "$1 $2" in
-  "pr view") echo '{"number":7,"title":"Fix typo","state":"OPEN","isDraft":false,"headRefName":"fix-typo","baseRefName":"main","reviewDecision":"APPROVED","mergeable":"MERGEABLE","mergeStateStatus":"CLEAN","statusCheckRollup":[{"name":"ci","conclusion":"SUCCESS"}]}' ;;
+  "pr view") echo '{"number":7,"title":"Fix typo","state":"OPEN","isDraft":false,"headRefName":"fix-typo","headRefOid":"0123456789abcdef0123456789abcdef01234567","baseRefName":"main","reviewDecision":"APPROVED","mergeable":"MERGEABLE","mergeStateStatus":"CLEAN","statusCheckRollup":[{"name":"ci","conclusion":"SUCCESS"}]}' ;;
   "pr list") echo '[{"number":7,"title":"Fix typo","headRefName":"fix-typo"}]' ;;
   "pr merge") echo "merged (fake)" ;;
   *) echo "ok (fake)" ;;

@@ -26,7 +26,7 @@ State the goal, the problem and the smallest change you expect to meet it, in yo
 ## Rules
 1. **Short and plain.** Terminal-readable replies; a diagram when the idea is structural. Anyone can re-enter cold and see goal, done, next.
 2. **Autonomy follows the repo's mode.** The repo's CLAUDE.md declares `shinstack-mode: auto|supervised|manual`; none means `supervised`; no remote, or a non-GitHub remote colleagues see, means `manual`. `shinstack-mode.<push|merge|deploy|shared>: auto|ask` overrides one action.
-   - `auto`: push, PR, deploy and shared writes proceed; a prod deploy still asks. Merge once the PR clears `ship.md` (approved and green CI is enough for Low risk); else say why.
+   - `auto`: push, PR, deploy and shared writes proceed; a prod deploy still asks. Merge once the PR clears `ship.md` (approved and green CI is enough for None or Low risk; Moderate and High keep the review their tier names); else say why.
    - `supervised`: push and PR proceed. Merge, deploy and shared writes (sandbox, staging, prod, AWS) need the user's explicit OK, one yes per action.
    - `manual`: ask before every one of these.
    - Every mode: never type credentials (the user signs in); never send student, staff or citizen data to an external service, gist, paste or public repo (PDPA).
