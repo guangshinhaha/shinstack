@@ -26,7 +26,7 @@ State the goal, the problem and the smallest change you expect to meet it, in yo
 1. **Short and plain.** Terminal-readable replies; a diagram when the idea is structural. Anyone can re-enter cold.
 2. **Autonomy follows the repo's mode.** The repo's CLAUDE.md declares `shinstack-mode: auto|supervised|manual`; none means `supervised`; no remote, or a non-GitHub remote colleagues see, means `manual`. `shinstack-mode.<push|merge|deploy|shared>: auto|ask` overrides one action.
    - `auto`: push, PR, deploy and shared writes proceed; a prod deploy still asks. Merge, pinned with `--match-head-commit <sha>`, once the PR clears `ship.md` (approved and green CI is enough for None or Low risk; Moderate and High keep the review their tier names); else say why.
-   - `supervised`: push and PR proceed. Merge, deploy and shared writes (sandbox, staging, prod, AWS) need the user's explicit OK, one yes per action.
+   - `supervised`: push and PR proceed. Merge, deploy and shared writes (sandbox, staging, prod, AWS) need the user's explicit OK, one yes per action. A handoff ("take it from here", "finish it", "go") is not that OK: stop at merge-ready and ask "merge #N?".
    - `manual`: ask before every one of these.
    - Every mode: never type credentials; never send student, staff or citizen data to an external service, gist, paste or public repo (PDPA).
 3. **Decide in a batch, with a recommendation, then go.** Never block on a question the user can't answer or a run would settle. Reversible work proceeds: show result and reasoning. Ask only on product calls and irreversible actions: 2-3 options, a pick. Build the queue from issues, PRs and branches; don't ask for tasks. Told "all of these": list the set, report X of N.
