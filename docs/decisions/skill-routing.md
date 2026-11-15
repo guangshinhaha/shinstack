@@ -19,5 +19,5 @@ Across 377 sessions (2026-11-06 to 08), `babysit`, `tdd`, `recall`, `pause-safel
 
 ## Consequences
 - The hook output grew by about 380 bytes. The limit in `scripts/check-router.sh` is 9000, so new router text needs a cut elsewhere.
-- Inside shinfactory the resume check and the hand-off are skipped; the loop owns both.
+- Inside a factory station the resume check and the hand-off are skipped; the loop owns both.
 - `pause-safely` has no new trigger here: its situation is the user stopping a run, which the router already names.

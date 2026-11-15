@@ -1,15 +1,15 @@
 # shinstack owns how, shinfactory owns when and who, gantry owns the checks
 
-Date: 2026-11-06, recording a split made on 2026-11-05. Gantry added on 2026-11-07. Status: accepted.
+Date: 2026-11-06, recording a split made on 2026-11-05. Gantry added on 2026-11-07. Orca runtime and the `factory-role` contract added on 2026-11-15 (factory#1). Status: accepted.
 
 ## Decision
 
 | Concern | Owner |
 |---|---|
 | How to do the work: principles, playbooks, craft skills, review standards | shinstack |
-| When a stage runs, in what order, and what happens on failure | shinfactory |
-| Who runs a stage: provider, model, runtime | shinfactory |
-| Merging, PRs and worktrees inside a factory order | shinfactory (its `mode`) |
+| When a station runs, in what order, and what happens on failure; the policy that decides it | the factory |
+| Who runs a station: the runtime that starts workers, holds the Run's tasks and dependencies, and keeps its mail | Orca (the factory chooses each station's model) |
+| Merging, PRs and worktrees inside a factory order | the factory's gates (`sf-gate-evidence`, `sf-verdict-check`, `sf-ship`), which read the repo's `shinstack-mode` |
 | Push, PR, merge and deploy outside the factory | shinstack (`approval-modes`) |
 | Checks that need no judgment, shared across repos: secret scan, lint, tests, the `needs-human` label, and `ac-check` in repos that opt in (`gantry-init --ac-check`) | gantry |
 | Whether a failed check blocks a merge: the required `gantry / ci-ok` check | gantry (`gantry-protect`) |
@@ -25,10 +25,10 @@ Date: 2026-11-06, recording a split made on 2026-11-05. Gantry added on 2026-11-
 **Each tool works alone and stays compatible with the others.** Any one of the three must work in a repo with neither of the other two installed. A tool may use another when it is present, and it must not fail or give wrong instructions when that tool is absent.
 
 - gantry's checks run on a repo whoever wrote the code, person or agent. Its files don't assume an agent plugin is installed.
-- shinstack mentions the factory only to step aside when it detects a factory run: the router's "Inside shinfactory" section and the matching line in `approval-modes`.
+- shinstack mentions the factory only to step aside when it detects a factory station: the router's "Inside a factory station" section and the matching line in `approval-modes`. A station is detected by the line `factory-role: <station>`, the first line of every factory brief (matched anywhere in the prompt, since Orca adds its own preamble) (plan, build, review, verify or debrief), because Orca workers don't inherit the caller's environment (factory `docs/decisions/orca-run-lifecycle.md`). The `NOODLE_WORKTREE` variable still marks a stage of the old Go loop until the cutover (factory#9) removes it.
 - shinfactory stages use shinstack for craft when it is installed. Without it, a stage still runs on its own instructions and the project's `CLAUDE.md`.
 
-**A merge needs both a green check and an approval.** Gantry decides whether the checks pass. `approval-modes` or the factory's `mode` decides whether the merge may happen. Neither one overrides the other.
+**A merge needs both a green check and an approval.** Gantry decides whether the checks pass. `approval-modes` decides whether the merge may happen; inside a factory order `sf-ship` applies the same `shinstack-mode` (the old loop uses its own `mode`). Neither one overrides the other.
 
 ## Worked example: review
 - shinfactory decides that a `quality` stage follows `execute`, and which provider runs it.
@@ -43,6 +43,7 @@ Date: 2026-11-06, recording a split made on 2026-11-05. Gantry added on 2026-11-
 Two rulebooks diverged and made cooks behave inconsistently. One source of truth for how to work removes that.
 
 ## Rejected
+- An environment variable (`SHINFACTORY_ROLE`) as the station marker: Orca workers start with Orca's environment, not the caller's, so it never arrives (spike factory#10, 2026-11-15).
 - Merge them into one repo: shinstack would stop being usable on its own, and upstream noodle updates would be harder to take.
 - shinfactory requires shinstack, the rule until 2026-11-07: the factory couldn't run for anyone without the plugin.
 

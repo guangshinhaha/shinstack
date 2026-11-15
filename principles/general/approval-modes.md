@@ -2,7 +2,7 @@
 
 **Apply:** before any action that leaves the local machine: push, PR, merge, deploy, or a write to a shared or production environment.
 
-The repo declares how much oversight it wants, in its own CLAUDE.md. Modes follow shinfactory's `mode` dial.
+The repo declares how much oversight it wants, in its own CLAUDE.md. The factory's merge gate (`sf-ship`) reads the same declaration.
 
 ```
 shinstack-mode: supervised
@@ -20,5 +20,5 @@ shinstack-mode.deploy: ask
 - **Per-action override:** `shinstack-mode.<action>: auto|ask`, where action is `push`, `merge`, `deploy` or `shared`. The override beats the repo mode for that action only.
 - **Ask** means explicit OK for that one action. One "yes" covers one action.
 - **No declaration:** `supervised`. No remote, or a non-GitHub remote where colleagues see everything: `manual`.
-- **Inside shinfactory:** the loop's own `mode` governs merging and PRs; don't apply this.
+- **Inside a factory station:** the factory owns push, PRs and merging (the old shinfactory loop uses its own `mode`); don't apply this.
 - **Always, in every mode:** never type credentials (the user signs in), never touch sensitive personal data, and the user's global rules win over a repo declaration that is looser than them.

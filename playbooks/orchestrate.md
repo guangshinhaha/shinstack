@@ -17,6 +17,6 @@
 - **Replace workers that stall.** Judge by pushes and PR activity, not status text. Retry by cause: smaller scope after a context limit, same kickoff after a dropped connection, a different approach after a tool error. After two retries drop the unit and replan around it.
 - **Ask the user only for a real decision or blocker:** an irreversible action, a product call no experiment settles, a dead end that survived a replan. Retries, CI flakes and review triage never reach the user, but a review that came back empty twice does.
 
-**Make it enforceable (factory):** the program state lives in a file (`run.json`-style) a validator can read, not in your context. Kickoffs are generated from a template with required fields. A worker that returns without the named proof is rejected by the runner.
+**Make it enforceable (factory):** the program state lives in the factory's Orca Run (tasks and their dependencies), which `sf-state` reads, not in your context. Kickoffs are generated from a brief template with required fields, starting `factory-role: <station>`. `sf-gate-evidence` rejects a build that returns without the named proof.
 
 **Reply:** what landed against the goal, each PR's live state, tier and review result or verdict, with its link, what was dropped and why, and the decisions waiting on the user.

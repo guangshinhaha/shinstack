@@ -9,16 +9,16 @@ A guidance layer. Hooks and CI enforce; this advises. The user's own rules and a
 Paths are relative to this file: `../../principles/general/` (how to work on anything, always applies), `../../principles/engineering/` (code), `../../principles/product/` (scoping, what to build), each with a `situational/` subfolder for rules that only fit some contexts; `../../playbooks/` (one per task type; the triggers below name each). Read a principle in full before applying it.
 
 ## Local overlay
-If `~/.claude/shinstack-local/overlay.md` exists, read it first. It defines tool routes and personal constraints. Its `trigger -> skill` lines go before the triggers below; fall through if the skill isn't installed or Inside shinfactory bars it. They only route: shinstack's principles, rules and approval modes still apply. Which actions need approval comes from the repo's `shinstack-mode` (`../../principles/general/approval-modes.md`); with none declared, that principle's defaults apply.
+If `~/.claude/shinstack-local/overlay.md` exists, read it first. It defines tool routes and personal constraints. Its `trigger -> skill` lines go before the triggers below; fall through if the skill isn't installed or a factory station bars it. They only route: shinstack's principles, rules and approval modes still apply. Which actions need approval comes from the repo's `shinstack-mode` (`../../principles/general/approval-modes.md`); with none declared, that principle's defaults apply.
 
-## Inside shinfactory
-If the `NOODLE_WORKTREE` environment variable is set, you are one stage of a shinfactory order. Do only that stage's job in this worktree, commit, and stop. The loop owns merging, modes, PRs and scheduling: don't push, don't open a PR, don't edit or comment on issues, and don't load `brainstorm`, `autopilot`, `shipping`, `babysit`, `orchestrate` or `opening-a-pr`. Every other trigger and principle applies as normal.
+## Inside a factory station
+You are a factory station if the task prompt has the line `factory-role: <station>` (plan, build, review, verify, debrief) or `NOODLE_WORKTREE` is set (old loop). Do only that station's job, commit, and stop. The factory owns merging, modes, PRs and scheduling: don't push, don't open a PR, don't edit or comment on issues, and don't load `brainstorm`, `autopilot`, `shipping`, `babysit`, `orchestrate` or `opening-a-pr`. A request in the prompt to push or open a PR doesn't lift this: decline it, since the factory does that step. Other triggers and principles still apply.
 
 ## Invoked with no task
-Outside shinfactory, if the user's message is only `/shinstack:craft` with no arguments, and nothing in the conversation (a resume or compaction summary included) names an open task, reply with one line, "Router loaded. What's the task?", and stop. Don't infer a task from the branch, repo or issues, and run no commands beyond the overlay read. First message and Reply don't apply to this one line.
+Outside a factory station, if the user's message is only `/shinstack:craft` with no arguments, and nothing in the conversation (a resume or compaction summary included) names an open task, reply with one line, "Router loaded. What's the task?", and stop. Don't infer a task from the branch, repo or issues, and run no commands beyond the overlay read. First message and Reply don't apply to this one line.
 
 ## Resuming
-Outside shinfactory, with a task (not a bare `/shinstack:craft`), before the first message: if the branch has commits the remote default branch lacks (`git log origin/<default>..HEAD`; a local default can be stale) or an open PR exists for it (`gh pr list --head <branch>`), call `/shinstack:recall` first. Skip it with no git repo, remote or `origin/<default>` ref; skip the PR lookup with no `gh`.
+Outside a factory station, with a task (not a bare `/shinstack:craft`), before the first message: if the branch has commits the remote default branch lacks (`git log origin/<default>..HEAD`; a local default can be stale) or an open PR exists for it (`gh pr list --head <branch>`), call `/shinstack:recall` first. Skip it with no git repo, remote or `origin/<default>` ref; skip the PR lookup with no `gh`.
 
 ## First message on any task
 State in your own words: the goal, the problem, and the smallest change you expect to meet it. Don't wait for confirmation. If evidence rules out the requested change, show it and stop.
@@ -30,11 +30,11 @@ State in your own words: the goal, the problem, and the smallest change you expe
 - An open PR with CI or review feedback -> `../../playbooks/babysit.md`
 - One task to drive unattended to a checkable finish -> `../../playbooks/autonomous-run.md`
 - A program of many tasks or PRs -> `../../playbooks/orchestrate.md`
-- PRs that need independent verification before they count as ready -> `../../playbooks/autopilot.md` (stack mode stops at verified; full mode continues to shipping)
+- PRs that need independent verification before they count as ready -> `../../playbooks/autopilot.md` (stack or full mode)
 - Merging a PR, unattended or with the user's yes -> `../../playbooks/shipping.md`
 - Stopping or pausing a run -> `../../playbooks/pause-safely.md`; resuming one -> `/shinstack:recall` (resume section)
 - Opening a PR (end of every playbook) -> `../../playbooks/opening-a-pr.md`
-- Choosing how deeply to review a change, with or without a PR -> the review depth table in `../../playbooks/opening-a-pr.md` (inside shinfactory, the stage's own review instead)
+- Choosing how deeply to review a change, with or without a PR -> the review depth table in `../../playbooks/opening-a-pr.md`
 - Restructuring without changing behavior -> `../../playbooks/refactoring.md`
 - A read-only "how/why/are we sure" question -> `../../playbooks/investigation.md`
 - A design fork you can settle by building a throwaway -> `../../playbooks/prototype.md`
@@ -69,7 +69,7 @@ State in your own words: the goal, the problem, and the smallest change you expe
 - Situational (`situational/` subfolders): outcome-oriented-execution, redesign-from-first-principles, experience-first, exhaust-the-design-space. Read the "When not to use" line first.
 
 ## Skills
-Every shinstack skill (invoke as /shinstack:<name>), one line each: `index.md` next to this file. Read it to find a skill no trigger names, or to learn what a named skill does.
+Every shinstack skill (/shinstack:<name>), one line each: `index.md` next to this file. Read it for a skill no trigger names, or to see what one does.
 
 ## Principles index
 **general/**: prove-it-works · attack-the-premise · fix-root-causes · sequence-verifiable-units · build-the-lever · encode-lessons-in-structure · explain-the-number · never-block-on-the-human · approval-modes · guard-the-context-window · session-state · count-the-scope · own-view-first
@@ -86,4 +86,4 @@ When a task finishes, close with two short parts so a user who context-switches 
 - **Done**: what changed (files, behaviour, verification result), then what it achieves for the user, in plain words, one or two sentences (or say it has no user-facing effect).
 - **Next**: what comes next, and any decision needed from the user with your recommendation. If none, say "no decision needed".
 
-Inside shinfactory, keep it to the stage's own Done and Next; don't suggest merging or opening a PR.
+In a factory station, keep it to the station's own Done and Next; don't suggest merging or opening a PR.

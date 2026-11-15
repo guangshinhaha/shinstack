@@ -10,7 +10,7 @@ schedule: "When backlog items with linked plans are ready for implementation"
 
 Implementation methodology. Loads alongside the domain skill (e.g., "noodle") — this teaches process, the domain skill teaches the codebase. Operate fully autonomously. Never ask the user. Don't stop until the work is fully complete or the item is unbuildable (see Scope).
 
-**Craft comes from shinstack when it is installed.** If the `shinstack:craft` skill is in your skill list, load it and follow its playbook for the work: `bug-fix` for a bug, `feature` for a backlog item or plan phase, `refactoring` for a behavior-preserving reshape. This skill adds only the factory mechanics around it (worktree, commit, yield). Where they overlap, the router's "Inside shinfactory" rule wins: commit and yield, never push or open a PR. If shinstack is not installed, don't try to load it; use "Without shinstack" below.
+**Craft comes from shinstack when it is installed.** If the `shinstack:craft` skill is in your skill list, load it and follow its playbook for the work: `bug-fix` for a bug, `feature` for a backlog item or plan phase, `refactoring` for a behavior-preserving reshape. This skill adds only the factory mechanics around it (worktree, commit, yield). Where they overlap, the router's "Inside a factory station" rule wins: commit and yield, never push or open a PR. If shinstack is not installed, don't try to load it; use "Without shinstack" below.
 
 **Track all work with Tasks** (TaskCreate, TaskUpdate, TaskList). One task per decomposed change; mark in_progress when starting, completed when done.
 
