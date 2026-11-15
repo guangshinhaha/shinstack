@@ -4,7 +4,7 @@
 
 1. Read the code, tests, git history, issues and PRs; cite each claim to a file, line, commit or link. For "why is it like this", start from `git log` and `git blame`.
 2. Produce a plain explanation shaped (Overview, Key Concepts, How It Works, Where Things Live, Gotchas), or a recommendation with a tradeoffs table when the request is a choice between alternatives.
-3. Run the reply through `/shinstack:unslop`.
+3. Write the reply to `/shinstack:writing`.
 
 No PR, no babysit. If the investigation precedes a code change, hand back and re-route to `bug-fix.md` or `feature.md`.
 
