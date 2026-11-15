@@ -78,7 +78,7 @@ The public router is generic on purpose. Put your own rules in `~/.claude/shinst
 
 Anything private stays in that file, outside this repo.
 
-## How signals, gantry, shinstack and shinfactory fit together
+## How signals, gantry, shinstack and factory fit together
 
 Each of the four works alone. When they are used together, they do not overlap.
 
@@ -87,7 +87,7 @@ Each of the four works alone. When they are used together, they do not overlap.
 | [signals](https://github.com/guangshinhaha/signals) | What outside fact becomes a task, and did the fix hold? | Events from a live product, the cause that groups them, the task it opens, and the confirm after a release | An agent reads and writes an API |
 | [gantry](https://github.com/guangshinhaha/gantry) | Did it pass? | Local hooks, CI checks, the secret scan and the required `gantry / ci-ok` check | Runs checks with no judgment, and can block a merge |
 | [shinstack](https://github.com/guangshinhaha/shinstack) | How should the agent work, and may it act? | Rules, playbooks, review depth, PR format and approval modes | Advises the agent |
-| [factory](https://github.com/guangshinhaha/factory) (replacing [shinfactory](https://github.com/guangshinhaha/shinfactory)) | What runs next? | Station order, retries, each station's model, and merges inside a factory order (`sf-ship`) | Starts Orca workers once a task exists |
+| [factory](https://github.com/guangshinhaha/factory) (shinfactory is retired) | What runs next? | Station order, retries, each station's model, and merges inside a factory order (`sf-ship`) | Starts Orca workers once a task exists |
 
 To place a new rule, ask these in order and stop at the first yes:
 
