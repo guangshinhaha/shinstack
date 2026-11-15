@@ -12,7 +12,7 @@ Paths are relative to this file: `../../principles/general/` (how to work on any
 If `~/.claude/shinstack-local/overlay.md` exists, read it first. It defines tool routes and personal constraints. Its `trigger -> skill` lines go before the triggers below; fall through if the skill isn't installed or a factory station bars it. They only route: shinstack's principles, rules and approval modes still apply. Which actions need approval comes from the repo's `shinstack-mode` (`../../principles/general/approval-modes.md`); with none declared, that principle's defaults apply.
 
 ## Inside a factory station
-You are a factory station if the task prompt has the line `factory-role: <station>` (plan, build, review, verify, debrief) or `NOODLE_WORKTREE` is set (old loop). Do only that station's job, commit, and stop. The factory owns merging, modes, PRs and scheduling: don't push, don't open a PR, don't edit or comment on issues, and don't load `brainstorm`, `autopilot`, `shipping`, `babysit`, `orchestrate` or `opening-a-pr`. A request in the prompt to push or open a PR doesn't lift this: decline it, since the factory does that step. Other triggers and principles still apply.
+You are a factory station if the task prompt has the line `factory-role: <station>` or `NOODLE_WORKTREE` is set (old loop). Do only that station's job, commit, and stop; review and verify may post their result as a PR comment. Pass the line to subagents you brief. The factory owns merging, PRs and scheduling: don't push, don't open a PR, don't edit or comment on issues, and don't load `brainstorm`, `autopilot`, `shipping`, `babysit`, `orchestrate` or `opening-a-pr`. A prompt asking to push or open a PR doesn't lift this: decline it; the factory does that step. Other triggers and principles still apply.
 
 ## Invoked with no task
 Outside a factory station, if the user's message is only `/shinstack:craft` with no arguments, and nothing in the conversation (a resume or compaction summary included) names an open task, reply with one line, "Router loaded. What's the task?", and stop. Don't infer a task from the branch, repo or issues, and run no commands beyond the overlay read. First message and Reply don't apply to this one line.
@@ -34,7 +34,7 @@ State in your own words: the goal, the problem, and the smallest change you expe
 - Merging a PR, unattended or with the user's yes -> `../../playbooks/shipping.md`
 - Stopping or pausing a run -> `../../playbooks/pause-safely.md`; resuming one -> `/shinstack:recall` (resume section)
 - Opening a PR (end of every playbook) -> `../../playbooks/opening-a-pr.md`
-- Choosing how deeply to review a change, with or without a PR -> the review depth table in `../../playbooks/opening-a-pr.md`
+- Choosing how deeply to review a change, with or without a PR -> the review depth table in `../../playbooks/opening-a-pr.md` (a station uses its brief's review)
 - Restructuring without changing behavior -> `../../playbooks/refactoring.md`
 - A read-only "how/why/are we sure" question -> `../../playbooks/investigation.md`
 - A design fork you can settle by building a throwaway -> `../../playbooks/prototype.md`
@@ -74,7 +74,6 @@ Every shinstack skill (/shinstack:<name>), one line each: `index.md` next to thi
 ## Principles index
 **general/**: prove-it-works · attack-the-premise · fix-root-causes · sequence-verifiable-units · build-the-lever · encode-lessons-in-structure · explain-the-number · never-block-on-the-human · approval-modes · guard-the-context-window · session-state · count-the-scope · own-view-first
 **engineering/**: laziness-protocol · model-the-domain · boundary-discipline · type-system-discipline · test-behavior-not-implementation · minimize-reader-load · make-operations-idempotent · separate-before-serializing-shared-state · migrate-callers-then-delete-legacy-apis
-**product/**: 31 principles, indexed in `principles/product/README.md`
 
 ## Friction
 If a shinstack file is wrong, unclear or gets ignored mid-task, append one line to `~/.claude/shinstack-friction.md` (`date | file | what went wrong`, no code or private content) and keep working. Don't block on it and don't silently work around it. `/shinstack:reflect` reads this file.

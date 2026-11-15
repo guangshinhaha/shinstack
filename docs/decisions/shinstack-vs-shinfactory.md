@@ -9,7 +9,7 @@ Date: 2026-11-06, recording a split made on 2026-11-05. Gantry added on 2026-11-
 | How to do the work: principles, playbooks, craft skills, review standards | shinstack |
 | When a station runs, in what order, and what happens on failure; the policy that decides it | the factory |
 | Who runs a station: the runtime that starts workers, holds the Run's tasks and dependencies, and keeps its mail | Orca (the factory chooses each station's model) |
-| Merging, PRs and worktrees inside a factory order | the factory's gates (`sf-gate-evidence`, `sf-verdict-check`, `sf-ship`), which read the repo's `shinstack-mode` |
+| Merging, PRs and worktrees inside a factory order | the factory's `sf-ship`, which reads the repo's `shinstack-mode` and reruns gantry's `sf-gate-evidence` and `sf-verdict-check` |
 | Push, PR, merge and deploy outside the factory | shinstack (`approval-modes`) |
 | Checks that need no judgment, shared across repos: secret scan, lint, tests, the `needs-human` label, and `ac-check` in repos that opt in (`gantry-init --ac-check`) | gantry |
 | Whether a failed check blocks a merge: the required `gantry / ci-ok` check | gantry (`gantry-protect`) |
