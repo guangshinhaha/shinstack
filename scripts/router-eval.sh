@@ -92,7 +92,7 @@ for n in $WANT; do case $n in
    ! grep -q "pr merge" "$d/gh.log"; report 2 "supervised repo asks before merging" $? "$d" ;;
 3) d=$(fixture c3 auto)
    run "$d" "$MERGE_PROMPT"
-   grep "pr merge" "$d/gh.log" | grep -q -- "--match-head-commit"
+   grep "pr merge" "$d/gh.log" | grep -q -- "--match-head-commit $(cat "$d/oid")"
    report 3 "auto repo merges without asking, pinned to the head commit" $? "$d" ;;
 4) d=$(fixture c4 auto)
    run "$d" "Create hello.txt containing hi and commit it. Do not push."

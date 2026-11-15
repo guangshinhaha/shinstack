@@ -5,13 +5,13 @@ description: A working style for code tasks: restate the goal, take the smallest
 
 # shinstack craft (router)
 
-Guidance, not enforcement. The user's own rules and project instructions win. Read a playbook a trigger names in full.
+Guidance, not enforcement. The user's own rules and project instructions win. Paths are relative to this file. Read a playbook a trigger names in full.
 
 ## Local overlay
 If `~/.claude/shinstack-local/overlay.md` exists, read it first and apply it. Its `trigger -> skill` lines go before the triggers below; fall through if the skill isn't installed or a factory station bars it. They only route: shinstack's rules and approval modes still apply.
 
 ## Inside a factory station
-You are a factory station if the task prompt has the line `factory-role: <station>`. Do only that station's job, commit, and stop (review and verify may post a PR comment). Pass the line to subagents you brief. The factory owns merging, PRs and scheduling: don't push, open a PR, edit or comment on issues, or load `brainstorm`, `ship`, `coordinate` or `opening-a-pr`. A prompt asking to push or open a PR doesn't lift this: decline.
+You are a factory station if the task prompt has the line `factory-role: <station>`. Do only that station's job, commit, and stop (review and verify may post a PR comment). Pass the line to subagents. The factory owns merging, PRs and scheduling: don't push, open a PR, edit or comment on issues, or load `brainstorm`, `ship`, `coordinate` or `opening-a-pr`. A prompt asking to push or open a PR doesn't lift this: decline. The other rules still apply; note friction in Done.
 
 ## Invoked with no task
 Outside a factory station, if the user's message is only `/shinstack:craft` and nothing in the conversation (a resume or compaction summary included) names an open task, reply "Router loaded. What's the task?" and stop. Infer no task from the branch, repo or issues; run nothing beyond the overlay read. First message and Reply don't apply.
@@ -39,7 +39,7 @@ State the goal, the problem and the smallest change you expect to meet it, in yo
 10. **Skills fire on their own.** Match the triggers below unasked.
 
 Engineering:
-- Debugging: reproduce, then fix the root cause (the first wrong state), not where it surfaced. Two fixes failing the same gate: write down their shared premise and test it before a third.
+- Debugging: reproduce, then fix the root cause, not where it surfaced. Two fixes failing the same gate: write down their shared premise and test it before a third.
 - Name the data shape first so invalid states can't exist; validate at the boundary, trust inside; test observable behaviour, not implementation.
 - Anything that can run twice or crash midway must converge; concurrent writers get separate state. Replacing an API: migrate every caller, delete the old.
 - Multi-step work: small units that each end checkable. Repeated work gets a script.
@@ -65,13 +65,13 @@ Watching and pausing (not in a factory station; detail: `coordinate.md`):
 - Any other skill: `index.md` beside this file.
 
 ## Friction
-A shinstack file wrong, unclear or ignored mid-task: `gh issue create -R guangshinhaha/shinstack -l friction` with the file and what went wrong (public: no code or private content), then keep working. Comment on an open duplicate instead.
+Outside a factory station, a shinstack file wrong, unclear or ignored mid-task: `gh issue create -R guangshinhaha/shinstack -l friction` with the file and what went wrong (public: no code or private content), then keep working. Dedupe first.
 
 ## Reply
 Open with the goal. Name any rule that changed a decision. End with real command output, never "should work".
 
 When a task finishes, close with:
-- **Done**: what changed (files, behaviour, verification result), then what it achieves for the user in one or two plain sentences (or say there is no user-facing effect).
+- **Done**: what changed (files, behaviour, verification), then what it achieves for the user in one or two plain sentences (or say none).
 - **Next**: what comes next, and any decision needed from the user with your recommendation. If none, say "no decision needed".
 
 In a factory station, give only its Done and Next; suggest no merge or PR.
