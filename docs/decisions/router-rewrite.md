@@ -11,4 +11,3 @@ Principle files were almost never opened; the router line is what gets followed 
 ## Consequences
 - Under `auto`, a deploy still asks when it targets prod. The old approval-modes table let `auto` deploy anywhere, but #68 rule 2 says deploy and prod belong to the user. `docs/decisions/approval-modes.md` links to a deleted file; the decision stands.
 - `check-router.sh` no longer checks principles; it checks the router's size (120 lines, 9000 hook bytes) and that every file it names exists.
-- `.agents/skills/plan/SKILL.md` still names the `multi-phase-plan` playbook (factory#9 removes it).
