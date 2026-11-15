@@ -8,7 +8,7 @@
 - **Work in an isolated worktree** off the base branch. Loop one change at a time: check the exit condition, make the smallest change the evidence justifies, verify against the real artifact, commit if it advanced and discard if not. A "might help" change is reverted, not left to ride.
 - **A plateau means pivot, not stop.** Never relax the exit condition to declare victory. Past the budget, stop and write up what you tried, the evidence, and your best hypothesis.
 - **Mid-run discoveries are yours** when they support the goal and are reversible; put out-of-band fixes in their own PR. Surface only irreversible actions, product calls no experiment settles, and dead ends.
-- **Assume the session can die.** Commit each finished unit and push per the repo's mode, so a fresh agent can resume (`/shinstack:recall`). Keep the decision trail for the reviewer per its Decision trail section.
+- **Assume the session can die.** Commit each finished unit and push per the repo's mode, so a fresh agent can resume (`/shinstack:recall`). Keep the decision trail for the reviewer per the Decision trail section of `/shinstack:recall`.
 
 **Topology (many tasks)**
 - **One owner per PR.** The owner is the only writer of its branch and carries the PR from build to merge-ready. You never author or edit code; conflicts, rebases and fixes go back to owners.

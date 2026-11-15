@@ -13,7 +13,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          # The version-bump check compares against origin/main and skips itself if that ref is missing.
-          fetch-depth: 0
       - run: sh scripts/check-router.sh

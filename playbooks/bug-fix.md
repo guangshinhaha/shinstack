@@ -7,7 +7,7 @@ Every shipped line traces to runtime evidence. A "might help" change is a hypoth
 3. **Plan the smallest fix** (if the bug is state or branch sprawl, name the data shape that makes the bad state unrepresentable). Stop and settle the design only at a real fork: the fix changes a data shape or a public interface. Crossing a function boundary is not a fork.
 4. **Verify on the same surface:** the original repro now passes. "Inconclusive" or the wrong surface is not a pass; flag it. Unit tests show branch behavior, not that the bug is gone.
 5. **Commit the failing repro or test before the fix.** Skip a test only when it would be expensive or unclear, and say what you used instead. Outside a factory station, push each commit (per rule 2), so a killed session resumes from the branch (`/shinstack:recall`).
-6. **Run the repo's lint, typecheck and tests,** then open the PR (`opening-a-pr.md`) under the repo's mode. If the bug shipped past a review that should have caught it, log it as friction (router).
+6. **Run the repo's lint, typecheck and tests,** then open the PR (`opening-a-pr.md`) under the repo's mode. If the bug shipped past a review that should have caught it, file it as friction (router).
 7. **Hand off.** Outside a factory station, if the PR has red CI or review comments, work it per the router's watching line. Otherwise stop at the PR URL.
 
 **Reply:** what was broken, the root cause, the fix, how you verified. Paste the failing-then-passing output verbatim.
