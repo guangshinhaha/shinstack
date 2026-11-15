@@ -2,7 +2,7 @@
 
 **A working style for coding agents, packaged as a Claude Code plugin.**
 
-shinstack is how one person runs one agent: a short router that always loads, a few playbooks for the work that person does, and a few skills. It nudges an agent to restate the goal, take the smallest change, verify against the real thing, and work in small steps that can each be checked. Nothing in it is a program: every piece is a markdown file the agent reads when it applies. The rebuild plan and the reason each piece stays are in issue #68.
+shinstack is how one person runs one agent: a short router that always loads, 8 playbooks for the work that person does, a few kept skills, and one product-taste file. It nudges an agent to restate the goal, take the smallest change, verify against the real thing, and work in small steps that can each be checked. Nothing in it is a program: every piece is a markdown file the agent reads when it applies. The rebuild plan and the reason each piece stays are in issue #68.
 
 ```
 /shinstack:craft          the router (loads at the start of every session; rules 1-10 inline)
@@ -102,7 +102,7 @@ Full reasoning: [the decision record](https://github.com/guangshinhaha/shinstack
 
 ## Status
 
-Rebuilding from Shin's own rules (issue #68). The router and playbooks are rewritten; the skills (`writing`, `recall`, `reflect`) follow in #71.
+Rebuilt from Shin's own rules (issue #68; decision record: [`shinstack-rebuild.md`](docs/decisions/shinstack-rebuild.md)). The plugin has no `version`: installs track the commit SHA, so every merge to main updates them. Friction (a shinstack file that was wrong or ignored) is filed as a `friction` issue in this repo.
 
 ## License
 

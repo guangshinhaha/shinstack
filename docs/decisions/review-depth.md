@@ -14,7 +14,7 @@ The table in `playbooks/opening-a-pr.md` picks the review from the risk of a wro
 
 ## How the table gets tuned
 
-1. A review miss becomes one line in `~/.claude/shinstack-friction.md`. `bug-fix.md` logs a bug that a review should have caught, and `opening-a-pr.md` logs a review that was clearly too heavy.
+1. (Superseded by `friction-as-issues.md`: now a `friction` issue.) A review miss becomes one line in `~/.claude/shinstack-friction.md`. `bug-fix.md` logs a bug that a review should have caught, and `opening-a-pr.md` logs a review that was clearly too heavy.
 2. `/shinstack:reflect` step 5 reads the log. When two or more lines point the same way at one file, it proposes an edit and waits for approval.
 3. Single lines stay in the log, so one odd miss doesn't move a tier.
 

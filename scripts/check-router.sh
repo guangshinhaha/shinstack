@@ -1,5 +1,5 @@
 #!/bin/sh
-# Fails if the router points at a missing playbook, a skill is missing from the index, or the hook output is too big.
+# Fails if the router points at a missing playbook, a skill is missing from the index, the hook output is too big, or plugin.json pins a version.
 cd "$(dirname "$0")/.." || exit 1
 fail=0
 for d in skills/*/; do
@@ -30,12 +30,7 @@ sh hooks/inject-router.sh | grep -q "shinstack craft" || { echo "hook does not e
 # Claude Code shows the model only a 2KB preview of SessionStart output over ~10KB, so keep the router well under it
 size=$(sh hooks/inject-router.sh | wc -c | tr -d ' ')
 [ "$size" -le 9000 ] || { echo "hook output is $size bytes, over the 9000-byte limit: move reference detail out of skills/craft/SKILL.md"; fail=1; }
-# plugin content changed against main without a version bump -> installed copies never update
-if git rev-parse -q --verify origin/main >/dev/null && [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
-  if git diff --name-only origin/main | grep -qE '^(skills|principles|playbooks|taste|hooks)/' && \
-     [ "$(git show origin/main:.claude-plugin/plugin.json | grep '"version"')" = "$(grep '"version"' .claude-plugin/plugin.json)" ]; then
-    echo "plugin content changed but .claude-plugin/plugin.json version was not bumped"; fail=1
-  fi
-fi
+# plugin.json must not carry a version: with none, installs use the commit SHA and update on every merge
+grep -q '"version"' .claude-plugin/plugin.json && { echo ".claude-plugin/plugin.json has a version: remove it (installs track the commit SHA)"; fail=1; }
 [ $fail -eq 0 ] && echo "router ok"
 exit $fail

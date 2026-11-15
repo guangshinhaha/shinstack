@@ -17,7 +17,7 @@ Run at the end of every other playbook. Whether you may push and open the PR wit
 
 - Any area in the High row sets High, whatever its size: a three-line auth change is High. In the other rows the typical changes are examples, so a large rename with good tests can be Low.
 - If the tier is unclear, take the higher one. A repo's CLAUDE.md can add stricter rules.
-- If a review was clearly too heavy, log it as friction (router).
+- If a review was clearly too heavy, file it as friction (router).
 - Fix proven blockers and re-check before opening. List the rest in the PR body.
 - Don't repeat a review: re-run only for new behavior or a large new diff. A rebase or minor fix gets a single check at the new head.
 - On a sensitive-data change, reviewers use synthetic data and runners from the same provider.

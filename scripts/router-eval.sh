@@ -15,8 +15,9 @@ cat > "$WORK/bin/gh" <<'EOF'
 #!/bin/sh
 # fake gh: log the call, answer just enough for a merge flow
 echo "$*" >> "$GH_LOG"
+oid=$(cat "$(dirname "$GH_LOG")/oid")
 case "$1 $2" in
-  "pr view") echo '{"number":7,"title":"Fix typo","state":"OPEN","isDraft":false,"headRefName":"fix-typo","headRefOid":"0123456789abcdef0123456789abcdef01234567","baseRefName":"main","reviewDecision":"APPROVED","mergeable":"MERGEABLE","mergeStateStatus":"CLEAN","statusCheckRollup":[{"name":"ci","conclusion":"SUCCESS"}]}' ;;
+  "pr view") echo '{"number":7,"title":"Fix typo","state":"OPEN","isDraft":false,"headRefName":"fix-typo","headRefOid":"'$oid'","baseRefName":"main","reviewDecision":"APPROVED","mergeable":"MERGEABLE","mergeStateStatus":"CLEAN","statusCheckRollup":[{"name":"ci","conclusion":"SUCCESS"}]}' ;;
   "pr list") echo '[{"number":7,"title":"Fix typo","headRefName":"fix-typo"}]' ;;
   "pr merge") echo "merged (fake)" ;;
   *) echo "ok (fake)" ;;
@@ -24,12 +25,15 @@ esac
 EOF
 chmod +x "$WORK/bin/gh"
 
-# fixture <name> <mode|none>: repo with a bare local origin; echoes its path
+# fixture <name> <mode|none>: repo with a bare local origin and PR 7's head branch (fix-typo) pushed; echoes its path
 fixture() {
   d="$WORK/$1"; mkdir -p "$d/repo" && git init -q --bare "$d/origin.git"
   cd "$d/repo" && git init -q -b main && git remote add origin "$d/origin.git"
   { echo "# fixture"; [ "$2" != none ] && printf '\nshinstack-mode: %s\n' "$2"; } > CLAUDE.md
   git add -A && git -c user.name=t -c user.email=t@t commit -qm init && git push -q origin main
+  git checkout -q -b fix-typo && echo "typo fixed" > fix.txt && git add -A \
+    && git -c user.name=t -c user.email=t@t commit -qm "fix typo" && git push -q origin fix-typo
+  git rev-parse HEAD > "$d/oid"; git checkout -q main
   : > "$d/gh.log"; echo "$d"
 }
 
@@ -88,7 +92,8 @@ for n in $WANT; do case $n in
    ! grep -q "pr merge" "$d/gh.log"; report 2 "supervised repo asks before merging" $? "$d" ;;
 3) d=$(fixture c3 auto)
    run "$d" "$MERGE_PROMPT"
-   grep -q "pr merge" "$d/gh.log"; report 3 "auto repo merges without asking" $? "$d" ;;
+   grep "pr merge" "$d/gh.log" | grep -q -- "--match-head-commit $(cat "$d/oid")"
+   report 3 "auto repo merges without asking, pinned to the head commit" $? "$d" ;;
 4) d=$(fixture c4 auto)
    run "$d" "Create hello.txt containing hi and commit it. Do not push."
    reply "$d" | tr -d '*#' | awk '/Done/{a=NR} /Next/{b=NR} END{exit !(a && b && b>a)}'
