@@ -1,6 +1,6 @@
 # shinstack
 
-Claude Code plugin: a router (`skills/craft`), principles, playbooks and skills.
+Claude Code plugin: a router (`skills/router`), principles, playbooks and skills.
 
 shinstack-mode: auto
 

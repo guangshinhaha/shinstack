@@ -5,7 +5,7 @@
 shinstack is how one person runs one agent: a short router that always loads, 8 playbooks for the work that person does, a few kept skills, and one product-taste file. It nudges an agent to restate the goal, take the smallest change, verify against the real thing, and work in small steps that can each be checked. Nothing in it is a program: every piece is a markdown file the agent reads when it applies. The rebuild plan and the reason each piece stays are in issue #68.
 
 ```
-/shinstack:craft          the router (loads at the start of every session; rules 1-10 inline)
+/shinstack:router          the router (loads at the start of every session; rules 1-10 inline)
         │
         ├─ playbooks/     step-by-step recipes for one kind of task
         ├─ skills/        tools you or the agent invoke by name
@@ -16,7 +16,7 @@ shinstack is how one person runs one agent: a short router that always loads, 8 
 
 1. **A session starts.** A SessionStart hook (`hooks/inject-router.sh`) puts the router in the agent's context, so nothing depends on someone invoking it first.
 2. **Local overlay.** If `~/.claude/shinstack-local/overlay.md` exists, the router reads it first. That is where you put your own tool routes, `trigger -> skill` lines for personal skills, and constraints. Approval comes from each repo's `shinstack-mode` (default `supervised`: stops before merge, deploy and anything shared).
-3. **First message.** The agent states the goal, the problem, and the smallest change it expects to meet it, without waiting for confirmation. A bare `/shinstack:craft` with no task gets one line asking for the task.
+3. **First message.** The agent states the goal, the problem, and the smallest change it expects to meet it, without waiting for confirmation. A bare `/shinstack:router` with no task gets one line asking for the task.
 4. **Rules and triggers.** The router states ten rules inline (reply style, approval mode, deciding in a batch, evidence before claims, rigor by risk, minimalism, issues as state, fix at the source, token cost, skills firing on their own) and a short list of "when X, read Y". Everything else stays unloaded, so context stays small.
 5. **Reply.** The agent opens with the goal, names any rule that changed a decision, and ends with real command output instead of "should work".
 
@@ -26,7 +26,7 @@ shinstack is how one person runs one agent: a short router that always loads, 8 
 
 ```
 .claude-plugin/    plugin and marketplace manifests
-skills/            the router (craft/) and every other skill, including one command per playbook
+skills/            the router (router/) and every other skill, including one command per playbook
 playbooks/         one recipe per kind of task, listed below
 taste/product.md   product calls for scoping and ticket-writing
 ```
@@ -57,7 +57,7 @@ Each is also a command, `/shinstack:<name>`.
 Watching a PR and pausing a run are router lines, not playbooks.
 
 ## Skills
-Invoke as `/shinstack:<name>`. Every skill, one line each, is in [`skills/craft/index.md`](skills/craft/index.md).
+Invoke as `/shinstack:<name>`. Every skill, one line each, is in [`skills/router/index.md`](skills/router/index.md).
 
 | Skill | What it does |
 |---|---|
@@ -77,7 +77,7 @@ claude plugin marketplace add guangshinhaha/shinstack
 claude plugin install shinstack@shinstack
 ```
 
-Restart Claude Code, then try `/shinstack:craft`.
+Restart Claude Code, then try `/shinstack:router`.
 
 ## Make it yours: the local overlay
 
