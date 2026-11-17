@@ -3,17 +3,17 @@
 cd "$(dirname "$0")/.." || exit 1
 fail=0
 for d in skills/*/; do
-  n=$(basename "$d"); [ "$n" = craft ] && continue
-  grep -q "\`$n\`" skills/craft/index.md || { echo "skill not in skills/craft/index.md: $n"; fail=1; }
+  n=$(basename "$d"); [ "$n" = router ] && continue
+  grep -q "\`$n\`" skills/router/index.md || { echo "skill not in skills/router/index.md: $n"; fail=1; }
 done
-for p in $(grep -o '\.\./\.\./playbooks/[a-z-]*\.md' skills/craft/SKILL.md | sort -u); do
-  [ -f "skills/craft/$p" ] || { echo "router points at missing file: $p"; fail=1; }
+for p in $(grep -o '\.\./\.\./playbooks/[a-z-]*\.md' skills/router/SKILL.md | sort -u); do
+  [ -f "skills/router/$p" ] || { echo "router points at missing file: $p"; fail=1; }
 done
-grep -rn -E "\bowned\b/|class: (owned|gated)|project-class|approval rules" playbooks skills/craft README.md && fail=1
-for p in $(grep -o '\.\./\.\./taste/[a-z-]*\.md' skills/craft/SKILL.md | sort -u); do
-  [ -f "skills/craft/$p" ] || { echo "router points at missing file: $p"; fail=1; }
+grep -rn -E "\bowned\b/|class: (owned|gated)|project-class|approval rules" playbooks skills/router README.md && fail=1
+for p in $(grep -o '\.\./\.\./taste/[a-z-]*\.md' skills/router/SKILL.md | sort -u); do
+  [ -f "skills/router/$p" ] || { echo "router points at missing file: $p"; fail=1; }
 done
-[ "$(wc -l < skills/craft/SKILL.md)" -le 120 ] || { echo "router is over 120 lines"; fail=1; }
+[ "$(wc -l < skills/router/SKILL.md)" -le 120 ] || { echo "router is over 120 lines"; fail=1; }
 for f in skills/*/SKILL.md; do
   awk '/^---$/{c++;next} c==1' "$f" | grep -q '^disable-model-invocation' && { echo "skill hidden from auto-invocation: $f"; fail=1; }
 done
@@ -22,14 +22,14 @@ for f in playbooks/*.md; do
   [ -f "skills/$n/SKILL.md" ] || { echo "playbook has no skill (no command): $n"; fail=1; continue; }
   grep -q "playbooks/$n.md" "skills/$n/SKILL.md" || { echo "skill $n does not point at its playbook"; fail=1; }
 done
-awk '/^## Reply/{r=1;next} /^## /{r=0} r' skills/craft/SKILL.md | grep -q 'what it achieves' || { echo "router Reply: Done must ask what the work achieves"; fail=1; }
-awk '/^## Local overlay/{r=1;next} /^## /{r=0} r' skills/craft/SKILL.md | grep 'trigger -> skill' | grep -q 'approval modes still apply' || { echo "router Local overlay must say trigger -> skill lines only route"; fail=1; }
+awk '/^## Reply/{r=1;next} /^## /{r=0} r' skills/router/SKILL.md | grep -q 'what it achieves' || { echo "router Reply: Done must ask what the work achieves"; fail=1; }
+awk '/^## Local overlay/{r=1;next} /^## /{r=0} r' skills/router/SKILL.md | grep 'trigger -> skill' | grep -q 'approval modes still apply' || { echo "router Local overlay must say trigger -> skill lines only route"; fail=1; }
 python3 -c "import json;json.load(open('hooks/hooks.json'))" || { echo "hooks/hooks.json invalid"; fail=1; }
 [ -x hooks/inject-router.sh ] || { echo "hooks/inject-router.sh not executable"; fail=1; }
-sh hooks/inject-router.sh | grep -q "shinstack craft" || { echo "hook does not emit the router"; fail=1; }
+sh hooks/inject-router.sh | grep -q "shinstack router" || { echo "hook does not emit the router"; fail=1; }
 # Claude Code shows the model only a 2KB preview of SessionStart output over ~10KB, so keep the router well under it
 size=$(sh hooks/inject-router.sh | wc -c | tr -d ' ')
-[ "$size" -le 9000 ] || { echo "hook output is $size bytes, over the 9000-byte limit: move reference detail out of skills/craft/SKILL.md"; fail=1; }
+[ "$size" -le 9000 ] || { echo "hook output is $size bytes, over the 9000-byte limit: move reference detail out of skills/router/SKILL.md"; fail=1; }
 # plugin.json must not carry a version: with none, installs use the commit SHA and update on every merge
 grep -q '"version"' .claude-plugin/plugin.json && { echo ".claude-plugin/plugin.json has a version: remove it (installs track the commit SHA)"; fail=1; }
 [ $fail -eq 0 ] && echo "router ok"

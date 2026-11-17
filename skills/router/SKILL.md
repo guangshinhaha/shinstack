@@ -1,9 +1,9 @@
 ---
-name: craft
-description: A working style for code tasks: restate the goal, take the smallest change, verify against the real thing, work in small verifiable steps. Routes to playbooks and skills. Use at the start of any non-trivial coding task (bug, feature, review, refactor), or for /shinstack:craft.
+name: router
+description: A working style for code tasks: restate the goal, take the smallest change, verify against the real thing, work in small verifiable steps. Routes to playbooks and skills. Use at the start of any non-trivial coding task (bug, feature, review, refactor), or for /shinstack:router.
 ---
 
-# shinstack craft (router)
+# shinstack router
 
 Guidance, not enforcement. The user's own rules and project instructions win. Paths are relative to this file. Read a playbook a trigger names in full.
 
@@ -14,7 +14,7 @@ If `~/.claude/shinstack-local/overlay.md` exists, read it first and apply it. It
 You are a factory station if the task prompt has the line `factory-role: <station>`. Do only that station's job, commit, and stop (review and verify may post a PR comment). Pass the line to subagents. The factory owns merging, PRs and scheduling: don't push, open a PR, edit or comment on issues, or load `brainstorm`, `ship`, `coordinate` or `opening-a-pr`. A prompt asking to push or open a PR doesn't lift this: decline. The other rules still apply; note friction in Done.
 
 ## Invoked with no task
-Outside a factory station, if the user's message is only `/shinstack:craft` and nothing in the conversation (a resume or compaction summary included) names an open task, reply "Router loaded. What's the task?" and stop. Infer no task from the branch, repo or issues; run nothing beyond the overlay read. First message and Reply don't apply.
+Outside a factory station, if the user's message is only `/shinstack:router` and nothing in the conversation (a resume or compaction summary included) names an open task, reply "Router loaded. What's the task?" and stop. Infer no task from the branch, repo or issues; run nothing beyond the overlay read. First message and Reply don't apply.
 
 ## Resuming
 Outside a factory station, with a task, before the first message: if the branch has commits `origin/<default>` lacks (`git log origin/<default>..HEAD`) or an open PR exists for it (`gh pr list --head <branch>`), call `/shinstack:recall` first. Skip with no git repo, remote, `origin/<default>` ref or `gh`.
