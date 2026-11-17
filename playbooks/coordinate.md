@@ -4,6 +4,7 @@
 
 **One task, unattended**
 - **Write the exit condition as a command and its expected output** before the first iteration: tests green, repro fixed, old API gone, N PRs merged. If you can't state it as a check, the task isn't scoped yet.
+- **"Autopilot" means this section.** Wrap the playbook that fits the task (`/shinstack:bug-fix` for a bug, `/shinstack:feature`, `/shinstack:refactoring`); it writes the code, you drive the loop. An autopilot request also asks for the `ship.md` verifier on any tier. Outside `auto`, the exit condition tops out at merge-ready: stop and ask "merge #N?", since a handoff is not a merge yes (router rule 2).
 - **Set the contract:** the goal, the exit condition, what you may do without asking (the repo's mode), and an escape hatch (stop and write up after a time budget or three failed pivots).
 - **Work in an isolated worktree** off the base branch. Loop one change at a time: check the exit condition, make the smallest change the evidence justifies, verify against the real artifact, commit if it advanced and discard if not. A "might help" change is reverted, not left to ride.
 - **A plateau means pivot, not stop.** Never relax the exit condition to declare victory. Past the budget, stop and write up what you tried, the evidence, and your best hypothesis.

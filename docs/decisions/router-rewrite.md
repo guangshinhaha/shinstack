@@ -11,3 +11,5 @@ Principle files were almost never opened; the router line is what gets followed 
 ## Consequences
 - Under `auto`, a deploy still asks when it targets prod. The old approval-modes table let `auto` deploy anywhere, but #68 rule 2 says deploy and prod belong to the user. `docs/decisions/approval-modes.md` links to a deleted file; the decision stands.
 - `check-router.sh` no longer checks principles; it checks the router's size (120 lines, 9000 hook bytes) and that every file it names exists.
+
+> Amended 2026-11-17: the word "autopilot" now routes to `coordinate` (one task unattended), which asks for the `ship.md` verifier. That is a new trigger, not a change to where the old playbook was merged.

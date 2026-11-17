@@ -25,3 +25,5 @@ See `plugin-version-from-commit.md` (no version bump) and `friction-as-issues.md
 ## Consequences
 - Older records in this folder that mention deleted files or the old friction log are history and are not rewritten.
 - A week after #72 merges, #73 reruns `scripts/skill-usage.py`; anything still unused gets a delete issue.
+
+> Amended 2026-11-17: the word "autopilot" now routes to `coordinate` (one task unattended), which asks for the `ship.md` verifier. That is a new trigger, not a change to where the old playbook was merged.

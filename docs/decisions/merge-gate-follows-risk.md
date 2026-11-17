@@ -32,3 +32,5 @@ An unattended merge (mode `auto`, with no yes on that PR) needs what the PR's ri
 - A Low or Moderate change can merge with only its author's review. In a repo on `auto`, no person or second agent looks at it.
 - If an autopilot verifier dies before writing a verdict, a new session sees a Low PR with no verdict and can merge it under the normal gate. That is the same bar as any Low PR.
 - Agents rate their own tier, so under-rating can skip the verifier, and nothing outside the author checks the rating. An unclear tier goes up, and a miss becomes a friction line (`review-depth.md`). A path-based check for the High areas would close this, but we'd build it only if friction lines show under-rating.
+
+> Amended 2026-11-17: the `autopilot` playbook and `/shinstack:autopilot` command are gone. "Autopilot" is now a trigger phrase for `coordinate` (one task unattended); the verifier lives in `playbooks/ship.md`, and `orchestrate.md` became `coordinate.md`. Read the lines above with that in mind.

@@ -63,3 +63,5 @@ Three gantry PRs showed the gap in enforcement. gantry#33 and gantry#35 were Hig
 - A user's yes given after the flag on an empty review is final for that head.
 - `Refs #N` PRs list the claimed items in `## Scope`, and the verdict carries `done_when`.
 - A Done when that only a sentence could satisfy counts as missing.
+
+> Amended 2026-11-17: the `autopilot` playbook and `/shinstack:autopilot` command are gone. "Autopilot" is now a trigger phrase for `coordinate` (one task unattended); the verifier lives in `playbooks/ship.md`, and `orchestrate.md` became `coordinate.md`. Read the lines above with that in mind.

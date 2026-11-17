@@ -7,7 +7,7 @@ Date: 2026-11-08. Status: accepted. Closes #47.
 - Review depth lives only in the table in `opening-a-pr.md`. `feature.md` no longer runs `blast-radius` or `interrogate`, so a High PR runs them once.
 - `feature.md` and `bug-fix.md` end with a hand-off: outside a factory station, red CI or review comments on the PR go to `babysit.md`. Both commit and push after each slice so a killed session can resume.
 - The router resumes from facts, not from a user's phrasing: commits on the branch that the default branch lacks, or an open PR for it, call `/shinstack:recall` first. The repeated-correction trigger names `/shinstack:correct`.
-- A kickoff in `orchestrate.md` names the playbook plus task facts and never restates the playbook's steps.
+- A kickoff in `coordinate.md` names the playbook plus task facts and never restates the playbook's steps.
 - Every fan-out point names a role (explorer, builder, reviewer, adversary, verifier, judge) and a weight (light, standard, strong), never a model.
 
 ## Why
