@@ -1,6 +1,6 @@
 ---
 name: coordinate
-description: "Run a program of many tasks or PRs through owners, workers and verifiers without writing code, or drive one task unattended to a checkable finish. Use for /shinstack:coordinate, 'work the queue', 'run these issues', or 'keep going until it's done'."
+description: "Run a program of many tasks or PRs through owners, workers and verifiers without writing code, or drive one task unattended to a checkable finish. Use for /shinstack:coordinate, 'autopilot', 'work the queue', 'run these issues', or 'keep going until it's done'."
 ---
 
 # coordinate
