@@ -67,6 +67,7 @@ Invoke as `/shinstack:<name>`. Every skill, one line each, is in [`skills/router
 | `writing` | Standard for prose a person reads, including cutting AI tells |
 | `recall` | Re-enter cold: rebuild context, catch you up on a long chat, keep the decision trail |
 | `consult-shin` | Shin is away and a product call blocks the work: take the pick, log it in a fixed line, keep going. Never an approval |
+| `uat` | After a milestone merges, walk the user through its live checks one at a time on a fresh build. Pass needs their evidence; fails become issues |
 | `reflect`, `correct`, `init` | File a conversation's lessons as issues; make a repeated mistake impossible; set up the repo's mode and checks |
 | `frontend-design`, `interaction-design`, `make-interfaces-feel-better` | UI craft (from [poteto/noodle](https://github.com/poteto/noodle)) |
 

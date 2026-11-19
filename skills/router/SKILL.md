@@ -58,6 +58,7 @@ Watching and pausing (not in a factory station; detail: `coordinate.md`):
 - Merging or shipping PRs, or a High PR that needs an independent verifier -> `../../playbooks/ship.md`
 - A program of many tasks or PRs, or one task driven unattended to a checkable finish, or "autopilot" -> `../../playbooks/coordinate.md`
 - A change big enough to plan before building -> `../../playbooks/plan.md`
+- Milestone merged, live checks left ("UAT", "walk me through the checks") -> `/shinstack:uat`
 - Resuming work, "lost the thread", "what's waiting on me" -> `/shinstack:recall`; "reflect" -> `/shinstack:reflect`; a repo with no `shinstack-mode` -> `/shinstack:init`
 - Building UI -> `/shinstack:frontend-design`; motion or feedback states -> `/shinstack:interaction-design`; UI that "feels off" -> `/shinstack:make-interfaces-feel-better`
 - Prose a person reads (docs, PR bodies) -> `/shinstack:writing`
