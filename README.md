@@ -68,7 +68,7 @@ Invoke as `/shinstack:<name>`. Every skill, one line each, is in [`skills/router
 | `recall` | Re-enter cold: rebuild context, catch you up on a long chat, keep the decision trail |
 | `consult-shin` | Shin is away and a product call blocks the work: take the pick, log it in a fixed line, keep going. Never an approval |
 | `uat` | After a milestone merges, walk the user through its live checks one at a time on a fresh build. Pass needs their evidence; fails become issues |
-| `milestone` | Manual only (`/shinstack:milestone`): set a milestone up with a goal, ready issues, an order you approve once, your hands-on items, and the text to run it unattended |
+| `milestone` | Typed by you (`/shinstack:milestone`), no router line: set a milestone up with a goal, ready issues, an order you approve once, your hands-on items, and the text to run it unattended |
 | `reflect`, `correct`, `init` | File a conversation's lessons as issues; make a repeated mistake impossible; set up the repo's mode and checks |
 | `frontend-design`, `interaction-design`, `make-interfaces-feel-better` | UI craft (from [poteto/noodle](https://github.com/poteto/noodle)) |
 
