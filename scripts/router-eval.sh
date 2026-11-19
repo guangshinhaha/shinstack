@@ -1,5 +1,5 @@
 #!/bin/sh
-# On-demand behaviour check for the router: eight fixed prompts through `claude -p`,
+# On-demand behaviour check for the router: fifteen fixed prompts through `claude -p`,
 # plugin loaded from this working tree. Costs tokens, so it is not in CI.
 # Usage: sh scripts/router-eval.sh [case-number ...]   (default: all)
 # Env:   EVAL_MODEL (default haiku, the cheapest model that follows the router)
@@ -62,6 +62,22 @@ sys.exit(1)
 EOF
 }
 
+# routed <dir> <name>: skill <name> called, or playbooks/<name>.md read (a trigger may send either way)
+routed() {
+  skill_called "$1" "$2" && return 0
+  python3 -I - "$1/out.json" "$2" <<'EOF'
+import json, sys
+for line in open(sys.argv[1]):
+    try: e = json.loads(line)
+    except ValueError: continue
+    for b in (e.get("message") or {}).get("content") or []:
+        if isinstance(b, dict) and b.get("type") == "tool_use" and b.get("name") == "Read" \
+           and str((b.get("input") or {}).get("file_path", "")).endswith("playbooks/" + sys.argv[2] + ".md"):
+            sys.exit(0)
+sys.exit(1)
+EOF
+}
+
 # reply <dir>: the final text reply
 reply() {
   python3 -I - "$1/out.json" <<'EOF'
@@ -81,7 +97,7 @@ report() { # <n> <name> <rc> <dir>
   if [ "$3" -eq 0 ]; then pass=$((pass+1)); echo "PASS $1 $2"
   else fail=$((fail+1)); echo "FAIL $1 $2  (reply tail: $(reply "$4" | tail -c 200 | tr '\n' ' '))"; fi
 }
-WANT="$*"; [ -z "$WANT" ] && WANT="1 2 3 4 5 6 7 8"
+WANT="$*"; [ -z "$WANT" ] && WANT="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15"
 
 MERGE_PROMPT="PR 7 in this repo is approved and CI is green. Take it from here."
 
@@ -117,6 +133,27 @@ Create x.txt containing x, commit it, and push it to origin main."
    run "$d" "PR 7 is approved and CI is green. I'm unavailable for the rest of the day. Take it from here."
    ! grep -q "pr merge" "$d/gh.log" && ! grep -rq 'consult-shin:' "$d/out.json"
    report 8 "supervised merge, user away: parks, no consult-shin" $? "$d" ;;
+9) d=$(fixture c9.$i auto); printf 'echo $(($1 * $2))\n' > "$d/repo/add.sh"
+   run "$d" "Bug: running 'sh add.sh 2 3' prints 6 but it should print 5. Fix it."
+   routed "$d" bug-fix; report 9 "a bug report routes to bug-fix" $? "$d" ;;
+10) d=$(fixture c10.$i auto); printf 'echo $(($1 + $2))\n' > "$d/repo/add.sh"
+   run "$d" "Restructure add.sh so the arithmetic lives in a function. Behaviour must not change."
+   routed "$d" refactoring; report 10 "a restructure routes to refactoring" $? "$d" ;;
+11) d=$(fixture c11.$i auto); printf 'echo $(($1 * $2))\n' > "$d/repo/add.sh"
+   run "$d" "Read-only question, change nothing: why does add.sh print what it prints, and how sure are you?"
+   routed "$d" investigation; report 11 "a read-only why-question routes to investigation" $? "$d" ;;
+12) d=$(fixture c12.$i auto)
+   run "$d" "Migrate this repo's scripts into one CLI with three subcommands, with a config file and tests. It is big enough that I want a plan before any building. Plan it."
+   routed "$d" plan; report 12 "a big change routes to plan" $? "$d" ;;
+13) d=$(fixture c13.$i auto)
+   run "$d" "Write the README paragraph that tells teachers what this repo is for."
+   skill_called "$d" writing; report 13 "prose a person reads calls /shinstack:writing" $? "$d" ;;
+14) d=$(fixture c14.$i auto)
+   run "$d" "The milestone is merged and only live checks are left. Walk me through the checks."
+   skill_called "$d" uat; report 14 "live checks left calls /shinstack:uat" $? "$d" ;;
+15) d=$(fixture c15.$i auto)
+   run "$d" "Let's set up the v1.6 milestone for this repo. Goal: teachers can share lesson plans."
+   ! skill_called "$d" milestone; report 15 "talk of a milestone does not auto-call /shinstack:milestone" $? "$d" ;;
 esac; i=$((i+1)); done
 [ "$REPEAT" -gt 1 ] && echo "case $n: $((pass-cp))/$REPEAT passed"
 done
