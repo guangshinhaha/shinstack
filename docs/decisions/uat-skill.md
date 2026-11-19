@@ -13,7 +13,7 @@ In Chippy v1.5 three of four open issues ended in "Live check (Shin)", and the a
 - **Three outcomes plus skipped.** A finding (works, but the issue's premise was wrong) is never a pass and keeps the issue open. chippy#139 is the example: its live check assumed the rest panel shows an approval, which it can never do.
 - **No pass without the user's evidence.** Screenshots are read locally and never attached or sent (PDPA).
 - **A fail gets no `ready` label.** `ready` is a person's permission (`issue-standard.md`); the reply asks for it.
-- **No label, no playbook.** A "Live check" line in Done when plus a merged PR selects the issues. The router had about 210 bytes of hook budget free, so the trigger is one short line.
+- **No label, no playbook.** A "Live check" line in Done when plus a merged PR selects the issues. The router had about 180 bytes of hook budget free, so the trigger is one short line.
 
 ## Not decided here
 A factory "awaiting UAT" digest (factory owns when work runs), and staging or prod targets.
