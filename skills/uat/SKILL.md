@@ -14,7 +14,7 @@ Rule 4: no pass without evidence. For the checks only a person can see, hear or 
 
 ## Steps
 
-1. **Select.** Issues in the named milestone (or the ones the user names), open or closed, whose Done when has a "Live check" line (or that carry a `hands-on` label), whose PR is merged, and that have no `UAT pass` comment. A closed one gets a card too; say it was closed early. Read the body and the latest comments; a comment that corrected the premise wins, and the card says so. Anything you can run yourself (a command, a test, a screenshot you can take), run and report; it gets no card.
+1. **Select.** Issues in the named milestone (or the ones the user names), open or closed, whose Done when has a "Live check" line, whose PR is merged, and that have no `UAT pass` comment. A closed one gets a card too; say it was closed early. Read the body and the latest comments; a comment that corrected the premise wins, and the card says so. Anything you can run yourself (a command, a test, a screenshot you can take), run and report; it gets no card.
 2. **Build.** `git fetch origin`, then from a clean checkout of `origin/main`, with the repo's own build and launch command (CLAUDE.md, README, scripts, then `/run`; if none, say the one command you ran). State the SHA first and prove each issue's merge is in it (`git merge-base --is-ancestor <merge> <sha>`); if one isn't, stop and report. One yes before quitting the user's running copy of the app.
 3. **Order.** Smoke first (it launches at that SHA), then cheapest first grouped by shared setup, checks that touch real config last.
 4. **One card at a time**, then wait:
