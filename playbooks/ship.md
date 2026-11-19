@@ -40,4 +40,4 @@
 
 **Make it enforceable (factory):** the merge step is the factory's `sf-ship` gate. It reruns gantry's `gantry-gate-evidence` and `gantry-verdict-check`, so it refuses on a `FAIL`, on a verdict whose `head_sha` is not the branch head, or where the tier needs a verdict and none exists. It merges only where the repo's `shinstack-mode` is `auto`; otherwise it parks the PR.
 
-**Reply:** the cleared run and its ceiling, each PR's tier and gate result, any verdict and who produced it, what landed and how you confirmed it, what is ready, gates waiting on the user, and what the next gap needs.
+**Reply:** the cleared run and its ceiling, each PR's tier and gate result, any verdict and who produced it, what landed and how you confirmed it, what is ready, gates waiting on the user, and what the next gap needs. When the open issues left hold only a live check, name `/shinstack:uat`.

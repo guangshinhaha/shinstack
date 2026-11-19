@@ -33,4 +33,4 @@
 
 **Make it enforceable (factory):** the program state lives in the factory's Orca Run (tasks and their dependencies), which `sf-state` reads, not in your context. Kickoffs are generated from a brief template with required fields, starting `factory-role: <station>`. gantry's `gantry-gate-evidence` rejects a build that returns without the named proof. The exit condition is a command the runner executes, not the agent's opinion; the iteration and time budget live in policy.
 
-**Reply:** the exit condition or goal and where it stands, what landed, each PR's live state, tier and review result or verdict with its link, what was dropped and why, what was verified and when, and the decisions waiting on the user.
+**Reply:** the exit condition or goal and where it stands, what landed, each PR's live state, tier and review result or verdict with its link, what was dropped and why, what was verified and when, and the decisions waiting on the user. When the open issues left hold only a live check, name `/shinstack:uat`.
