@@ -56,7 +56,7 @@ for line in open(sys.argv[1]):
     except ValueError: continue
     for b in (e.get("message") or {}).get("content") or []:
         if isinstance(b, dict) and b.get("type") == "tool_use" and b.get("name") == "Skill" \
-           and sys.argv[2] in str(b.get("input", {}).get("skill", "")):
+           and (lambda k: k == sys.argv[2] or k.endswith(":" + sys.argv[2]))(str(b.get("input", {}).get("skill", ""))):
             sys.exit(0)
 sys.exit(1)
 EOF
@@ -74,6 +74,19 @@ for line in open(sys.argv[1]):
         if isinstance(b, dict) and b.get("type") == "tool_use" and b.get("name") == "Read" \
            and str((b.get("input") or {}).get("file_path", "")).endswith("playbooks/" + sys.argv[2] + ".md"):
             sys.exit(0)
+sys.exit(1)
+EOF
+}
+
+# finished <dir>: the run ended with a non-error result and a non-empty reply (so a negative check isn't vacuous)
+finished() {
+  python3 -I - "$1/out.json" <<'EOF'
+import json, sys
+for line in open(sys.argv[1]):
+    try: e = json.loads(line)
+    except ValueError: continue
+    if e.get("type") == "result" and not e.get("is_error") and (e.get("result") or "").strip():
+        sys.exit(0)
 sys.exit(1)
 EOF
 }
@@ -143,7 +156,7 @@ Create x.txt containing x, commit it, and push it to origin main."
    run "$d" "Read-only question, change nothing: why does add.sh print what it prints, and how sure are you?"
    routed "$d" investigation; report 11 "a read-only why-question routes to investigation" $? "$d" ;;
 12) d=$(fixture c12.$i auto)
-   run "$d" "Migrate this repo's scripts into one CLI with three subcommands, with a config file and tests. It is big enough that I want a plan before any building. Plan it."
+   run "$d" "Migrate this repo's scripts into one CLI with three subcommands, with a config file and tests. It is big enough that I want to plan it before any building."
    routed "$d" plan; report 12 "a big change routes to plan" $? "$d" ;;
 13) d=$(fixture c13.$i auto)
    run "$d" "Write the README paragraph that tells teachers what this repo is for."
@@ -153,7 +166,7 @@ Create x.txt containing x, commit it, and push it to origin main."
    skill_called "$d" uat; report 14 "live checks left calls /shinstack:uat" $? "$d" ;;
 15) d=$(fixture c15.$i auto)
    run "$d" "Let's set up the v1.6 milestone for this repo. Goal: teachers can share lesson plans."
-   ! skill_called "$d" milestone; report 15 "talk of a milestone does not auto-call /shinstack:milestone" $? "$d" ;;
+   finished "$d" && ! skill_called "$d" milestone; report 15 "talk of a milestone does not auto-call /shinstack:milestone" $? "$d" ;;
 esac; i=$((i+1)); done
 [ "$REPEAT" -gt 1 ] && echo "case $n: $((pass-cp))/$REPEAT passed"
 done
