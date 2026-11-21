@@ -1,0 +1,14 @@
+# Hillclimb
+
+**You own the metric and the experiment's integrity.** For sustained, iterative improvement of one measurable thing against a target (latency, accuracy, cost, size). A one-off fix is `bug-fix.md`. This is the loop: one change, one measurement, keep or revert. Never stack untested changes, and never claim a win from reading code.
+
+1. **Ground the workload first.** Learn the target (`investigation.md`), name the realistic dimensions that can move the result (data size, history, state, concurrency), and pick a case that reproduces the complaint. If none does, fix the repro instead of climbing. Then fix one metric, the direction that counts as better, and a checkable stop predicate: a target plus a minimum number of attempts, so a lucky early win can't end the run.
+2. **Build the measurement harness, prove its sensitivity, then freeze it.** Run contrasting workloads: the target case must show the symptom and easy cases must separate as expected. Make it print its error count and the work done (a harness that errors fast looks fast). Freeze it as one repeatable command.
+3. **Open the decision log**: one row per attempt with id, hypothesis, change, before, after, delta, tests, verdict (kept or reverted), note. Read it before each attempt. Keep it out of git.
+4. **Ground each hypothesis in a mechanism** ("defer X off the boot path because it blocks first paint"), not "try memoizing something".
+5. **Loop, one hypothesis per iteration.** Make the change (or hand it to a Sonnet worker with a tight scope and review the diff). Independent hypotheses can fan out to parallel workers, each in its own worktree. Measure before and after with the frozen harness and run the regression gate. Accept only if the metric moves past noise and the gate stays green; otherwise revert fully. One commit per accepted fix, staging only the files you changed. Log the row either way. Unattended, arm the wake as in `coordinate.md`; its stop rule does not apply, yours does.
+6. **Push past the first plateau.** After several rejects in a row, pivot category, combine near-misses, re-read the source, or try something more radical. Correctness and simplicity outrank the number: revert a win that breaks behaviour, and keep a simplification that holds the number.
+7. **Stop** when the predicate is met, or the remaining ideas are marginal. Don't relax the predicate, and don't quit while cheap untried hypotheses remain. If stuck, say so.
+8. **Open the PR** with the accepted commits in the order they landed (`opening-a-pr.md`).
+
+**Reply:** metric and target, baseline to final with the percent change, iterations (kept versus reverted), each accepted fix in one line, the log path, and the best idea to try next.
