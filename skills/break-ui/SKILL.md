@@ -1,6 +1,6 @@
 ---
 name: break-ui
-description: "Stress-test a UI with realistic worst-case data: long and non-Latin names, missing fields, counts of 0 and 1, huge lists. Renders both datasets behind a toggle and reports what broke. Use for /shinstack:break-ui, 'stress-test this screen', 'try the worst case', or 'what edge cases break this'."
+description: "Stress-test a UI with realistic worst-case data: long and non-Latin names, missing fields, counts of 0 and 1, huge lists. Renders both datasets behind a toggle and reports what broke. Use for /shinstack:break-ui, 'stress-test this screen', 'try the worst case', or 'what edge cases break this UI'. Not for testing code logic (that is `interrogate`)."
 ---
 
 # break-ui
@@ -23,8 +23,8 @@ A UI built on kind demo data ("Jane Doe, 12 members") looks right and fails on r
 5. **Report and stop.**
 
 ## Catalog
-- **Names (use all that apply):** long Chinese (`欧阳明轩`), Tamil (`கார்த்திகேயன் சுப்பிரமணியம்`), Malay patronymic (`Nur Aisyah binti Mohd Abdul Rahman`), Indian `s/o` and `d/o` (`Rajendran s/o Krishnasamy`), a single name (`Sukarno`), one letter, a surname-first pattern, an emoji or accent first character.
-- **Org text:** a long agency or school name (`Ministry of ... Statutory Board for ...`), a long role title, a long translated button label.
+- **Names (use all that apply):** long Chinese (`欧阳明轩`), Tamil (`கார்த்திகேயன் சுப்பிரமணியம்`), Malay patronymics with `bin` and `binti` (`Ahmad Faris bin Ismail`, `Nur Aisyah binti Mohd Abdul Rahman`), Indian `s/o` and `d/o` (`Rajendran s/o Krishnasamy`, `Meena d/o Ramasamy`), a Chinese name with its English name (`陈慧珊 Tan Hui Shan (Grace)`), a single name (`Selvam`), one letter, a surname-first pattern, an emoji or accent first character.
+- **Org text:** a long agency or school name (`Ministry of Education, Student Services and Welfare Division (Policy Office)`), a long role title, a long translated button label.
 - **Identifiers:** an email with a long domain, a URL with no break points, a file name differing only at the end.
 - **Numbers:** 0, 1, 1,284, a million, null, negative.
 - **Collections:** empty, one, 1,000+.
@@ -38,7 +38,7 @@ A UI built on kind demo data ("Jane Doe, 12 members") looks right and fails on r
 | Email or URL runs past the edge | no break points | `overflow-wrap: anywhere` |
 | Trailing menu or button pushed off | middle content took the space | `min-width: 0` on middle, `flex-shrink: 0` on action |
 | Badge wraps to two lines | badge may shrink | `white-space: nowrap; flex-shrink: 0` |
-| Wrong initials, or `�` | `name.split(' ')[0][0]` | grapheme clusters (`Intl.Segmenter`), skip suffixes, icon fallback |
+| Wrong initials, or `�` | `name.split(' ')[0][0]` | grapheme clusters (`Intl.Segmenter`), skip suffixes (Jr, III) and patronymic words (`bin`, `binti`, `s/o`, `d/o`: initials come from the given name, not the father's), icon fallback |
 | Orphan `—` where a field was missing | placeholder always rendered | omit the line or reserve the height on purpose |
 | "1 members" | hardcoded plural | `Intl.PluralRules` |
 | `NaN`, `undefined`, `1284` | raw number | `Intl.NumberFormat`, guard null |

@@ -120,4 +120,4 @@ Rebuilt from Shin's own rules (issue #68; decision record: [`shinstack-rebuild.m
 
 ## License
 
-MIT. See [`LICENSE`](LICENSE). `skills/frontend-design` is Anthropic's, under Apache 2.0 (its own `LICENSE.txt`).
+MIT. See [`LICENSE`](LICENSE). `skills/break-ui` and the animate-or-not and easing rules in `skills/interaction-design` are adapted from [emilkowalski/skills](https://github.com/emilkowalski/skills), MIT, Copyright (c) 2026 Emil Kowalski; his permission notice applies to those adapted parts. `skills/frontend-design` is Anthropic's, under Apache 2.0 (its own `LICENSE.txt`).

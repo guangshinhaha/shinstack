@@ -36,7 +36,7 @@ Daily-use government tools sit in the top two rows. Default to none.
 
 - Never `ease-in` on UI: it starts slow, exactly when the user is watching. Default `ease-out`; `ease-in-out` for on-screen movement; `ease` for hover and colour; `linear` only for constant motion (progress).
 - Built-in curves are weak. Use `cubic-bezier(0.23, 1, 0.32, 1)` for ease-out and `cubic-bezier(0.77, 0, 0.175, 1)` for ease-in-out.
-- Keep UI under 300ms; modals and drawers up to 500ms. A 180ms dropdown feels faster than a 400ms one.
+- Keep UI under 300ms; modals and drawers up to 500ms (see the scale below). A 180ms dropdown feels faster than a 400ms one.
 - Popovers scale from their trigger (`transform-origin`), modals stay centred. Never `scale(0)`: start at `scale(0.95)` with `opacity: 0`. Never `transition: all`.
 
 ### Timing Scale
@@ -45,12 +45,12 @@ Daily-use government tools sit in the top two rows. Default to none.
 | --------- | ----------------------------------------- |
 | 100-150ms | Micro-feedback (hovers, clicks)           |
 | 200-300ms | Small transitions (toggles, dropdowns)    |
-| 300-500ms | Medium transitions (modals, page changes) |
-| 500ms+    | Complex choreographed animations          |
+| 300-500ms | Modals, drawers, page changes (the ceiling) |
+| 500ms+    | Rare or first-time sequences only         |
 
 ### Accessibility
 
-Always respect `prefers-reduced-motion: reduce`. Set animation duration to 0 when the user prefers reduced motion. This is non-negotiable.
+Always respect `prefers-reduced-motion: reduce`. Remove movement (slides, scales, parallax) when the user prefers reduced motion; short opacity and colour fades may stay. This is non-negotiable.
 
 ## Reference Files
 
