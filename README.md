@@ -2,7 +2,7 @@
 
 **A working style for coding agents, packaged as a Claude Code plugin.**
 
-shinstack is how one person runs one agent: a short router that always loads, 8 playbooks for the work that person does, a few kept skills, and one product-taste file. It nudges an agent to restate the goal, take the smallest change, verify against the real thing, and work in small steps that can each be checked. Nothing in it is a program: every piece is a markdown file the agent reads when it applies. The rebuild plan and the reason each piece stays are in issue #68.
+shinstack is how one person runs one agent: a short router that always loads, 9 playbooks for the work that person does, a few kept skills, and one product-taste file. It nudges an agent to restate the goal, take the smallest change, verify against the real thing, and work in small steps that can each be checked. Nothing in it is a program: every piece is a markdown file the agent reads when it applies. The rebuild plan and the reason each piece stays are in issue #68.
 
 ```
 /shinstack:router          the router (loads at the start of every session; rules 1-10 inline)
@@ -52,6 +52,7 @@ Each is also a command, `/shinstack:<name>`.
 - [`ship`](playbooks/ship.md): the merge gate by risk, plus an independent verifier and the verdict format for High-risk PRs.
 - [`coordinate`](playbooks/coordinate.md): run many tasks through owners and workers, or one task unattended; poll, verify liveness, never write code.
 - [`plan`](playbooks/plan.md): the plan is a GitHub issue, a checklist with evidence per box, checked by `scripts/check-plan.sh`.
+- [`hillclimb`](playbooks/hillclimb.md): improve one metric over measured iterations: frozen harness, one change per run, keep or revert.
 - [`investigation`](playbooks/investigation.md): a read-only question answered with cited evidence.
 
 Watching a PR and pausing a run are router lines, not playbooks.
