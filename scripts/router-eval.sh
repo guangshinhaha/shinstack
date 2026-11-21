@@ -167,8 +167,8 @@ Create x.txt containing x, commit it, and push it to origin main."
 16) d=$(fixture c16.$i auto); printf '<ul id=m><li><img src=a.png class=av> <b>Jane Doe</b> jane@acme.com <button>...</button></li></ul>\n' > "$d/repo/members.html"
    run "$d" "Stress-test members.html with realistic worst-case data: long names, empty, one item."
    skill_called "$d" break-ui; report 16 "a worst-case-data request calls /shinstack:break-ui" $? "$d" ;;
-17) d=$(fixture c17.$i auto); printf 'for i in $(seq 1 3000000); do :; done\n' > "$d/repo/slow.sh"
-   run "$d" "slow.sh takes a few seconds. Get its run time down as far as you can, measuring each change, until you run out of ideas."
+17) d=$(fixture c17.$i auto); printf 'import sys\ndef primes(n):\n    out = []\n    for k in range(2, n):\n        if all(k %% p for p in range(2, k)):\n            out.append(k)\n    return out\nprint(len(primes(int(sys.argv[1]))))\n' > "$d/repo/primes.py"
+   run "$d" "primes.py takes about a second for 'python3 primes.py 20000' and I want it under 0.1 seconds. It will take many rounds of trying things and measuring each one. Keep going until you hit the number or run out of ideas."
    skill_called "$d" hillclimb; report 17 "sustained metric work calls /shinstack:hillclimb" $? "$d" ;;
 15) d=$(fixture c15.$i auto)
    run "$d" "Let's set up the v1.6 milestone for this repo. Goal: teachers can share lesson plans."
