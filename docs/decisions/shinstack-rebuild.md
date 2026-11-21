@@ -27,3 +27,5 @@ See `plugin-version-from-commit.md` (no version bump) and `friction-as-issues.md
 - A week after #72 merges, #73 reruns `scripts/skill-usage.py`; anything still unused gets a delete issue.
 
 > Amended 2026-11-17: the word "autopilot" now routes to `coordinate` (one task unattended), which asks for the `ship.md` verifier. That is a new trigger, not a change to where the old playbook was merged.
+
+> Amended 2026-11-21: `hillclimb` is back as a playbook and skill (#100, `hillclimb-restored.md`), so there are 9 playbooks and it is no longer deleted.
