@@ -71,6 +71,7 @@ Invoke as `/shinstack:<name>`. Every skill, one line each, is in [`skills/router
 | `milestone` | Typed by you (`/shinstack:milestone`), no router line: set a milestone up with a goal, ready issues, an order you approve once, your hands-on items, and the text to run it unattended |
 | `reflect`, `correct`, `init` | File a conversation's lessons as issues; make a repeated mistake impossible; set up the repo's mode and checks |
 | `frontend-design`, `interaction-design`, `make-interfaces-feel-better` | UI craft (from [poteto/noodle](https://github.com/poteto/noodle)) |
+| `break-ui` | Stress-test a UI with realistic worst-case data and report what broke. Idea and failure table adapted from Emil Kowalski's [emilkowalski/skills](https://github.com/emilkowalski/skills) (MIT); `interaction-design` also takes his animate-or-not and easing rules |
 
 ## Install
 
@@ -119,4 +120,4 @@ Rebuilt from Shin's own rules (issue #68; decision record: [`shinstack-rebuild.m
 
 ## License
 
-MIT. See [`LICENSE`](LICENSE). `skills/frontend-design` is Anthropic's, under Apache 2.0 (its own `LICENSE.txt`).
+MIT. See [`LICENSE`](LICENSE). `skills/break-ui` and the animate-or-not and easing rules in `skills/interaction-design` are adapted from [emilkowalski/skills](https://github.com/emilkowalski/skills), MIT, Copyright (c) 2026 Emil Kowalski; his permission notice applies to those adapted parts. `skills/frontend-design` is Anthropic's, under Apache 2.0 (its own `LICENSE.txt`).

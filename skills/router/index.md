@@ -18,5 +18,6 @@ The catalog behind the router (`SKILL.md`, next to this file): every skill, one 
 - `frontend-design`: pick a design direction before code; UI that avoids generic AI aesthetics
 - `interaction-design`: microinteractions, motion, loading and feedback states, timing scale, reduced motion
 - `make-interfaces-feel-better`: polish details (radius, optical alignment, shadows, interruptible animation, tabular numbers)
+- `break-ui`: stress-test a UI with realistic worst-case data (long and non-Latin names, empty, one, huge lists) and report what broke
 **Playbooks (each is also a command, /shinstack:<name>)**
 - `feature`, `bug-fix`, `refactoring`, `investigation`, `opening-a-pr`, `ship`, `coordinate`, `plan`
